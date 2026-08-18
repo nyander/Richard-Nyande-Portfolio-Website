@@ -1,6 +1,6 @@
 'use client'
 
-import type { CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { Leva, useControls } from 'leva'
 import { HeroStamp } from '@/components/site/HeroStamp'
 
@@ -8,6 +8,16 @@ const LEDE =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
 
 export function HomeHero() {
+  const [hideLeva, setHideLeva] = useState(false)
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 800px)')
+    const sync = () => setHideLeva(media.matches)
+    sync()
+    media.addEventListener('change', sync)
+    return () => media.removeEventListener('change', sync)
+  }, [])
+
   const stamp = useControls('Stamp', {
     size: {
       value: 0.85,
@@ -123,6 +133,13 @@ export function HomeHero() {
       step: 0.05,
       label: 'Size',
     },
+    width: {
+      value: 36.8,
+      min: 8,
+      max: 48,
+      step: 0.1,
+      label: 'Width',
+    },
     weight: {
       value: 800,
       min: 400,
@@ -131,7 +148,7 @@ export function HomeHero() {
       label: 'Weight',
     },
     tracking: {
-      value: -0.01,
+      value: 0,
       min: -0.08,
       max: 0.3,
       step: 0.005,
@@ -157,6 +174,13 @@ export function HomeHero() {
       max: 0.4,
       step: 0.005,
       label: 'Eyebrow tracking',
+    },
+    eyebrowWidth: {
+      value: 22,
+      min: 8,
+      max: 48,
+      step: 0.1,
+      label: 'Subtitle width',
     },
   })
 
@@ -215,6 +239,7 @@ export function HomeHero() {
   return (
     <section className="home-hero" aria-labelledby="home-hero-heading">
       <Leva
+        hidden={hideLeva}
         collapsed={false}
         titleBar={{ title: 'Hero', filter: false }}
         theme={{
@@ -242,11 +267,13 @@ export function HomeHero() {
             '--title-x': `${title.x}rem`,
             '--title-y': `${title.y}rem`,
             '--title-size': `${title.size}rem`,
+            '--title-width': `${title.width}rem`,
             '--title-weight': String(title.weight),
             '--title-tracking': `${title.tracking}em`,
             '--title-leading': String(title.leading),
             '--eyebrow-size': `${title.eyebrowSize}rem`,
             '--eyebrow-tracking': `${title.eyebrowTracking}em`,
+            '--eyebrow-width': `${title.eyebrowWidth}rem`,
             '--lede-x': `${description.x}rem`,
             '--lede-y': `${description.y}rem`,
             '--lede-width': `${description.width}rem`,
@@ -261,8 +288,8 @@ export function HomeHero() {
 
         <div className="hero-copy">
           <div className="hero-title">
-            <p className="hero-eyebrow">Digital</p>
-            <h1 id="home-hero-heading">Product Designer</h1>
+            <p className="hero-eyebrow">Product Designer and Creative Technologist</p>
+            <h1 id="home-hero-heading">Designing and Building Digital Products</h1>
           </div>
           <p className="hero-lede">{LEDE}</p>
         </div>
