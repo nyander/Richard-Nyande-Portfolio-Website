@@ -152,8 +152,8 @@ export function AboutCollage() {
       return
     }
 
-    const onWheel = (event: WheelEvent) => {
-      if (event.ctrlKey) {
+    const onWheel = (event: Event) => {
+      if (!(event instanceof WheelEvent) || event.ctrlKey) {
         return
       }
 

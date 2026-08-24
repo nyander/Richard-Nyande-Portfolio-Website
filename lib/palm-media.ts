@@ -152,11 +152,11 @@ const DESIGN_TO_CODE_SHIPPED = localImage(
   'Shown with a test client before full data population. Score ranges, subcomponent breakdown and tab structure carried through from design to build.'
 )
 
-function hasVisual(image?: AltImage | null) {
+function hasVisual(image?: AltImage | null): image is AltImage {
   return Boolean(image?.asset || image?.src)
 }
 
-function preferExisting(existing: AltImage | null | undefined, fallback: AltImage) {
+function preferExisting(existing: AltImage | null | undefined, fallback: AltImage): AltImage {
   return hasVisual(existing) ? existing : fallback
 }
 
