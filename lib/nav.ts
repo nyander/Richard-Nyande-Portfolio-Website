@@ -36,6 +36,7 @@ export const MENU_CONTACT = {
 } as const
 
 export const MENU_SOCIALS = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/richard-nyande-1aa32a133' },
   { label: 'Instagram', href: 'https://www.instagram.com/richxrt_/' },
   { label: 'Behance', href: 'https://www.behance.net/richardnyande' },
   { label: 'GitHub', href: 'https://github.com/nyander' },

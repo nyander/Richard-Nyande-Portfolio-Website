@@ -6,15 +6,30 @@ type MediaSlotProps = {
   image?: AltImage | null
   todo: string
   label?: string
+  hideProvenance?: boolean
+  sizes?: string
 }
 
 export function hasImageAsset(image?: AltImage | null) {
-  return Boolean(image?.asset)
+  return Boolean(image?.asset || image?.src)
 }
 
-export function MediaSlot({ image, todo, label }: MediaSlotProps) {
+export function MediaSlot({
+  image,
+  todo,
+  label,
+  hideProvenance = false,
+  sizes = '(min-width: 800px) 40vw, 100vw',
+}: MediaSlotProps) {
   if (hasImageAsset(image) && image) {
-    return <SanityImage image={image} sizes="(min-width: 800px) 40vw, 100vw" />
+    return (
+      <SanityImage
+        image={image}
+        caption={label}
+        hideProvenance={hideProvenance || Boolean(label)}
+        sizes={sizes}
+      />
+    )
   }
 
   return (

@@ -30,31 +30,47 @@ export function ImagePair({
   afterTodo,
 }: ImagePairProps) {
   const [active, setActive] = useState<LightboxState | null>(null)
+  const hasBefore = hasImageAsset(before)
+  const hasAfter = hasImageAsset(after)
+
+  if (!hasBefore && !hasAfter) {
+    return null
+  }
+
+  const pair = hasBefore && hasAfter
 
   return (
     <>
-      <div className="image-pair">
-        <ImagePairSlot
-          image={before}
-          label={beforeLabel}
-          todo={beforeTodo}
-          delay={0}
-          onExpand={() =>
-            before && hasImageAsset(before) && setActive({ image: before, label: beforeLabel })
-          }
-        />
-        <span className="image-pair-arrow" aria-hidden="true">
-          →
-        </span>
-        <ImagePairSlot
-          image={after}
-          label={afterLabel}
-          todo={afterTodo}
-          delay={90}
-          onExpand={() =>
-            after && hasImageAsset(after) && setActive({ image: after, label: afterLabel })
-          }
-        />
+      <div className={pair ? 'image-pair' : 'image-pair is-single'}>
+        {hasBefore ? (
+          <ImagePairSlot
+            image={before}
+            label={beforeLabel}
+            todo={beforeTodo}
+            delay={0}
+            sizes={pair ? '(min-width: 800px) 40vw, 100vw' : '(min-width: 800px) 92vw, 100vw'}
+            onExpand={() =>
+              before && setActive({ image: before, label: beforeLabel })
+            }
+          />
+        ) : null}
+        {pair ? (
+          <span className="image-pair-arrow" aria-hidden="true">
+            →
+          </span>
+        ) : null}
+        {hasAfter ? (
+          <ImagePairSlot
+            image={after}
+            label={afterLabel}
+            todo={afterTodo}
+            delay={hasBefore ? 90 : 0}
+            sizes={pair ? '(min-width: 800px) 40vw, 100vw' : '(min-width: 800px) 92vw, 100vw'}
+            onExpand={() =>
+              after && setActive({ image: after, label: afterLabel })
+            }
+          />
+        ) : null}
       </div>
       {active ? (
         <Lightbox image={active.image} label={active.label} onClose={() => setActive(null)} />
@@ -68,28 +84,30 @@ function ImagePairSlot({
   label,
   todo,
   delay,
+  sizes,
   onExpand,
 }: {
   image?: AltImage | null
   label: string
   todo: string
   delay: number
+  sizes: string
   onExpand: () => void
 }) {
-  if (hasImageAsset(image)) {
-    return (
-      <Reveal className="media-reveal" delay={delay}>
-        <button
-          type="button"
-          className="image-pair-expand"
-          onClick={onExpand}
-          aria-label={`Expand ${label} image`}
-        >
-          <MediaSlot image={image} label={label} todo={todo} />
-        </button>
-      </Reveal>
-    )
+  if (!hasImageAsset(image) || !image) {
+    return null
   }
 
-  return <MediaSlot image={image} label={label} todo={todo} />
+  return (
+    <Reveal className="media-reveal" delay={delay}>
+      <button
+        type="button"
+        className="image-pair-expand"
+        onClick={onExpand}
+        aria-label={`Expand ${label} image`}
+      >
+        <MediaSlot image={image} label={label} todo={todo} sizes={sizes} />
+      </button>
+    </Reveal>
+  )
 }

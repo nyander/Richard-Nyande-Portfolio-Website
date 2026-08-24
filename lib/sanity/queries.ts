@@ -1,5 +1,7 @@
 import { groq } from 'next-sanity'
 
+import { applyPalmCardMedia, applyPalmLocalMedia } from '@/lib/palm-media'
+
 import { client } from './client'
 import { isValidInternalHref } from './href'
 import type { ArchiveProject, CaseStudyCard, CaseStudyPage } from './types'
@@ -117,6 +119,8 @@ const caseStudyBySlugQuery = groq`
       evidence,
       reflection
     },
+    liveUrl,
+    liveNote,
     seoTitle,
     seoDescription,
     ogImage${altImageProjection}
@@ -137,7 +141,8 @@ const archiveProjectsQuery = groq`
 `
 
 export async function getFeaturedCaseStudies(): Promise<CaseStudyCard[]> {
-  return client.fetch<CaseStudyCard[]>(featuredCaseStudiesQuery)
+  const studies = await client.fetch<CaseStudyCard[]>(featuredCaseStudiesQuery)
+  return studies.map(applyPalmCardMedia)
 }
 
 export async function getCaseStudySlugs(): Promise<string[]> {
@@ -148,7 +153,10 @@ export async function getCaseStudySlugs(): Promise<string[]> {
 export async function getCaseStudyBySlug(
   slug: string
 ): Promise<CaseStudyPage | null> {
-  return client.fetch<CaseStudyPage | null>(caseStudyBySlugQuery, { slug })
+  const study = await client.fetch<CaseStudyPage | null>(caseStudyBySlugQuery, {
+    slug,
+  })
+  return study ? applyPalmLocalMedia(study) : null
 }
 
 export async function getArchiveProjects(): Promise<ArchiveProject[]> {

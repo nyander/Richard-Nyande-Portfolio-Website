@@ -8,9 +8,7 @@ export default async function HomePage() {
   return (
     <main>
       <HomeHero />
-      <div className="home-shell">
-        <FeaturedCaseStudyList studies={studies} />
-      </div>
+      <FeaturedCaseStudyList studies={studies} />
     </main>
   )
 }

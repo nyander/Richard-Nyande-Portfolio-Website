@@ -72,7 +72,7 @@ export function SectionProgress() {
         {SECTIONS.map((section, index) => {
           const isActive = section.id === activeId
           return (
-            <li key={section.id}>
+            <li key={section.id} className="section-progress-item">
               <a
                 href={`#${section.id}`}
                 className="section-progress-marker"
@@ -82,6 +82,9 @@ export function SectionProgress() {
               >
                 <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               </a>
+              <span className="section-progress-label" aria-hidden="true">
+                {section.label}
+              </span>
             </li>
           )
         })}

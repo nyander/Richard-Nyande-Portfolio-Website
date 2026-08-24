@@ -3,6 +3,7 @@
 import { useId, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 
+import { hasImageAsset } from '@/components/media/MediaSlot'
 import { Reveal } from '@/components/motion/Reveal'
 import { RestrictedPortableText } from '@/components/portable-text/RestrictedPortableText'
 import { ImagePair } from '@/components/work/ImagePair'
@@ -189,14 +190,20 @@ function DeepDiveBlock({
         </ol>
       ) : null}
 
-      <h4 className="image-pair-label">{pair?.label || 'Before / after'}</h4>
-      <ImagePair
-        before={pair?.before}
-        after={pair?.after}
-        beforeTodo="Add a before image, or an honest note if none exists."
-        afterTodo="Add an after image."
-      />
-      {pair?.caption ? <p className="image-pair-caption">{pair.caption}</p> : null}
+      {hasImageAsset(pair?.before) || hasImageAsset(pair?.after) ? (
+        <>
+          {hasImageAsset(pair?.before) && hasImageAsset(pair?.after) ? (
+            <h4 className="image-pair-label">{pair?.label || 'Before / after'}</h4>
+          ) : null}
+          <ImagePair
+            before={pair?.before}
+            after={pair?.after}
+            beforeTodo="Add a before image, or an honest note if none exists."
+            afterTodo="Add an after image."
+          />
+          {pair?.caption ? <p className="image-pair-caption">{pair.caption}</p> : null}
+        </>
+      ) : null}
 
       <div className="dive-outcome">
         <h4>Outcome</h4>

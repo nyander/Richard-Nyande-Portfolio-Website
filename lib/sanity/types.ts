@@ -4,6 +4,7 @@ export type Provenance = 'actual' | 'representative' | 'test-data'
 
 export type AltImage = {
   _type?: 'image'
+  src?: string
   asset?: {
     _ref: string
     _type: 'reference'
@@ -140,6 +141,8 @@ export type CaseStudyPage = {
   deepDives: DeepDivesSection | null
   designToCode: DesignToCode | null
   outcomeStatus: OutcomeStatus | null
+  liveUrl?: string | null
+  liveNote?: string | null
   seoTitle?: string
   seoDescription?: string
   ogImage: AltImage | null

@@ -49,21 +49,28 @@ export function SiteHeader() {
             <nav className="site-bar-nav" aria-label="Primary">
               {NAV_ITEMS.map((item) => {
                 const current = isCurrentNav(pathname, item.href, 'external' in item)
-                const className = current ? 'site-bar-link is-current' : 'site-bar-link'
 
-                if ('external' in item) {
+                if (item.id === 'yande') {
                   return (
                     <a
                       key={item.id}
                       href={item.href}
-                      className={className}
+                      className="site-bar-yande"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {item.label}
+                      <Image
+                        src="/images/Yande Logo - 1024px.png"
+                        alt="Yande"
+                        width={3167}
+                        height={1265}
+                        className="site-bar-yande-logo"
+                      />
                     </a>
                   )
                 }
+
+                const className = current ? 'site-bar-link is-current' : 'site-bar-link'
 
                 return (
                   <Link

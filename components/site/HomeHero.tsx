@@ -7,6 +7,26 @@ import { HeroStamp } from '@/components/site/HeroStamp'
 const LEDE =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
 
+function HeroRail({
+  left,
+  mid,
+  right,
+}: {
+  left: string
+  mid: string
+  right: string
+}) {
+  return (
+    <p className="hero-rail">
+      <span>{left}</span>
+      <span className="hero-rail-rule" aria-hidden="true" />
+      <span>{mid}</span>
+      <span className="hero-rail-rule" aria-hidden="true" />
+      <span>{right}</span>
+    </p>
+  )
+}
+
 export function HomeHero() {
   const [hideLeva, setHideLeva] = useState(false)
 
@@ -17,6 +37,15 @@ export function HomeHero() {
     media.addEventListener('change', sync)
     return () => media.removeEventListener('change', sync)
   }, [])
+
+  const { version } = useControls('Layout', {
+    version: {
+      value: 'Original',
+      options: ['Original', 'New'],
+      label: 'Version',
+    },
+  })
+  const isArchive = version === 'New'
 
   const stamp = useControls('Stamp', {
     size: {
@@ -161,27 +190,6 @@ export function HomeHero() {
       step: 0.01,
       label: 'Leading',
     },
-    eyebrowSize: {
-      value: 0.82,
-      min: 0.5,
-      max: 2,
-      step: 0.01,
-      label: 'Eyebrow size',
-    },
-    eyebrowTracking: {
-      value: 0.16,
-      min: 0,
-      max: 0.4,
-      step: 0.005,
-      label: 'Eyebrow tracking',
-    },
-    eyebrowWidth: {
-      value: 22,
-      min: 8,
-      max: 48,
-      step: 0.1,
-      label: 'Subtitle width',
-    },
   })
 
   const description = useControls('Description', {
@@ -237,7 +245,10 @@ export function HomeHero() {
   })
 
   return (
-    <section className="home-hero" aria-labelledby="home-hero-heading">
+    <section
+      className={isArchive ? 'home-hero is-archive' : 'home-hero'}
+      aria-labelledby="home-hero-heading"
+    >
       <Leva
         hidden={hideLeva}
         collapsed={false}
@@ -271,9 +282,6 @@ export function HomeHero() {
             '--title-weight': String(title.weight),
             '--title-tracking': `${title.tracking}em`,
             '--title-leading': String(title.leading),
-            '--eyebrow-size': `${title.eyebrowSize}rem`,
-            '--eyebrow-tracking': `${title.eyebrowTracking}em`,
-            '--eyebrow-width': `${title.eyebrowWidth}rem`,
             '--lede-x': `${description.x}rem`,
             '--lede-y': `${description.y}rem`,
             '--lede-width': `${description.width}rem`,
@@ -284,15 +292,33 @@ export function HomeHero() {
           } as CSSProperties
         }
       >
-        <HeroStamp />
+        {isArchive ? null : <HeroStamp />}
 
-        <div className="hero-copy">
-          <div className="hero-title">
-            <p className="hero-eyebrow">Product Designer and Creative Technologist</p>
-            <h1 id="home-hero-heading">Designing and Building Digital Products</h1>
+        {isArchive ? (
+          <div className="hero-archive">
+            <div className="hero-archive-col">
+              <HeroRail left="R.N.Portfolio" mid="22 / 08 / 26" right="Work" />
+              <h1 id="home-hero-heading" className="hero-archive-heading">
+                <span className="hero-archive-kicker">
+                  <span>Product</span>
+                  <span>Designer</span>
+                </span>
+                <span className="hero-archive-title">and Creative Technologist</span>
+              </h1>
+            </div>
+            <div className="hero-archive-col is-copy">
+              <HeroRail left="R.N.Portfolio" mid="08 / 26" right="V. 001" />
+              <p className="hero-lede">{LEDE}</p>
+            </div>
           </div>
-          <p className="hero-lede">{LEDE}</p>
-        </div>
+        ) : (
+          <div className="hero-copy">
+            <div className="hero-title">
+              <h1 id="home-hero-heading">Product Designer and Creative Technologist</h1>
+            </div>
+            <p className="hero-lede">{LEDE}</p>
+          </div>
+        )}
       </div>
     </section>
   )

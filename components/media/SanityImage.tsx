@@ -8,6 +8,8 @@ type SanityImageProps = {
   className?: string
   sizes?: string
   priority?: boolean
+  caption?: string
+  hideProvenance?: boolean
 }
 
 export function SanityImage({
@@ -15,14 +17,22 @@ export function SanityImage({
   className,
   sizes,
   priority = false,
+  caption,
+  hideProvenance = false,
 }: SanityImageProps) {
-  if (!image.asset) {
+  const src = image.src
+    ? image.src
+    : image.asset
+      ? urlFor(image).width(2000).quality(80).url()
+      : null
+
+  if (!src) {
     return null
   }
 
-  const src = urlFor(image).width(2000).quality(80).url()
+  const resolvedCaption = caption ?? image.caption
   const showProvenance =
-    image.provenance && image.provenance !== 'actual'
+    !hideProvenance && image.provenance && image.provenance !== 'actual'
 
   return (
     <figure>
@@ -35,9 +45,9 @@ export function SanityImage({
         sizes={sizes}
         priority={priority}
       />
-      {(image.caption || showProvenance) && (
+      {(resolvedCaption || showProvenance) && (
         <figcaption>
-          {image.caption}
+          {resolvedCaption}
           {showProvenance ? ` (${image.provenance})` : null}
         </figcaption>
       )}

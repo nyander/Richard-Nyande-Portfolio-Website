@@ -16,8 +16,6 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
 
   return (
     <section id="hero" className="case-study-hero" aria-labelledby="case-study-title">
-      <p className="case-study-hero-summary">{study.summary}</p>
-      <p className="case-study-year">{study.year}</p>
       {(study.contextFacts?.length ?? 0) > 0 ? (
         <dl className="case-study-facts">
           {study.contextFacts?.map((fact) => (

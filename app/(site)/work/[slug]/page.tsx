@@ -34,9 +34,11 @@ export async function generateMetadata({
 
   const title = study.seoTitle || study.title
   const description = study.seoDescription || study.summary
-  const ogImage = study.ogImage?.asset
-    ? urlFor(study.ogImage).width(1200).height(630).url()
-    : undefined
+  const ogImage = study.ogImage?.src
+    ? study.ogImage.src
+    : study.ogImage?.asset
+      ? urlFor(study.ogImage).width(1200).height(630).url()
+      : undefined
 
   return {
     title,
@@ -61,10 +63,32 @@ export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
     <article className="case-study">
       <SectionProgress />
       <header className="case-study-masthead">
-        <h1 id="case-study-title">{study.title}</h1>
-        <div className="case-study-role">
-          <span className="case-study-role-label">Role</span>
-          <span className="case-study-role-value">{study.role}</span>
+        <div className="case-study-masthead-main">
+          <h1 id="case-study-title">{study.title}</h1>
+          <p className="case-study-hero-summary">{study.summary}</p>
+          <p className="case-study-year">{study.year}</p>
+        </div>
+        <div className="case-study-masthead-meta">
+          <div className="case-study-role">
+            <span className="case-study-role-label">Role</span>
+            <span className="case-study-role-value">{study.role}</span>
+          </div>
+          {study.liveUrl ? (
+            <div className="case-study-live">
+              <a
+                className="case-study-live-link"
+                href={study.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="case-study-role-label">Live site</span>
+                <span className="case-study-role-value">Visit ↗</span>
+              </a>
+              {study.liveNote ? (
+                <p className="case-study-live-note">{study.liveNote}</p>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </header>
       <CaseStudyHero study={study} />

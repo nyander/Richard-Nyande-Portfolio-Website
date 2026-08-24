@@ -81,6 +81,21 @@ export const caseStudy = defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'liveUrl',
+      title: 'Live site URL',
+      type: 'url',
+      group: 'hero',
+      description: 'Optional public URL. Shown in the case study header as Live site.',
+    }),
+    defineField({
+      name: 'liveNote',
+      title: 'Live site note',
+      type: 'string',
+      group: 'hero',
+      description:
+        'Optional access note under the live link, e.g. login required or available upon request.',
+    }),
+    defineField({
       name: 'contextFacts',
       title: 'Context facts',
       type: 'array',

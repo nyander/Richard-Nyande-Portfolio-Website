@@ -1,4 +1,5 @@
 import { Reveal } from '@/components/motion/Reveal'
+import { hasImageAsset } from '@/components/media/MediaSlot'
 import { RestrictedPortableText } from '@/components/portable-text/RestrictedPortableText'
 import { ImagePair } from '@/components/work/ImagePair'
 import type { DesignToCode } from '@/lib/sanity/types'
@@ -48,16 +49,22 @@ export function CaseStudyDesignToCode({ section }: CaseStudyDesignToCodeProps) {
         </ol>
       ) : null}
 
-      <h4 className="image-pair-label">Figma to shipped</h4>
-      <ImagePair
-        before={section.figmaImage}
-        after={section.shippedImage}
-        beforeLabel="Figma"
-        afterLabel="Shipped"
-        beforeTodo="Add the Figma state for this pair."
-        afterTodo="Add the shipped state for this pair."
-      />
-      {caption ? <p className="image-pair-caption">{caption}</p> : null}
+      {hasImageAsset(section.figmaImage) || hasImageAsset(section.shippedImage) ? (
+        <>
+          {hasImageAsset(section.figmaImage) && hasImageAsset(section.shippedImage) ? (
+            <h4 className="image-pair-label">Figma to shipped</h4>
+          ) : null}
+          <ImagePair
+            before={section.figmaImage}
+            after={section.shippedImage}
+            beforeLabel="Figma"
+            afterLabel="Shipped"
+            beforeTodo="Add the Figma state for this pair."
+            afterTodo="Add the shipped state for this pair."
+          />
+          {caption ? <p className="image-pair-caption">{caption}</p> : null}
+        </>
+      ) : null}
 
       {tags.length > 0 ? (
         <ul className="stack-pills">

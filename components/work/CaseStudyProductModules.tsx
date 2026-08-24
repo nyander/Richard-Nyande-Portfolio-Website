@@ -1,10 +1,13 @@
 'use client'
 
+import { useControls } from 'leva'
 import { useEffect, useId, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 
-import { MediaSlot } from '@/components/media/MediaSlot'
+import { hasImageAsset, MediaSlot } from '@/components/media/MediaSlot'
+import { Lightbox } from '@/components/media/Lightbox'
 import { Reveal } from '@/components/motion/Reveal'
+import { ModuleShotFrame } from '@/components/work/ModuleShotFrame'
 import { RestrictedPortableText } from '@/components/portable-text/RestrictedPortableText'
 import { ImagePair } from '@/components/work/ImagePair'
 import { StatusTag } from '@/components/work/StatusTag'
@@ -174,14 +177,32 @@ export function CaseStudyProductModules({
     items[0] ? moduleKey(items[0]) : undefined
   )
   const [moreOpen, setMoreOpen] = useState(false)
+  const [inspecting, setInspecting] = useState(false)
   const pillsRef = useRef<HTMLOListElement>(null)
   const pillButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({})
+  const crop = useControls('Module screenshot', {
+    x: {
+      value: 50,
+      min: 0,
+      max: 100,
+      step: 1,
+      label: 'X',
+    },
+    y: {
+      value: 0,
+      min: 0,
+      max: 100,
+      step: 1,
+      label: 'Y',
+    },
+  })
 
   if (items.length === 0 && !section.heading && !section.eyebrow) {
     return null
   }
 
   const activeItem = items.find((item) => moduleKey(item) === openKey)
+  const hasShot = hasImageAsset(activeItem?.screenshot)
 
   function selectModule(key: string) {
     if (key === openKey) {
@@ -189,9 +210,11 @@ export function CaseStudyProductModules({
     }
     setOpenKey(key)
     setMoreOpen(false)
+    setInspecting(false)
   }
 
   return (
+    <>
     <section id="modules" className="case-study-modules" aria-labelledby="modules-heading">
       <div className="case-study-modules-inner">
         <StickyHeader>
@@ -240,16 +263,25 @@ export function CaseStudyProductModules({
           </ol>
         ) : null}
 
-        <div className="modules-layout">
-          <div className="modules-media" aria-live="polite">
-            <div key={openKey} className="modules-media-slide">
-              <MediaSlot
-                image={activeItem?.screenshot}
-                label={activeItem?.title}
-                todo="Add a product screenshot for this module."
-              />
+        <div className={hasShot ? 'modules-layout' : 'modules-layout is-copy-only'}>
+          {hasShot ? (
+            <div className="modules-media" aria-live="polite">
+              <div key={openKey} className="modules-media-slide">
+                <ModuleShotFrame
+                  label={activeItem?.title}
+                  x={crop.x}
+                  y={crop.y}
+                  onInspect={() => setInspecting(true)}
+                >
+                  <MediaSlot
+                    image={activeItem?.screenshot}
+                    hideProvenance
+                    todo="Add a product screenshot for this module."
+                  />
+                </ModuleShotFrame>
+              </div>
             </div>
-          </div>
+          ) : null}
 
           <ol className="module-list">
             {items.map((item, index) => {
@@ -277,6 +309,14 @@ export function CaseStudyProductModules({
         </div>
       </div>
     </section>
+    {inspecting && activeItem?.screenshot ? (
+      <Lightbox
+        image={activeItem.screenshot}
+        label={activeItem.title}
+        onClose={() => setInspecting(false)}
+      />
+    ) : null}
+    </>
   )
 }
 
