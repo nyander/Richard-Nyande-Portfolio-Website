@@ -15,8 +15,9 @@
 /coverage
 
 # next.js
-/.next/
-/.next.nosync/
+# No trailing slash: a local .next -> .next.nosync symlink must be ignored too.
+/.next
+/.next.nosync
 /out/
 
 # production
