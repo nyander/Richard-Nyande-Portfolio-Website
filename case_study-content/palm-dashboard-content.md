@@ -324,13 +324,9 @@ tactic, activity, timeplan — rather than inventing a new one.
    from entered activities. What to plan stays a human decision.
 
 **beforeAfterPair**
-`[NEEDS RICHARD]` Unresolved. The real design artifact was a paper sketch. Two honest
-options, pick one:
-- Photograph the paper sketch and caption it as initial exploration
-- Omit the design artifact entirely and add: "Designed directly through iteration in
-  code rather than in Figma first, a deliberate trade-off given the timeline."
-
-Do NOT produce a Figma reconstruction after the fact.
+No Figma before exists. Caption the after image with: "Designed directly through
+iteration in code rather than in Figma first — a deliberate trade-off given the
+timeline." Do NOT produce a Figma reconstruction after the fact.
 
 After image is available: objective detail view with timeline showing tactic →
 activity → timeplan hierarchy across weeks. Tag `test-data`.
@@ -354,8 +350,12 @@ returned articles were not relevant, so every mention had to be read and filtere
 of a crowded inbox before anyone could act on it.
 
 **quote**
-`[NEEDS RICHARD]` No verified quote for this section. Charlotte's quote (in Outcome)
-covers coverage tracking and could move here instead, or this section runs without one.
+"The KPI Management really helps us identify and manage articles much more quickly,
+and the fact that all the articles found are in one place is great. Not to mention
+the fact that we can upload our own as well."
+— Charlotte, Account Director, Palm PR
+
+Moved here from Outcome: it is specifically about coverage and KPI management.
 
 **contribution**
 End to end. I interviewed staff and managers and shadowed them running the existing
@@ -397,10 +397,8 @@ Each client's scoring criteria for coverage lived in separate Word files and
 spreadsheets, rebuilt and cross-checked by hand.
 
 **quote**
-"Something simple, easy to manage, that doesn't need cross-checking five documents."
-— Palm PR team member
-
-`[NEEDS RICHARD]` Attribution is vague. Confirm who said this, or drop the quote.
+None. The earlier "Palm PR team member" line was too vague to ship. Do not invent
+attribution.
 
 **contribution**
 Product designer, translating a document structure the team already trusted into a
@@ -521,10 +519,8 @@ Status tags to render:
    automates and speeds things up so much more."
    — Hannah, Account Executive, Palm PR
 
-3. "The KPI Management really helps us identify and manage articles much more quickly,
-   and the fact that all the articles found are in one place is great. Not to mention
-   the fact that we can upload our own as well."
-   — Charlotte, Account Director, Palm PR
+Charlotte's quote lives on the Coverage tracking deep-dive, not here. Stack these two
+so both are visible — do not hide them behind a carousel.
 
 **evidence** (plain strings)
 - Building an Excel timeline manually took around an hour per client. That step was

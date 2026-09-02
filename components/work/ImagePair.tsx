@@ -106,7 +106,7 @@ function ImagePairSlot({
         onClick={onExpand}
         aria-label={`Expand ${label} image`}
       >
-        <MediaSlot image={image} label={label} todo={todo} sizes={sizes} />
+        <MediaSlot image={image} label={label} todo={todo} sizes={sizes} intrinsic />
       </button>
     </Reveal>
   )

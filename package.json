@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --disable-source-maps --hostname 127.0.0.1",
+    "modules:nosync": "if [ -L node_modules ]; then echo 'node_modules already linked'; elif [ -d node_modules ]; then rm -rf node_modules.nosync && mv node_modules node_modules.nosync && ln -s node_modules.nosync node_modules && echo linked; else echo 'no node_modules'; exit 1; fi",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -19,6 +20,7 @@
     "next-sanity": "^11.6.10",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "resend": "^6.25.0",
     "sanity": "^4.19.0",
     "styled-components": "^6.5.2"
   },

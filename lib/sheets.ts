@@ -19,7 +19,11 @@ export const ABOUT_SHEETS = [
 export type AboutSheetId = (typeof ABOUT_SHEETS)[number]['id']
 
 /** Ordered published (or soon-published) case studies. Index 0 → A-01. */
-export const CASE_STUDY_SHEETS = [{ slug: 'palm-dashboard' }] as const
+export const CASE_STUDY_SHEETS = [
+  { slug: 'palm-dashboard' },
+  { slug: 'yande-gadgets' },
+  { slug: 'recruiteware' },
+] as const
 
 export type CaseStudySheetSlug = (typeof CASE_STUDY_SHEETS)[number]['slug']
 

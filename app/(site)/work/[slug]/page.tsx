@@ -8,8 +8,11 @@ import { CaseStudyHero } from '@/components/work/CaseStudyHero'
 import { CaseStudyOutcome } from '@/components/work/CaseStudyOutcome'
 import { CaseStudyProductModules } from '@/components/work/CaseStudyProductModules'
 import { CaseStudyReframing } from '@/components/work/CaseStudyReframing'
+import { CaseStudyWalkthrough } from '@/components/work/CaseStudyWalkthrough'
+import { YandeStudioEditorial } from '@/components/work/YandeStudioEditorial'
 import { urlFor } from '@/lib/sanity/image'
 import { getCaseStudyBySlug, getCaseStudySlugs } from '@/lib/sanity/queries'
+import { YANDE_STUDIO_SLUG } from '@/lib/yande-studio'
 
 type CaseStudyRouteProps = {
   params: Promise<{ slug: string }>
@@ -59,6 +62,10 @@ export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
     notFound()
   }
 
+  if (slug === YANDE_STUDIO_SLUG) {
+    return <YandeStudioEditorial study={study} />
+  }
+
   return (
     <article className="case-study">
       <SectionProgress />
@@ -81,8 +88,16 @@ export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="case-study-role-label">Live site</span>
-                <span className="case-study-role-value">Visit ↗</span>
+                <span className="case-study-role-label">
+                  {study.walkthroughUrl && study.liveUrl === study.walkthroughUrl
+                    ? 'Walkthrough'
+                    : 'Live site'}
+                </span>
+                <span className="case-study-role-value">
+                  {study.walkthroughUrl && study.liveUrl === study.walkthroughUrl
+                    ? 'Watch ↗'
+                    : 'Visit ↗'}
+                </span>
               </a>
               {study.liveNote ? (
                 <p className="case-study-live-note">{study.liveNote}</p>
@@ -92,6 +107,12 @@ export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
         </div>
       </header>
       <CaseStudyHero study={study} />
+      {study.walkthroughUrl ? (
+        <CaseStudyWalkthrough
+          url={study.walkthroughUrl}
+          title={study.walkthroughTitle}
+        />
+      ) : null}
       {study.reframing ? (
         <CaseStudyReframing reframing={study.reframing} />
       ) : null}

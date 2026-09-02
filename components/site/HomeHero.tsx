@@ -5,7 +5,7 @@ import { Leva, useControls } from 'leva'
 import { HeroStamp } from '@/components/site/HeroStamp'
 
 const LEDE =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
+  'I design digital products, then build them — from notes and sketches through to software people can actually use.'
 
 function HeroRail({
   left,

@@ -8,7 +8,7 @@ type SectionProgressItem = {
   label: string
 }
 
-const SECTIONS: SectionProgressItem[] = [
+const DEFAULT_SECTIONS: SectionProgressItem[] = [
   { id: 'hero', label: 'Overview' },
   { id: 'reframing', label: 'Reframing' },
   { id: 'modules', label: 'Product modules' },
@@ -17,6 +17,8 @@ const SECTIONS: SectionProgressItem[] = [
   { id: 'outcome', label: 'Outcome and status' },
 ]
 
+export type { SectionProgressItem }
+
 function prefersReducedMotion() {
   return (
     typeof window !== 'undefined' &&
@@ -24,11 +26,15 @@ function prefersReducedMotion() {
   )
 }
 
-export function SectionProgress() {
-  const [activeId, setActiveId] = useState(SECTIONS[0].id)
+export function SectionProgress({
+  sections = DEFAULT_SECTIONS,
+}: {
+  sections?: SectionProgressItem[]
+}) {
+  const [activeId, setActiveId] = useState(sections[0]?.id ?? '')
 
   useEffect(() => {
-    const elements = SECTIONS.map((section) => document.getElementById(section.id)).filter(
+    const elements = sections.map((section) => document.getElementById(section.id)).filter(
       (el): el is HTMLElement => el !== null
     )
 
@@ -52,7 +58,7 @@ export function SectionProgress() {
 
     elements.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [])
+  }, [sections])
 
   function handleClick(event: MouseEvent<HTMLAnchorElement>, id: string) {
     const el = document.getElementById(id)
@@ -69,7 +75,7 @@ export function SectionProgress() {
   return (
     <nav className="section-progress" aria-label="Section progress">
       <ol>
-        {SECTIONS.map((section, index) => {
+        {sections.map((section, index) => {
           const isActive = section.id === activeId
           return (
             <li key={section.id} className="section-progress-item">

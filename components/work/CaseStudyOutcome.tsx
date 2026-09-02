@@ -1,6 +1,6 @@
 import { Reveal } from '@/components/motion/Reveal'
 import { RestrictedPortableText } from '@/components/portable-text/RestrictedPortableText'
-import { QuoteCarousel } from '@/components/work/QuoteCarousel'
+import { QuoteBlock } from '@/components/work/QuoteBlock'
 import { StatusTag } from '@/components/work/StatusTag'
 import { TodoPlaceholder } from '@/components/work/TodoPlaceholder'
 import type { OutcomeStatus, ProductModule, Status } from '@/lib/sanity/types'
@@ -77,13 +77,15 @@ export function CaseStudyOutcome({ section, modules }: CaseStudyOutcomeProps) {
         </Reveal>
       ) : null}
 
-      <Reveal delay={120}>
-        {quotes.length > 0 ? (
-          <QuoteCarousel quotes={quotes} />
-        ) : (
-          <TodoPlaceholder label="Add attributed quotes." />
-        )}
-      </Reveal>
+      {quotes.length > 0 ? (
+        <Reveal delay={120}>
+          <div className="outcome-quotes">
+            {quotes.map((quote) => (
+              <QuoteBlock key={`${quote.name}-${quote.quote.slice(0, 24)}`} quote={quote} />
+            ))}
+          </div>
+        </Reveal>
+      ) : null}
 
       <Reveal className="outcome-split" delay={60}>
         <div>

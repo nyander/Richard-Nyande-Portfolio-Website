@@ -1,14 +1,19 @@
 import { HomeHero } from '@/components/site/HomeHero'
-import { FeaturedCaseStudyList } from '@/components/work/FeaturedCaseStudyList'
-import { getFeaturedCaseStudies } from '@/lib/sanity/queries'
+import { ContactSection } from '@/components/site/ContactSection'
+import { WorkIndex } from '@/components/work/WorkIndex'
+import { getWorkIndex } from '@/lib/sanity/queries'
 
 export default async function HomePage() {
-  const studies = await getFeaturedCaseStudies()
+  const { caseStudies, otherWork } = await getWorkIndex().catch(() => ({
+    caseStudies: [],
+    otherWork: [],
+  }))
 
   return (
     <main>
       <HomeHero />
-      <FeaturedCaseStudyList studies={studies} />
+      <WorkIndex caseStudies={caseStudies} otherWork={otherWork} />
+      <ContactSection />
     </main>
   )
 }

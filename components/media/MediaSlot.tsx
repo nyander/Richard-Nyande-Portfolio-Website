@@ -8,6 +8,8 @@ type MediaSlotProps = {
   label?: string
   hideProvenance?: boolean
   sizes?: string
+  intrinsic?: boolean
+  priority?: boolean
 }
 
 export function hasImageAsset(image?: AltImage | null) {
@@ -20,6 +22,8 @@ export function MediaSlot({
   label,
   hideProvenance = false,
   sizes = '(min-width: 800px) 40vw, 100vw',
+  intrinsic = false,
+  priority = false,
 }: MediaSlotProps) {
   if (hasImageAsset(image) && image) {
     return (
@@ -28,6 +32,8 @@ export function MediaSlot({
         caption={label}
         hideProvenance={hideProvenance || Boolean(label)}
         sizes={sizes}
+        intrinsic={intrinsic}
+        priority={priority}
       />
     )
   }

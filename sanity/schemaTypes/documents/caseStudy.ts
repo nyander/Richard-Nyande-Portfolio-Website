@@ -96,6 +96,19 @@ export const caseStudy = defineType({
         'Optional access note under the live link, e.g. login required or available upon request.',
     }),
     defineField({
+      name: 'walkthroughUrl',
+      title: 'Walkthrough URL',
+      type: 'url',
+      group: 'hero',
+      description: 'Optional YouTube or video URL, shown under the hero.',
+    }),
+    defineField({
+      name: 'walkthroughTitle',
+      title: 'Walkthrough title',
+      type: 'string',
+      group: 'hero',
+    }),
+    defineField({
       name: 'contextFacts',
       title: 'Context facts',
       type: 'array',

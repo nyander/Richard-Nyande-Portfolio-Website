@@ -12,6 +12,17 @@ import { TodoPlaceholder } from '@/components/work/TodoPlaceholder'
 import { toAnchor } from '@/lib/slug'
 import type { DeepDive, DeepDivesSection } from '@/lib/sanity/types'
 
+function constraintItems(value?: string) {
+  if (!value) {
+    return []
+  }
+
+  return value
+    .split(/\n+/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+}
+
 // Fallback abbreviations for the Palm Dashboard case study, kept only so
 // existing content keeps its short tab labels until `shortLabel` is filled
 // in via Studio. New case studies should set `shortLabel` on each deep dive
@@ -137,6 +148,7 @@ function DeepDiveBlock({
 }) {
   const decisions = item.decisions ?? []
   const pair = item.beforeAfter
+  const constraints = constraintItems(item.constraints)
 
   return (
     <article
@@ -154,11 +166,7 @@ function DeepDiveBlock({
         </div>
       ) : null}
 
-      {item.quote?.quote ? (
-        <QuoteBlock quote={item.quote} />
-      ) : (
-        <TodoPlaceholder label="Add or verify a quote for this deep dive." />
-      )}
+      {item.quote?.quote ? <QuoteBlock quote={item.quote} /> : null}
 
       <div className="dive-split">
         <div>
@@ -171,8 +179,12 @@ function DeepDiveBlock({
         </div>
         <div>
           <h4>Constraints</h4>
-          {item.constraints ? (
-            <p className="pre-line">{item.constraints}</p>
+          {constraints.length > 0 ? (
+            <ul className="dive-constraints">
+              {constraints.map((constraint) => (
+                <li key={constraint}>{constraint}</li>
+              ))}
+            </ul>
           ) : (
             <TodoPlaceholder label="Add constraints." />
           )}

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { FooterWordmark } from '@/components/site/FooterWordmark'
-import { MENU_CONTACT, MENU_SOCIALS, NAV_ITEMS, isCurrentNav } from '@/lib/nav'
+import { MENU_SOCIALS, NAV_ITEMS, isCurrentNav } from '@/lib/nav'
 
 const BIO =
   "I'm a multidisciplinary designer and developer working across product design, creative technology and digital experiences. My practice combines design and engineering, taking ideas from early concepts and user experience through to fully realised digital products, while drawing inspiration from fashion, music, art and culture to explore new ways of building, interacting and communicating through technology."
@@ -106,9 +106,15 @@ export function SiteFooter() {
                 if (item.id === 'yande') {
                   return [
                     <li key="contact">
-                      <a className="site-footer-link" href={MENU_CONTACT.mailto}>
+                      <Link
+                        className={
+                          pathname === '/contact' ? 'site-footer-link is-current' : 'site-footer-link'
+                        }
+                        href="/contact"
+                        aria-current={pathname === '/contact' ? 'page' : undefined}
+                      >
                         Contact
-                      </a>
+                      </Link>
                     </li>,
                     <li key={item.id}>
                       <a

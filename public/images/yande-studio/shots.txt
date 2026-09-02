@@ -1,0 +1,15 @@
+filename | actual|representative|test-data | alt (one factual sentence)
+gate-collage.png | actual | Collage password gate with ripped-paper panels, a red stamp card and an empty password field
+studio-exterior.png | actual | 3D studio exterior after unlock, night sky, building poster and camcorder chrome, no debug UI
+studio-exterior-mobile.png | actual | Same exterior at phone width, with the studio poster filling the portrait frame
+practice-index.png | actual | Practice index with studio work-type filters and an empty project list
+about-studio.png | actual | About page with the Yandè mark, founded by Richard Nyande, London
+library-index.png | actual | Library index showing zero archive entries
+rotation-crate.png | actual | Rotation page with album crate, De La Soul record and a 3D turntable
+contact-form.png | actual | Contact form with collaboration, project, press and general enquiry types
+
+# not captured
+# studio-interior.png — interior enter is development-only; furniture is not a public visitor surface
+# practice-project.png — Practice has no public projects to show
+# gate-figma.png — no Figma frame file on hand
+# gate-collage-mobile.png — optional, not shot

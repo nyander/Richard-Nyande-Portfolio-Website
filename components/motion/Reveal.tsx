@@ -35,19 +35,28 @@ export function Reveal({ as = 'div', children, className, delay = 0, id }: Revea
       return () => cancelAnimationFrame(frame)
     }
 
+    const show = () => {
+      setVisible(true)
+      observer.disconnect()
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisible(true)
-            observer.disconnect()
+          if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
+            show()
           }
         })
       },
-      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+      { threshold: 0, rootMargin: '15% 0px' }
     )
 
     observer.observe(node)
+
+    if (node.getBoundingClientRect().top < window.innerHeight) {
+      show()
+    }
+
     return () => observer.disconnect()
   }, [])
 

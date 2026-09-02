@@ -69,7 +69,7 @@ const doc = {
   year: 2025,
   summary:
     'A multi-tenant PR workspace that brought campaign planning, coverage tracking and performance reporting into one place for teams and clients.',
-  status: 'in-progress',
+  status: 'shipped',
   featured: true,
   order: 0,
   liveUrl: 'https://palm-dashboard-lg3wc.ondigitalocean.app/',
@@ -316,7 +316,7 @@ const doc = {
           ),
         ],
         outcome: blocks(
-          'Shipped and in active use. Internal feedback credited the timeline automation specifically with removing a task that used to take around an hour per client.'
+          'Shipped while I was there. Internal feedback credited the timeline automation specifically with removing a task that used to take around an hour per client.'
         ),
       },
       {
@@ -326,6 +326,11 @@ const doc = {
         shortLabel: 'Coverage tracking',
         problem: blocks(
           'The team relied on a third-party tool that emailed every article matching agreed client keywords, landing in the same inbox used for the rest of the business. Most returned articles were not relevant, so every mention had to be read and filtered out of a crowded inbox before anyone could act on it.'
+        ),
+        quote: quote(
+          'The KPI Management really helps us identify and manage articles much more quickly, and the fact that all the articles found are in one place is great. Not to mention the fact that we can upload our own as well.',
+          'Charlotte',
+          'Account Director, Palm PR'
         ),
         contribution:
           'End to end. I interviewed staff and managers and shadowed them running the existing process, then defined requirements, researched the filtering approach, and built the backend and frontend. The team tested the new workflow and signed it off before rollout.',
@@ -356,10 +361,6 @@ const doc = {
         shortLabel: 'KPI criteria',
         problem: blocks(
           "Each client's scoring criteria for coverage lived in separate Word files and spreadsheets, rebuilt and cross-checked by hand."
-        ),
-        quote: quote(
-          "Something simple, easy to manage, that doesn't need cross-checking five documents.",
-          'Palm PR team member'
         ),
         contribution:
           'Product designer, translating a document structure the team already trusted into a reusable in-app system.',
@@ -419,9 +420,9 @@ const doc = {
     eyebrow: '06 / Outcome and status',
     heading: 'Where the product stands',
     statusSummary:
-      'Four core modules are shipped and in active use. Performance analysis and coverage reporting have their core structure built, with further metric pillars still in progress.',
+      'Four modules shipped while I was there: onboarding, objectives and strategy, customer profiling, and coverage tracking. Performance analysis and coverage reporting had their structure. I left Palm PR. I am not working on this, and there is no developer continuing it.',
     whatsNext:
-      "The next step identified was using an LLM to compare incoming articles against a client's keywords and KPI criteria automatically, reducing manual filtering further.",
+      "The next step identified was an LLM to compare incoming articles against a client's keywords and KPI criteria. I left before that work started, and there is no developer on the product now.",
     quotes: [
       quote(
         'This is going to reposition Palm into the front-row leaders of PR tracking. We have an application that not only helps the client understand performance but also allows them to see their fallback and how they could improve and leverage their current keywords.',
@@ -432,11 +433,6 @@ const doc = {
         'This has made the onboarding process a lot easier, and the fact that we can have this all manageable in a single document is amazing. Before, when we made one update, we would have to make it in different documents, which made the process so long. This automates and speeds things up so much more.',
         'Hannah',
         'Account Executive, Palm PR'
-      ),
-      quote(
-        'The KPI Management really helps us identify and manage articles much more quickly, and the fact that all the articles found are in one place is great. Not to mention the fact that we can upload our own as well.',
-        'Charlotte',
-        'Account Director, Palm PR'
       ),
     ],
     evidence: [

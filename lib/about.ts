@@ -4,6 +4,8 @@ export const ABOUT_LINKS = {
   linkedin: 'https://www.linkedin.com/in/richard-nyande-1aa32a133',
   yande: 'https://yande.uk',
   palm: '/work/palm-dashboard',
+  gadgets: '/work/yande-gadgets',
+  recruiteware: '/work/recruiteware',
   cv: '/cv/richard-nyande.pdf',
 } as const
 
@@ -127,8 +129,10 @@ export const ABOUT = {
       },
       {
         org: 'Greyzip',
-        scope: 'Full-stack + UX',
+        scope: 'Full-stack + UX · Recruiteware',
         dates: '2024',
+        href: ABOUT_LINKS.recruiteware,
+        linkLabel: 'See sheet',
       },
       {
         org: 'RSM',
@@ -139,6 +143,13 @@ export const ABOUT = {
         org: 'Context World',
         scope: 'Junior data analyst',
         dates: '2020–21',
+      },
+      {
+        org: 'Yande Gadgets',
+        scope: 'Product designer + full-stack · Laravel, final-year project',
+        dates: '2019–20',
+        href: ABOUT_LINKS.gadgets,
+        linkLabel: 'See sheet',
       },
       {
         org: 'Universal Web Design',

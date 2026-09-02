@@ -143,6 +143,8 @@ export type CaseStudyPage = {
   outcomeStatus: OutcomeStatus | null
   liveUrl?: string | null
   liveNote?: string | null
+  walkthroughUrl?: string | null
+  walkthroughTitle?: string | null
   seoTitle?: string
   seoDescription?: string
   ogImage: AltImage | null
@@ -157,4 +159,9 @@ export type ArchiveProject = {
   linkType: 'internal' | 'external'
   href: string
   tags: string[]
+}
+
+export type WorkIndexData = {
+  caseStudies: CaseStudyCard[]
+  otherWork: ArchiveProject[]
 }

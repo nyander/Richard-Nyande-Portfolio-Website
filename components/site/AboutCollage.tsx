@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
 import { Leva, useControls } from 'leva'
-import Spline from '@splinetool/react-spline'
 import type { Application } from '@splinetool/runtime'
+
+import { SplineStage } from '@/components/site/SplineStage'
 
 // Local copy of the published export so Chrome extensions cannot block prod.spline.design.
 export const ABOUT_COLLAGE_SCENE = '/spline/who-i-am.splinecode'
@@ -31,7 +32,16 @@ export function AboutCollage() {
   const stageRef = useRef<HTMLDivElement>(null)
   const appRef = useRef<Application | null>(null)
   const [ready, setReady] = useState(false)
+  const [hideLeva, setHideLeva] = useState(false)
   const [phoneLayout, setPhoneLayout] = useState(false)
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 800px)')
+    const sync = () => setHideLeva(media.matches)
+    sync()
+    media.addEventListener('change', sync)
+    return () => media.removeEventListener('change', sync)
+  }, [])
 
   const syncSize = useCallback(() => {
     const app = appRef.current
@@ -279,16 +289,24 @@ export function AboutCollage() {
   return (
     <>
       <Leva
-        hidden={false}
+        hidden={hideLeva}
         collapsed={false}
         titleBar={{ title: 'About', filter: false }}
         theme={{
           sizes: { rootWidth: '240px' },
         }}
       />
-      <div
-        ref={frameRef}
-        className={ready ? 'about-collage-scene is-ready' : 'about-collage-scene'}
+      <SplineStage
+        scene={ABOUT_COLLAGE_SCENE}
+        label="Loading collage"
+        className="about-collage-scene"
+        stageClassName="about-collage-move"
+        splineClassName="about-collage-spline"
+        frameRef={frameRef}
+        stageRef={stageRef}
+        splineStyle={{ pointerEvents: 'auto' }}
+        renderOnDemand={false}
+        onLoad={handleLoad}
         style={
           {
             width: phoneLayout ? '100%' : `${active.width}rem`,
@@ -298,17 +316,7 @@ export function AboutCollage() {
             '--collage-y': `${active.y}rem`,
           } as CSSProperties
         }
-      >
-        <div ref={stageRef} className="about-collage-move">
-          <Spline
-            scene={ABOUT_COLLAGE_SCENE}
-            className="about-collage-spline"
-            style={{ pointerEvents: 'auto' }}
-            renderOnDemand={false}
-            onLoad={handleLoad}
-          />
-        </div>
-      </div>
+      />
     </>
   )
 }

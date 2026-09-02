@@ -12,6 +12,7 @@ import {
 type ModuleShotFrameProps = {
   children: ReactNode
   label?: string
+  imageKey?: string
   x: number
   y: number
   onInspect?: () => void
@@ -20,6 +21,7 @@ type ModuleShotFrameProps = {
 export function ModuleShotFrame({
   children,
   label,
+  imageKey,
   x,
   y,
   onInspect,
@@ -39,6 +41,7 @@ export function ModuleShotFrame({
   const [thumbX, setThumbX] = useState(1)
   const [draggingY, setDraggingY] = useState(false)
   const [draggingX, setDraggingX] = useState(false)
+  const lastSizeRef = useRef({ w: 0, h: 0 })
 
   const sync = useCallback(() => {
     const view = viewRef.current
@@ -69,7 +72,9 @@ export function ModuleShotFrame({
 
   const sizeImage = useCallback(() => {
     const view = viewRef.current
-    const image = view?.querySelector('img')
+    const image =
+      view?.querySelector<HTMLImageElement>('.modules-shot-layer.is-front img') ||
+      view?.querySelector('img')
     if (!view || !image || !image.naturalWidth) {
       return
     }
@@ -83,17 +88,44 @@ export function ModuleShotFrame({
     image.style.maxWidth = 'none'
   }, [])
 
-  const applyStart = useCallback(() => {
+  useEffect(() => {
     const view = viewRef.current
     if (!view) {
       return
     }
 
-    sizeImage()
-    view.scrollLeft = (x / 100) * Math.max(0, view.scrollWidth - view.clientWidth)
-    view.scrollTop = (y / 100) * Math.max(0, view.scrollHeight - view.clientHeight)
-    sync()
-  }, [sizeImage, sync, x, y])
+    const applySize = () => {
+      const w = view.clientWidth
+      const h = view.clientHeight
+      if (
+        Math.abs(w - lastSizeRef.current.w) < 1 &&
+        Math.abs(h - lastSizeRef.current.h) < 1
+      ) {
+        return
+      }
+
+      lastSizeRef.current = { w, h }
+      sizeImage()
+      sync()
+    }
+
+    applySize()
+    view.addEventListener('scroll', sync, { passive: true })
+    const observer = new ResizeObserver(applySize)
+    observer.observe(view)
+    const image = view.querySelector('img')
+    const onLoad = () => {
+      lastSizeRef.current = { w: 0, h: 0 }
+      applySize()
+    }
+    image?.addEventListener('load', onLoad)
+
+    return () => {
+      view.removeEventListener('scroll', sync)
+      observer.disconnect()
+      image?.removeEventListener('load', onLoad)
+    }
+  }, [imageKey, sizeImage, sync])
 
   useEffect(() => {
     const view = viewRef.current
@@ -101,23 +133,10 @@ export function ModuleShotFrame({
       return
     }
 
-    const applyWhenReady = () => {
-      applyStart()
-    }
-
-    applyWhenReady()
-    view.addEventListener('scroll', sync, { passive: true })
-    const observer = new ResizeObserver(applyWhenReady)
-    observer.observe(view)
-    const image = view.querySelector('img')
-    image?.addEventListener('load', applyWhenReady)
-
-    return () => {
-      view.removeEventListener('scroll', sync)
-      observer.disconnect()
-      image?.removeEventListener('load', applyWhenReady)
-    }
-  }, [applyStart, sync])
+    view.scrollLeft = (x / 100) * Math.max(0, view.scrollWidth - view.clientWidth)
+    view.scrollTop = (y / 100) * Math.max(0, view.scrollHeight - view.clientHeight)
+    sync()
+  }, [imageKey, x, y, sync])
 
   function seekY(clientY: number, track: HTMLDivElement, offset: number) {
     const view = viewRef.current

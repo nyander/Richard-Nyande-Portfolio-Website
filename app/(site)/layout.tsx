@@ -1,3 +1,4 @@
+import { BootScreen } from '@/components/site/BootScreen'
 import { PageWidthControls } from '@/components/site/PageWidthControls'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { SiteHeader } from '@/components/site/SiteHeader'
@@ -11,6 +12,7 @@ export default function SiteLayout({
 }>) {
   return (
     <>
+      <BootScreen />
       <PageWidthControls />
       <SiteHeader />
       {children}

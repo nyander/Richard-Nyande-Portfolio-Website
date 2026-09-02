@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import { AboutCollage } from '@/components/site/AboutCollage'
+import { AboutCoverFilm } from '@/components/site/AboutCoverFilm'
 import { ExperienceSheet } from '@/components/site/ExperienceSheet'
 import { ExperienceSpacer } from '@/components/site/ExperienceSpacer'
 import { MutedClip } from '@/components/site/MutedClip'
 import { OffClockRoll } from '@/components/site/OffClockRoll'
 import { Reveal } from '@/components/motion/Reveal'
 import { SheetUnroll } from '@/components/site/SheetUnroll'
-import { TodoPlaceholder } from '@/components/work/TodoPlaceholder'
 import { ABOUT, ABOUT_LINKS } from '@/lib/about'
 import { aboutSheetEyebrow, padSheet, recordCode, type AboutSheetId } from '@/lib/sheets'
 
@@ -82,13 +82,9 @@ export function AboutPage() {
               <p className="about-method-mark" aria-hidden="true">
                 {padSheet(index + 1)}
               </p>
-              <figure className="about-media about-media-proof">
-                <div className="about-media-frame" aria-hidden="true" />
-              </figure>
               <p className="about-method-project">{item.project}</p>
               <h3>{item.title}</h3>
               <p className="about-method-body">{item.body}</p>
-              <TodoPlaceholder label={`Add a proof screen for ${item.project}.`} />
             </Reveal>
           ))}
         </ol>
@@ -112,6 +108,22 @@ export function AboutPage() {
             </div>
           </Reveal>
         </div>
+      </section>
+
+      <section id="what-drives-me" className="about-band about-drive" aria-labelledby="drive-heading">
+        <Reveal>
+          <SectionChrome
+            sheet="what-drives-me"
+            heading={ABOUT.drive.label}
+            headingId="drive-heading"
+          />
+          <div className="about-drive-copy">
+            {ABOUT.drive.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
+          </div>
+        </Reveal>
+        <AboutCoverFilm />
       </section>
 
       <SheetUnroll

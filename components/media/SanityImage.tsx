@@ -10,6 +10,7 @@ type SanityImageProps = {
   priority?: boolean
   caption?: string
   hideProvenance?: boolean
+  intrinsic?: boolean
 }
 
 export function SanityImage({
@@ -19,6 +20,7 @@ export function SanityImage({
   priority = false,
   caption,
   hideProvenance = false,
+  intrinsic = false,
 }: SanityImageProps) {
   const src = image.src
     ? image.src
@@ -39,11 +41,12 @@ export function SanityImage({
       <Image
         src={src}
         alt={image.alt}
-        width={2000}
-        height={1250}
+        width={1920}
+        height={948}
         className={className}
         sizes={sizes}
         priority={priority}
+        style={intrinsic ? { width: '100%', height: 'auto' } : undefined}
       />
       {(resolvedCaption || showProvenance) && (
         <figcaption>

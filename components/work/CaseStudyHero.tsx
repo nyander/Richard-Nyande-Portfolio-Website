@@ -12,7 +12,8 @@ type CaseStudyHeroProps = {
 export function CaseStudyHero({ study }: CaseStudyHeroProps) {
   const images = (study.heroImages ?? []).filter((image) => hasImageAsset(image))
   const hasImages = images.length > 0
-  const slotCount = Math.max(images.length, BENTO_SLOTS)
+  const isSingle = images.length === 1
+  const slotCount = isSingle ? 1 : Math.max(images.length, BENTO_SLOTS)
 
   return (
     <section id="hero" className="case-study-hero" aria-labelledby="case-study-title">
@@ -27,7 +28,10 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
         </dl>
       ) : null}
 
-      <div className="hero-bento" aria-hidden={hasImages ? undefined : true}>
+      <div
+        className={isSingle ? 'hero-bento is-single' : 'hero-bento'}
+        aria-hidden={hasImages ? undefined : true}
+      >
         <div className="hero-bento-track">
           {Array.from({ length: slotCount }, (_, index) => {
             const image = hasImages ? images[index % images.length] : undefined

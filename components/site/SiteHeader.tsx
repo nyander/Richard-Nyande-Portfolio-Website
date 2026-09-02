@@ -7,8 +7,6 @@ import { usePathname } from 'next/navigation'
 import { SiteMenu } from '@/components/site/SiteMenu'
 import { NAV_ITEMS, isCurrentNav } from '@/lib/nav'
 
-const CONTACT_MAILTO = 'mailto:rich.nyande@gmail.com'
-
 export function SiteHeader() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -86,7 +84,11 @@ export function SiteHeader() {
             </nav>
           </div>
 
-          <a className="site-bar-contact" href={CONTACT_MAILTO}>
+          <a
+            className={pathname === '/contact' ? 'site-bar-contact is-current' : 'site-bar-contact'}
+            href="/contact"
+            aria-current={pathname === '/contact' ? 'page' : undefined}
+          >
             Contact
           </a>
         </div>

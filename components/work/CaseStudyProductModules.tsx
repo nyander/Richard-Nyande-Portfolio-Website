@@ -2,7 +2,6 @@
 
 import { useControls } from 'leva'
 import { useEffect, useId, useRef, useState } from 'react'
-import type { ReactNode } from 'react'
 
 import { hasImageAsset, MediaSlot } from '@/components/media/MediaSlot'
 import { Lightbox } from '@/components/media/Lightbox'
@@ -12,7 +11,7 @@ import { RestrictedPortableText } from '@/components/portable-text/RestrictedPor
 import { ImagePair } from '@/components/work/ImagePair'
 import { StatusTag } from '@/components/work/StatusTag'
 import { toAnchor } from '@/lib/slug'
-import type { ProductModule, ProductModulesSection } from '@/lib/sanity/types'
+import type { AltImage, ProductModule, ProductModulesSection } from '@/lib/sanity/types'
 
 // Fallback abbreviations for the Palm Dashboard case study, kept only so
 // existing content keeps its short pill labels until `shortLabel` is filled
@@ -80,32 +79,193 @@ function StringList({
   )
 }
 
-/** Keeps the section heading pinned while the module list scrolls beneath it. */
-function StickyHeader({ children }: { children: ReactNode }) {
+/**
+ * Full heading stays in document flow. A zero-height compact bar sticks
+ * over the top once the title has scrolled away, so collapsing type
+ * cannot fight page scroll.
+ */
+function StickyHeader({
+  eyebrow,
+  heading,
+  headingId,
+}: {
+  eyebrow?: string | null
+  heading: string
+  headingId: string
+}) {
   const sentinelRef = useRef<HTMLDivElement>(null)
   const [stuck, setStuck] = useState(false)
 
   useEffect(() => {
     const node = sentinelRef.current
-    if (!node || typeof IntersectionObserver === 'undefined') {
+    if (!node) {
       return
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setStuck(!entry.isIntersecting),
-      { threshold: 1 }
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
+    let frame = 0
+    const update = () => {
+      const next = node.getBoundingClientRect().bottom < 0
+      setStuck((prev) => (prev === next ? prev : next))
+    }
+
+    const onScroll = () => {
+      if (frame) {
+        return
+      }
+      frame = window.requestAnimationFrame(() => {
+        frame = 0
+        update()
+      })
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) {
+        window.cancelAnimationFrame(frame)
+      }
+    }
   }, [])
 
   return (
     <>
-      <div ref={sentinelRef} className="modules-sticky-sentinel" aria-hidden="true" />
-      <div className={`modules-sticky-header${stuck ? ' is-stuck' : ''}`}>
-        <Reveal>{children}</Reveal>
+      <div className="modules-section-header">
+        <Reveal>
+          {eyebrow ? <p className="section-eyebrow">{eyebrow}</p> : null}
+          <h2 id={headingId}>{heading}</h2>
+        </Reveal>
+        <div ref={sentinelRef} className="modules-sticky-sentinel" aria-hidden="true" />
+      </div>
+      <div
+        className={`modules-compact-bar${stuck ? ' is-visible' : ''}`}
+        aria-hidden="true"
+      >
+        <div className="modules-compact-bar-inner">
+          <p className="modules-compact-title">{heading}</p>
+        </div>
       </div>
     </>
+  )
+}
+
+function shotSrc(image?: AltImage | null) {
+  return image?.src || image?.asset?._ref || ''
+}
+
+/** Keeps the previous screenshot visible until the next one has decoded. */
+function ModuleScreenshot({
+  image,
+  label,
+  x,
+  y,
+  onInspect,
+}: {
+  image?: AltImage | null
+  label?: string
+  x: number
+  y: number
+  onInspect: () => void
+}) {
+  const src = shotSrc(image)
+  const [front, setFront] = useState(image)
+  const [back, setBack] = useState<AltImage | null | undefined>(null)
+  const [frontReady, setFrontReady] = useState(true)
+  const frontRef = useRef<HTMLDivElement>(null)
+  const displayedRef = useRef(image)
+
+  useEffect(() => {
+    const previous = displayedRef.current
+    displayedRef.current = image
+
+    if (shotSrc(previous) === src) {
+      setFront(image)
+      return
+    }
+
+    setBack(previous)
+    setFront(image)
+    setFrontReady(false)
+  }, [image, src])
+
+  useEffect(() => {
+    const root = frontRef.current
+    if (!root) {
+      return
+    }
+
+    let image: HTMLImageElement | null = null
+
+    const markReady = () => {
+      if (image && image.complete && image.naturalWidth > 0) {
+        setFrontReady(true)
+      }
+    }
+
+    const bind = () => {
+      image?.removeEventListener('load', markReady)
+      image = root.querySelector('img')
+      if (!image) {
+        return
+      }
+      markReady()
+      image.addEventListener('load', markReady)
+    }
+
+    bind()
+    const observer = new MutationObserver(bind)
+    observer.observe(root, { childList: true, subtree: true })
+
+    return () => {
+      image?.removeEventListener('load', markReady)
+      observer.disconnect()
+    }
+  }, [src])
+
+  useEffect(() => {
+    if (!frontReady || !back) {
+      return
+    }
+
+    const timer = window.setTimeout(() => setBack(null), 80)
+    return () => window.clearTimeout(timer)
+  }, [back, frontReady])
+
+  return (
+    <ModuleShotFrame
+      label={label}
+      imageKey={src}
+      x={x}
+      y={y}
+      onInspect={onInspect}
+    >
+      <div className="modules-shot-layers">
+        {back && shotSrc(back) && shotSrc(back) !== src ? (
+          <div className="modules-shot-layer is-back" aria-hidden="true">
+            <MediaSlot
+              image={back}
+              hideProvenance
+              todo="Add a product screenshot for this module."
+            />
+          </div>
+        ) : null}
+        <div
+          ref={frontRef}
+          className={
+            frontReady
+              ? 'modules-shot-layer is-front is-ready'
+              : 'modules-shot-layer is-front'
+          }
+        >
+          <MediaSlot
+            image={front}
+            hideProvenance
+            priority
+            todo="Add a product screenshot for this module."
+          />
+        </div>
+      </div>
+    </ModuleShotFrame>
   )
 }
 
@@ -197,6 +357,20 @@ export function CaseStudyProductModules({
     },
   })
 
+  useEffect(() => {
+    const urls = [
+      ...new Set(
+        items
+          .map((item) => item.screenshot?.src)
+          .filter((src): src is string => Boolean(src))
+      ),
+    ]
+    urls.forEach((src) => {
+      const img = new window.Image()
+      img.src = src
+    })
+  }, [items])
+
   if (items.length === 0 && !section.heading && !section.eyebrow) {
     return null
   }
@@ -217,16 +391,11 @@ export function CaseStudyProductModules({
     <>
     <section id="modules" className="case-study-modules" aria-labelledby="modules-heading">
       <div className="case-study-modules-inner">
-        <StickyHeader>
-          {section.eyebrow ? (
-            <p className="section-eyebrow">{section.eyebrow}</p>
-          ) : null}
-          {section.heading ? (
-            <h2 id="modules-heading">{section.heading}</h2>
-          ) : (
-            <h2 id="modules-heading">Product modules</h2>
-          )}
-        </StickyHeader>
+        <StickyHeader
+          eyebrow={section.eyebrow}
+          heading={section.heading || 'Product modules'}
+          headingId="modules-heading"
+        />
         {section.intro ? <p className="section-intro">{section.intro}</p> : null}
 
         {items.length > 0 ? (
@@ -266,20 +435,13 @@ export function CaseStudyProductModules({
         <div className={hasShot ? 'modules-layout' : 'modules-layout is-copy-only'}>
           {hasShot ? (
             <div className="modules-media" aria-live="polite">
-              <div key={openKey} className="modules-media-slide">
-                <ModuleShotFrame
-                  label={activeItem?.title}
-                  x={crop.x}
-                  y={crop.y}
-                  onInspect={() => setInspecting(true)}
-                >
-                  <MediaSlot
-                    image={activeItem?.screenshot}
-                    hideProvenance
-                    todo="Add a product screenshot for this module."
-                  />
-                </ModuleShotFrame>
-              </div>
+              <ModuleScreenshot
+                image={activeItem?.screenshot}
+                label={activeItem?.title}
+                x={crop.x}
+                y={crop.y}
+                onInspect={() => setInspecting(true)}
+              />
             </div>
           ) : null}
 

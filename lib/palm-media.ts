@@ -1,4 +1,5 @@
 import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
+import { blocks } from '@/lib/case-study-blocks'
 
 const ROOT = '/images/palm-dashboard'
 
@@ -16,6 +17,8 @@ function localImage(
   }
 }
 
+export const PALM_SLUG = 'palm-dashboard'
+
 const PALM_COVER = localImage(
   'palm-logo.png',
   'Palm wordmark',
@@ -25,6 +28,52 @@ const PALM_COVER = localImage(
 
 const PALM_LIVE_URL = 'https://palm-dashboard-lg3wc.ondigitalocean.app/'
 const PALM_LIVE_NOTE = 'Login required. Accessible upon request.'
+
+const PALM_STATUS_SUMMARY =
+  'Four modules shipped while I was there: onboarding, objectives and strategy, customer profiling, and coverage tracking. Performance analysis and coverage reporting had their structure. I left Palm PR. I am not working on this, and there is no developer continuing it.'
+
+const PALM_WHATS_NEXT =
+  "The next step identified was an LLM to compare incoming articles against a client's keywords and KPI criteria. I left before that work started, and there is no developer on the product now."
+
+export const PALM_CARD: CaseStudyCard = {
+  _id: 'caseStudy-palm-dashboard',
+  title: 'Palm Dashboard',
+  slug: PALM_SLUG,
+  role: 'Product Designer, Full Stack Developer',
+  year: 2025,
+  summary:
+    'A multi-tenant PR workspace that brought campaign planning, coverage tracking and performance reporting into one place for teams and clients.',
+  status: 'shipped',
+  heroImage: null,
+}
+
+export const PALM_STUDY: CaseStudyPage = {
+  _id: PALM_CARD._id,
+  title: PALM_CARD.title,
+  slug: PALM_CARD.slug,
+  role: PALM_CARD.role,
+  year: PALM_CARD.year,
+  summary: PALM_CARD.summary,
+  status: PALM_CARD.status,
+  contextFacts: [
+    { label: 'Client', value: 'Palm PR' },
+    { label: 'Type', value: 'Multi-tenant SaaS workspace' },
+    { label: 'Stack', value: 'Laravel, Inertia + React, MySQL' },
+    { label: 'Team', value: 'Sole designer and developer' },
+  ],
+  heroImages: [],
+  reframing: null,
+  productModules: null,
+  deepDives: null,
+  designToCode: null,
+  outcomeStatus: null,
+  liveUrl: PALM_LIVE_URL,
+  liveNote: PALM_LIVE_NOTE,
+  seoTitle: 'Palm Dashboard — Product Design & Build Case Study | Richard Nyande',
+  seoDescription:
+    'A multi-tenant PR workspace bringing campaign planning, coverage tracking and performance reporting into one place. Product design and full-stack build for Palm PR.',
+  ogImage: null,
+}
 
 const PALM_HERO: AltImage[] = [
   localImage(
@@ -64,6 +113,22 @@ const PALM_HERO: AltImage[] = [
     'Brand Awareness Score modal showing the overall score and component breakdown'
   ),
 ]
+
+const CHARLOTTE_QUOTE = {
+  quote:
+    'The KPI Management really helps us identify and manage articles much more quickly, and the fact that all the articles found are in one place is great. Not to mention the fact that we can upload our own as well.',
+  name: 'Charlotte',
+  role: 'Account Director, Palm PR',
+}
+
+const DIVE_CONSTRAINTS: Record<string, string> = {
+  'from scattered documents to one connected timeline':
+    'Users were largely non-technical, so navigation had to stay familiar.\nTerminology from existing client documents had to carry over so onboarding did not require retraining.',
+  'from a flooded inbox to a filtered review queue':
+    'Detection quality depends on what the scraping and keyword scope can reliably catch, so the interface had to make uncertainty visible rather than imply perfect coverage.\nVolume meant triage speed mattered as much as detail.',
+  'from bespoke documents to one scoring structure':
+    'Criteria genuinely differ by client, so the system needed real flexibility, not a fixed template.\nHad to mirror existing document logic closely enough that onboarding required no retraining.',
+}
 
 const MODULE_SCREENSHOTS: Record<string, AltImage> = {
   'client onboarding': localImage(
@@ -126,7 +191,7 @@ const DEEP_DIVE_AFTER: Record<string, { image: AltImage; caption: string }> = {
       'Campaign timeline showing tactic, activity and timeplan hierarchy across weeks'
     ),
     caption:
-      'Objective detail, timeline view. Colour marks layer (tactic, activity, timeplan), not status.',
+      'Designed directly through iteration in code rather than in Figma first — a deliberate trade-off given the timeline. After: objective detail, timeline view. Colour marks layer (tactic, activity, timeplan), not status.',
   },
   'from a flooded inbox to a filtered review queue': {
     image: localImage(
@@ -169,7 +234,6 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
     return study
   }
 
-  const heroImages = (study.heroImages ?? []).filter(hasVisual)
   const productModules = study.productModules
     ? {
         ...study.productModules,
@@ -198,26 +262,54 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
     ? {
         ...study.deepDives,
         items: study.deepDives.items?.map((item) => {
-          const match = DEEP_DIVE_AFTER[item.title.trim().toLowerCase()]
-          if (!match) {
-            return item
-          }
+          const key = item.title.trim().toLowerCase()
+          const match = DEEP_DIVE_AFTER[key]
+          const constraints = DIVE_CONSTRAINTS[key]
+          const isCoverage = key === 'from a flooded inbox to a filtered review queue'
+          const isKpi = key === 'from bespoke documents to one scoring structure'
+          const isTimeline = key === 'from scattered documents to one connected timeline'
 
           return {
             ...item,
-            beforeAfter: {
-              ...item.beforeAfter,
-              after: preferExisting(item.beforeAfter?.after, match.image),
-              caption: item.beforeAfter?.caption || match.caption,
-            },
+            quote: isCoverage
+              ? CHARLOTTE_QUOTE
+              : isKpi
+                ? null
+                : item.quote,
+            constraints: constraints || item.constraints,
+            outcome: isTimeline
+              ? blocks(
+                  'Shipped while I was there. Internal feedback credited the timeline automation specifically with removing a task that used to take around an hour per client.'
+                )
+              : item.outcome,
+            beforeAfter: match
+              ? {
+                  ...item.beforeAfter,
+                  after: preferExisting(item.beforeAfter?.after, match.image),
+                  caption: match.caption,
+                }
+              : item.beforeAfter,
           }
         }),
       }
     : study.deepDives
 
+  const outcomeStatus = study.outcomeStatus
+    ? {
+        ...study.outcomeStatus,
+        statusSummary: PALM_STATUS_SUMMARY,
+        whatsNext: PALM_WHATS_NEXT,
+        quotes: (study.outcomeStatus.quotes ?? []).filter(
+          (item) => item.name.trim().toLowerCase() !== 'charlotte'
+        ),
+      }
+    : study.outcomeStatus
+
   return {
     ...study,
-    heroImages: heroImages.length > 0 ? heroImages : PALM_HERO,
+    status: PALM_CARD.status,
+    heroImages: PALM_HERO,
+    outcomeStatus,
     productModules,
     deepDives,
     designToCode: study.designToCode
@@ -242,6 +334,7 @@ export function applyPalmCardMedia(study: CaseStudyCard): CaseStudyCard {
 
   return {
     ...study,
+    status: PALM_CARD.status,
     heroImage: PALM_COVER,
   }
 }

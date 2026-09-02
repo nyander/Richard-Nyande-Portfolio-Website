@@ -1,24 +1,17 @@
 'use client'
 
-import { useState } from 'react'
-import Spline from '@splinetool/react-spline'
+import { SplineStage } from '@/components/site/SplineStage'
 
-export const HERO_SPLINE_SCENE =
-  'https://prod.spline.design/cf4tHib-G1rG-iww/scene.splinecode'
+export const HERO_SPLINE_SCENE = '/spline/hero-portrait.splinecode'
 
 export function HeroAvatar() {
-  const [ready, setReady] = useState(false)
-
   return (
-    <div className={ready ? 'hero-stamp-scene is-ready' : 'hero-stamp-scene'}>
-      <div className="hero-stamp-model">
-        <Spline
-          scene={HERO_SPLINE_SCENE}
-          className="hero-stamp-spline"
-          renderOnDemand={false}
-          onLoad={() => setReady(true)}
-        />
-      </div>
-    </div>
+    <SplineStage
+      scene={HERO_SPLINE_SCENE}
+      label="Loading portrait"
+      className="hero-stamp-scene"
+      stageClassName="hero-stamp-model"
+      splineClassName="hero-stamp-spline"
+    />
   )
 }
