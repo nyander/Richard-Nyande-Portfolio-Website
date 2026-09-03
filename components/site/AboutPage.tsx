@@ -206,7 +206,7 @@ export function AboutPage() {
                             : `Still ${code}`
                         }
                         fill
-                        sizes="(min-width: 900px) 22vw, 45vw"
+                        sizes="(max-width: 800px) 84vw, 22vw"
                       />
                     ) : null}
                     {frame.kind === 'mov' ? (

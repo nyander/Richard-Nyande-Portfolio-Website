@@ -5412,6 +5412,176 @@ html.is-booting body {
     0 0 0 1.5px color-mix(in srgb, var(--color-ink) 18%, var(--color-vellum));
 }
 
+@media (max-width: 800px) {
+  .about-sheet-holes {
+    display: none;
+  }
+
+  .about-sheet-field-row .about-sheet-leader,
+  .about-sheet-record-head .about-sheet-leader,
+  .about-sheet-block-head .about-sheet-leader,
+  .about-sheet-key .about-sheet-leader,
+  .about-sheet-also .about-sheet-leader {
+    display: none;
+  }
+
+  .about-sheet-value,
+  .about-sheet-scope,
+  .about-sheet-key,
+  .about-sheet-also,
+  .about-sheet-edu {
+    text-transform: none;
+    letter-spacing: 0.01em;
+  }
+
+  .about-sheet-field-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-block: 0.8rem;
+  }
+
+  .about-sheet-field-end {
+    flex-shrink: 1;
+  }
+
+  .about-sheet-block-head {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.55rem;
+  }
+
+  .about-sheet-block-head h3 {
+    min-width: 0;
+    font-size: 0.84rem;
+    line-height: 1.25;
+  }
+
+  .about-sheet-record {
+    padding-block: 1.2rem;
+  }
+
+  .about-sheet-record-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 0.65rem;
+    row-gap: 0.38rem;
+  }
+
+  .about-sheet-ref {
+    width: auto;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .about-sheet-dates,
+  .about-sheet-chip {
+    grid-column: 2;
+    grid-row: 1;
+    margin-left: 0;
+    flex-basis: auto;
+    justify-self: end;
+    white-space: nowrap;
+  }
+
+  .about-sheet-chip {
+    align-self: start;
+    margin-top: 0.05rem;
+  }
+
+  .about-sheet-org {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 1.02rem;
+    line-height: 1.22;
+    color: var(--color-ink);
+  }
+
+  .about-sheet-record.is-fluency .about-sheet-org {
+    color: var(--color-ink);
+  }
+
+  .about-sheet-record-head .about-sheet-link {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: fit-content;
+    margin-top: 0.08rem;
+  }
+
+  .about-sheet-scope {
+    margin: 0.55rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+
+  .about-sheet-record.is-fluency .about-sheet-scope {
+    color: var(--color-ink);
+  }
+
+  .about-sheet-key {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    column-gap: 0.55rem;
+    row-gap: 0.4rem;
+    padding-block: 0.85rem 0.95rem;
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+
+  .about-sheet-key .about-sheet-label {
+    grid-column: 1;
+    grid-row: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .about-sheet-key > span:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .about-sheet-key-end {
+    grid-column: 2;
+    grid-row: 2;
+    flex-shrink: 1;
+  }
+
+  .about-sheet-also,
+  .about-sheet-edu {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    column-gap: 0.55rem;
+    row-gap: 0.2rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+
+  .about-sheet-also .about-sheet-label,
+  .about-sheet-edu .about-sheet-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .about-sheet-auth {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.28rem;
+  }
+
+  .about-sheet-related {
+    flex-wrap: wrap;
+    row-gap: 0.35rem;
+  }
+}
+
 @media (max-width: 640px) {
   .about-sheet-holes {
     left: 0.45rem;
@@ -5440,38 +5610,6 @@ html.is-booting body {
 .about-sheet-cv:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
-}
-
-@media (max-width: 600px) {
-  .about-sheet-field-row,
-  .about-sheet-record-head,
-  .about-sheet-block-head,
-  .about-sheet-key,
-  .about-sheet-also,
-  .about-sheet-foot-row,
-  .about-sheet-identity-row {
-    flex-wrap: wrap;
-  }
-
-  .about-sheet-field-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
-  }
-
-  .about-sheet-field-end {
-    flex-shrink: 1;
-  }
-
-  .about-sheet-dates,
-  .about-sheet-chip {
-    flex-basis: 100%;
-    margin-left: 4.4rem;
-  }
-
-  .about-sheet-scope {
-    margin-left: 0;
-  }
 }
 
 .about-offclock-head {
@@ -6171,19 +6309,38 @@ html.is-booting body {
     text-align: left;
   }
 
+  .about-offclock-scroller {
+    margin-inline: -1.5rem;
+  }
+
   .about-offclock-roll {
-    grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.85fr);
-    gap: 0.85rem;
-    overflow-x: visible;
-    scroll-snap-type: none;
+    display: flex;
+    grid-template-columns: none;
+    gap: 0.75rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    padding-inline: 1.5rem;
+    padding-bottom: 0.45rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .about-offclock-frame {
+    flex: 0 0 84vw;
+    max-width: 22.75rem;
+    scroll-snap-stop: always;
   }
 
   .about-offclock-scroll {
-    display: none;
+    display: block;
+    height: 8px;
+    margin-inline: 1.5rem;
+    margin-top: 1.35rem;
   }
 
   .about-offclock-frame .about-media-frame {
-    height: 12.5rem;
+    height: 23.5rem;
   }
 
   .about-offclock-copy {
@@ -6205,6 +6362,19 @@ html.is-booting body {
   .about-close-inner,
   .site-footer-inner {
     padding-inline: 1.25rem;
+  }
+
+  .about-offclock-scroller {
+    margin-inline: -1.25rem;
+  }
+
+  .about-offclock-roll {
+    scroll-padding-inline: 1.25rem;
+    padding-inline: 1.25rem;
+  }
+
+  .about-offclock-scroll {
+    margin-inline: 1.25rem;
   }
 
   .featured-work,
