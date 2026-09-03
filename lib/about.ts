@@ -41,7 +41,7 @@ export const ABOUT = {
       },
       {
         label: 'Also',
-        value: 'Founder, Yandè Studio · Creative Studio',
+        value: 'Founder, Yande Studio · Creative Studio',
       },
       {
         label: 'Based',
@@ -112,7 +112,7 @@ export const ABOUT = {
         dates: '2025 —',
       },
       {
-        org: 'Yandè Studio',
+        org: 'Yande Studio',
         scope: 'Founder · Creative studio',
         dates: '2024 —',
         href: ABOUT_LINKS.yande,

@@ -43,7 +43,7 @@ export const PRACTICE = localImage(
 
 export const ABOUT = localImage(
   'about-studio.png',
-  'About page with the Yandè mark, founded by Richard Nyande, London'
+  'About page with the Yande mark, founded by Richard Nyande, London'
 )
 
 export const LIBRARY = localImage(

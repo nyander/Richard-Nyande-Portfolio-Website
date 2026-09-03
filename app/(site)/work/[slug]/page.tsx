@@ -10,7 +10,7 @@ import { CaseStudyProductModules } from '@/components/work/CaseStudyProductModul
 import { CaseStudyReframing } from '@/components/work/CaseStudyReframing'
 import { CaseStudyWalkthrough } from '@/components/work/CaseStudyWalkthrough'
 import { OtherWorkPage } from '@/components/work/OtherWorkPage'
-import { YandeStudioEditorial } from '@/components/work/YandeStudioEditorial'
+import { YandeStudioComingSoon } from '@/components/work/YandeStudioComingSoon'
 import { otherWorkBySlug } from '@/lib/other-work'
 import { urlFor } from '@/lib/sanity/image'
 import { getCaseStudyBySlug, getCaseStudySlugs } from '@/lib/sanity/queries'
@@ -31,6 +31,14 @@ export async function generateMetadata({
   params,
 }: CaseStudyRouteProps): Promise<Metadata> {
   const { slug } = await params
+
+  if (slug === YANDE_STUDIO_SLUG) {
+    return {
+      title: 'Yande Studio — Richard Nyande',
+      description: 'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk.',
+    }
+  }
+
   const other = otherWorkBySlug(slug)
 
   if (other) {
@@ -67,6 +75,11 @@ export async function generateMetadata({
 
 export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
   const { slug } = await params
+
+  if (slug === YANDE_STUDIO_SLUG) {
+    return <YandeStudioComingSoon />
+  }
+
   const other = otherWorkBySlug(slug)
 
   if (other) {
@@ -77,10 +90,6 @@ export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
 
   if (!study) {
     notFound()
-  }
-
-  if (slug === YANDE_STUDIO_SLUG) {
-    return <YandeStudioEditorial study={study} />
   }
 
   return (

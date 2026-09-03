@@ -8,31 +8,32 @@ export const YANDE_STUDIO_LIVE_URL = 'https://yande.uk'
 export const YANDE_STUDIO_LIVE_NOTE =
   'Password-gated promo window. The studio surfaces sit behind the enter screen.'
 
+export const YANDE_STUDIO_SUMMARY =
+  'Yande is a creative digital studio. It works across production, identity and experience.'
+
 export const YANDE_STUDIO_CARD: CaseStudyCard = {
   _id: 'caseStudy-yande-studio',
-  title: 'Yandè Studio',
+  title: 'Yande Studio',
   slug: YANDE_STUDIO_SLUG,
   role: 'Founder, Product Designer, Full Stack Developer',
   year: 2026,
-  summary:
-    'Yandè Studio is Richard’s London creative studio. yande.uk is the platform he is designing and building for it — a spatial site and CMS for the studio’s work, not a second brand and not the 2020 Accra shop app. The live URL is an enter screen; About, Practice, Library, Rotation and Contact exist behind it.',
+  summary: YANDE_STUDIO_SUMMARY,
   status: 'in-progress',
   heroImage: null,
 }
 
 export const YANDE_STUDIO_STUDY: CaseStudyPage = {
   _id: 'caseStudy-yande-studio',
-  title: 'Yandè Studio',
+  title: 'Yande Studio',
   slug: YANDE_STUDIO_SLUG,
   role: 'Founder, Product Designer, Full Stack Developer',
   year: 2026,
-  summary:
-    'Yandè Studio is Richard’s London creative studio. yande.uk is the platform he is designing and building for it — a spatial site and CMS for the studio’s work, not a second brand and not the 2020 Accra shop app. The live URL is an enter screen; About, Practice, Library, Rotation and Contact exist behind it.',
+  summary: YANDE_STUDIO_SUMMARY,
   status: 'in-progress',
   liveUrl: YANDE_STUDIO_LIVE_URL,
   liveNote: YANDE_STUDIO_LIVE_NOTE,
   contextFacts: [
-    fact('Client', 'Yandè Studio (Richard Nyande)'),
+    fact('Client', 'Yande Studio (Richard Nyande)'),
     fact('Type', 'Studio platform — immersive site and CMS publishing'),
     fact(
       'Stack',
@@ -41,15 +42,15 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
     fact('Team', 'Sole designer and developer'),
   ],
   heroImages: [],
-  seoTitle: 'Yandè Studio — Building a digital studio as a place | Richard Nyande',
+  seoTitle: 'Yande Studio — Richard Nyande',
   seoDescription:
-    'How Yandè Studio was made: spatial home, editorial systems and a gated live site. This page is the production story; yande.uk is the living artefact.',
+    'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk.',
   ogImage: null,
   reframing: {
     eyebrow: 'Beyond a studio brochure',
     heading: 'The work was building the studio’s own platform, not another portfolio page.',
     intro:
-      'Yandè is the studio. yande.uk is what has to hold it: a 3D studio you can walk, pages you can read, and a CMS Richard publishes into. This is not Yande Gadgets, and it is not this personal site.',
+      'Yande is the studio. yande.uk is what has to hold it: a 3D studio you can walk, pages you can read, and a CMS Richard publishes into. This is not Yande Gadgets, and it is not this personal site.',
     initialProposal: blocks(
       'Treat yande.uk as a marketing site or a copy of the personal work list — Webflow-like pages, Instagram as the archive, the 3D studio as decoration.'
     ),
@@ -116,7 +117,7 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
         title: 'Studio (About)',
         shortLabel: 'About',
         teaser:
-          'Say who Yandè is, that it is London-based, founded by Richard, and what the practice is for.',
+          'Say who Yande is, that it is London-based, founded by Richard, and what the practice is for.',
         status: 'shipped',
         problem: blocks(
           'There was no public “who” for the studio that was distinct from a personal bio on this portfolio.'
@@ -126,7 +127,7 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
         ),
         before: [
           'Studio identity only as a line on the personal site',
-          'No dedicated about for Yandè',
+          'No dedicated about for Yande',
         ],
         after: [
           'About as a studio surface',
@@ -231,7 +232,7 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
         title: 'One studio, three names, no second site to duplicate',
         shortLabel: 'Identity',
         problem: blocks(
-          'Yandè Studio, Yande Gadgets (the 2020 Accra shop app) and this personal portfolio are easy to mash into one Yande website. Publishing work only here would make the studio a logo. Cloning this work list onto yande.uk would be two lists of the same case studies.'
+          'Yande Studio, Yande Gadgets (the 2020 Accra shop app) and this personal portfolio are easy to mash into one Yande website. Publishing work only here would make the studio a logo. Cloning this work list onto yande.uk would be two lists of the same case studies.'
         ),
         contribution:
           'I built yande.uk as the studio’s product: spatial home plus Practice, Library, Rotation and Contact. Gadgets stays its own 2020 study. This site stays the personal work list. The two apps share a Sanity production dataset; every studio GROQ query stays _type-scoped.',
