@@ -63,7 +63,7 @@ export function HomeHero() {
 
   const postmark = useControls('Postmark', {
     x: {
-      value: -1.8,
+      value: -2.8,
       min: -24,
       max: 24,
       step: 0.1,
@@ -101,14 +101,14 @@ export function HomeHero() {
 
   const logo = useControls('Logo', {
     x: {
-      value: 36,
+      value: 8,
       min: -200,
       max: 200,
       step: 0.5,
       label: 'X',
     },
     y: {
-      value: 117,
+      value: 132,
       min: -200,
       max: 200,
       step: 0.5,
