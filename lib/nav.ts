@@ -7,13 +7,6 @@ export const NAV_ITEMS = [
       'Case studies with real depth — the ideas that grew past the sketchbook and into products.',
   },
   {
-    id: 'services',
-    label: 'Services',
-    href: '/services',
-    preview:
-      'Product design, interfaces, and the build work that takes a doodle into something people can use.',
-  },
-  {
     id: 'about',
     label: 'About',
     href: '/about',

@@ -976,11 +976,6 @@ img {
   background: color-mix(in srgb, var(--color-bg) 88%, var(--color-line));
 }
 
-.about-cover-bleed .load-screen {
-  color: var(--color-muted);
-  background: var(--color-line);
-}
-
 @keyframes load-screen-spin {
   to {
     transform: rotate(360deg);
@@ -4428,10 +4423,6 @@ html.is-booting body {
   }
 }
 
-.about-drive {
-  padding-bottom: 0;
-}
-
 .about-drive-copy p {
   max-width: var(--measure-prose);
   margin: 0 0 1rem;
@@ -4440,28 +4431,6 @@ html.is-booting body {
 
 .about-drive-copy p:last-child {
   margin-bottom: 0;
-}
-
-.about-drive-copy {
-  padding-bottom: 2.5rem;
-}
-
-.about-cover-bleed {
-  position: relative;
-  margin: 0 calc(50% - 50vw);
-  width: 100vw;
-  line-height: 0;
-  background: var(--color-line);
-}
-
-.about-cover-video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 7;
-  height: auto;
-  max-height: 70vh;
-  object-fit: cover;
-  background: var(--color-line);
 }
 
 .about-standard,
@@ -5975,10 +5944,6 @@ html.is-booting body {
 
   .site-footer-wordmark {
     font-size: 62vw;
-  }
-
-  .about-cover-video {
-    aspect-ratio: 16 / 9;
   }
 
   .hero-bento-track {

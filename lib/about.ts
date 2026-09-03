@@ -82,7 +82,6 @@ export const ABOUT = {
   },
   drive: {
     label: 'What Drives Me',
-    film: '/videos/richard-nyande-about.mp4',
     paragraphs: [
       'I’m driven by the idea of elevating how people experience life — through design that feels honest, intentional, and quietly powerful. I see the web as a canvas, and my goal is to create work that leaves a mark — now and years from now.',
       'But great design isn’t just vision — it’s showing up with consistency, collaboration, and care. Design is second nature to me, but so is being reliable, practical, and focused on impact. I want to be one of the designers who helped shift the culture — not just through creativity, but through execution.',

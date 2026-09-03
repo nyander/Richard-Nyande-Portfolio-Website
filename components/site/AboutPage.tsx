@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { AboutCollage } from '@/components/site/AboutCollage'
-import { AboutCoverFilm } from '@/components/site/AboutCoverFilm'
 import { ExperienceSheet } from '@/components/site/ExperienceSheet'
 import { ExperienceSpacer } from '@/components/site/ExperienceSpacer'
 import { MutedClip } from '@/components/site/MutedClip'
@@ -123,7 +122,6 @@ export function AboutPage() {
             ))}
           </div>
         </Reveal>
-        <AboutCoverFilm />
       </section>
 
       <SheetUnroll
