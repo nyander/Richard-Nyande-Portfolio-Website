@@ -8,7 +8,6 @@ import { MENU_CONTACT, MENU_SOCIALS } from '@/lib/nav'
 const SOCIAL_HANDLES: Record<string, string> = {
   LinkedIn: 'Richard Nyande',
   Instagram: 'richxrt_',
-  Behance: 'richardnyande',
   GitHub: 'nyander',
 }
 
