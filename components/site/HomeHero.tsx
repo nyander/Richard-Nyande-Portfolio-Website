@@ -5,7 +5,7 @@ import { useControls } from 'leva'
 import { HeroStamp } from '@/components/site/HeroStamp'
 
 const LEDE =
-  'I design digital products, then build them — from notes and sketches through to software people can actually use.'
+  'I design and build digital products, systems and interactive experiences, working across product thinking, UX/UI, design systems and creative technology. From discovery and prototyping through to React, TypeScript, Next.js, APIs and production, I work across the full journey from an early idea to something people can actually use.'
 
 function HeroRail({
   left,

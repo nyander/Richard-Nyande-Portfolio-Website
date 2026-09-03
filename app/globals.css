@@ -35,7 +35,7 @@
 }
 
 html {
-  --hero-paper: #eaeaea;
+  --hero-paper: #f4f1ea;
   --page-pad-left: 2rem;
   --page-pad-right: 2rem;
   --measure-max: 75rem;
@@ -750,7 +750,7 @@ img {
   background-size: 360px 360px, 128px 128px;
   background-repeat: repeat;
   mix-blend-mode: multiply;
-  opacity: 0.78;
+  opacity: 0.55;
   -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0%,
