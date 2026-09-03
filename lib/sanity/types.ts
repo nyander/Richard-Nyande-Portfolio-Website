@@ -159,6 +159,10 @@ export type ArchiveProject = {
   linkType: 'internal' | 'external'
   href: string
   tags: string[]
+  role?: string
+  listRole?: string
+  kind?: string
+  slug?: string
 }
 
 export type WorkIndexData = {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
-import { Leva, useControls } from 'leva'
+import { useControls } from 'leva'
 import type { Application } from '@splinetool/runtime'
 
 import { SplineStage } from '@/components/site/SplineStage'
@@ -32,16 +32,7 @@ export function AboutCollage() {
   const stageRef = useRef<HTMLDivElement>(null)
   const appRef = useRef<Application | null>(null)
   const [ready, setReady] = useState(false)
-  const [hideLeva, setHideLeva] = useState(false)
   const [phoneLayout, setPhoneLayout] = useState(false)
-
-  useEffect(() => {
-    const media = window.matchMedia('(max-width: 800px)')
-    const sync = () => setHideLeva(media.matches)
-    sync()
-    media.addEventListener('change', sync)
-    return () => media.removeEventListener('change', sync)
-  }, [])
 
   const syncSize = useCallback(() => {
     const app = appRef.current
@@ -288,14 +279,6 @@ export function AboutCollage() {
 
   return (
     <>
-      <Leva
-        hidden={hideLeva}
-        collapsed={false}
-        titleBar={{ title: 'About', filter: false }}
-        theme={{
-          sizes: { rootWidth: '240px' },
-        }}
-      />
       <SplineStage
         scene={ABOUT_COLLAGE_SCENE}
         label="Loading collage"

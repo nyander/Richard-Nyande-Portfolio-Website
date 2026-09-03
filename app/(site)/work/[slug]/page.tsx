@@ -9,7 +9,9 @@ import { CaseStudyOutcome } from '@/components/work/CaseStudyOutcome'
 import { CaseStudyProductModules } from '@/components/work/CaseStudyProductModules'
 import { CaseStudyReframing } from '@/components/work/CaseStudyReframing'
 import { CaseStudyWalkthrough } from '@/components/work/CaseStudyWalkthrough'
+import { OtherWorkPage } from '@/components/work/OtherWorkPage'
 import { YandeStudioEditorial } from '@/components/work/YandeStudioEditorial'
+import { otherWorkBySlug } from '@/lib/other-work'
 import { urlFor } from '@/lib/sanity/image'
 import { getCaseStudyBySlug, getCaseStudySlugs } from '@/lib/sanity/queries'
 import { YANDE_STUDIO_SLUG } from '@/lib/yande-studio'
@@ -29,6 +31,15 @@ export async function generateMetadata({
   params,
 }: CaseStudyRouteProps): Promise<Metadata> {
   const { slug } = await params
+  const other = otherWorkBySlug(slug)
+
+  if (other) {
+    return {
+      title: `${other.title} — Richard Nyande`,
+      description: other.summary,
+    }
+  }
+
   const study = await getCaseStudyBySlug(slug)
 
   if (!study) {
@@ -56,6 +67,12 @@ export async function generateMetadata({
 
 export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
   const { slug } = await params
+  const other = otherWorkBySlug(slug)
+
+  if (other) {
+    return <OtherWorkPage project={other} />
+  }
+
   const study = await getCaseStudyBySlug(slug)
 
   if (!study) {

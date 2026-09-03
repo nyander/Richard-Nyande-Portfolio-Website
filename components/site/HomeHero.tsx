@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState, type CSSProperties } from 'react'
-import { Leva, useControls } from 'leva'
+import type { CSSProperties } from 'react'
+import { useControls } from 'leva'
 import { HeroStamp } from '@/components/site/HeroStamp'
 
 const LEDE =
@@ -28,16 +28,6 @@ function HeroRail({
 }
 
 export function HomeHero() {
-  const [hideLeva, setHideLeva] = useState(false)
-
-  useEffect(() => {
-    const media = window.matchMedia('(max-width: 800px)')
-    const sync = () => setHideLeva(media.matches)
-    sync()
-    media.addEventListener('change', sync)
-    return () => media.removeEventListener('change', sync)
-  }, [])
-
   const { version } = useControls('Layout', {
     version: {
       value: 'Original',
@@ -249,14 +239,6 @@ export function HomeHero() {
       className={isArchive ? 'home-hero is-archive' : 'home-hero'}
       aria-labelledby="home-hero-heading"
     >
-      <Leva
-        hidden={hideLeva}
-        collapsed={false}
-        titleBar={{ title: 'Hero', filter: false }}
-        theme={{
-          sizes: { rootWidth: '240px' },
-        }}
-      />
       <div className="home-hero-texture" aria-hidden="true" />
 
       <div

@@ -1,4 +1,5 @@
 import { BootScreen } from '@/components/site/BootScreen'
+import { ClientLeva } from '@/components/site/ClientLeva'
 import { PageWidthControls } from '@/components/site/PageWidthControls'
 import { SiteFooter } from '@/components/site/SiteFooter'
 import { SiteHeader } from '@/components/site/SiteHeader'
@@ -13,6 +14,7 @@ export default function SiteLayout({
   return (
     <>
       <BootScreen />
+      <ClientLeva />
       <PageWidthControls />
       <SiteHeader />
       {children}

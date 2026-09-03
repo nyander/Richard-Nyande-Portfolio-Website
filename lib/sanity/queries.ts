@@ -7,6 +7,8 @@ import {
   PALM_SLUG,
   PALM_STUDY,
 } from '@/lib/palm-media'
+import { applyCoocCardMedia, applyCoocLocalMedia } from '@/lib/cooc-media'
+import { COOC_CARD, COOC_SLUG, COOC_STUDY } from '@/lib/cooc'
 import {
   applyRecruitewareCardMedia,
   applyRecruitewareLocalMedia,
@@ -33,6 +35,7 @@ import {
   YANDE_STUDIO_SLUG,
   YANDE_STUDIO_STUDY,
 } from '@/lib/yande-studio'
+import { LOCAL_ARCHIVE, otherWorkSlugs } from '@/lib/other-work'
 
 import { client } from './client'
 import { isValidInternalHref } from './href'
@@ -62,6 +65,10 @@ async function sanityFetch<T>(
 function localStudyForSlug(slug: string): CaseStudyPage | null {
   if (slug === PALM_SLUG) {
     return PALM_STUDY
+  }
+
+  if (slug === COOC_SLUG) {
+    return COOC_STUDY
   }
 
   if (slug === RECRUITEWARE_SLUG) {
@@ -236,6 +243,7 @@ const archiveProjectsQuery = groq`
 const LOCAL_FEATURED: CaseStudyCard[] = [
   applyYandeStudioCardMedia(YANDE_STUDIO_CARD),
   applyPalmCardMedia(PALM_CARD),
+  applyCoocCardMedia(COOC_CARD),
   applySesahubCardMedia(SESAHUB_CARD),
   applyRecruitewareCardMedia(RECRUITEWARE_CARD),
   applyYandeCardMedia(YANDE_GADGETS_CARD),
@@ -253,7 +261,9 @@ export async function getFeaturedCaseStudies(): Promise<CaseStudyCard[]> {
 function applyLocalCardMedia(study: CaseStudyCard) {
   return applyYandeStudioCardMedia(
     applySesahubCardMedia(
-      applyRecruitewareCardMedia(applyYandeCardMedia(applyPalmCardMedia(study)))
+      applyRecruitewareCardMedia(
+        applyYandeCardMedia(applyPalmCardMedia(applyCoocCardMedia(study)))
+      )
     )
   )
 }
@@ -310,6 +320,12 @@ export async function getCaseStudySlugs(): Promise<string[]> {
     }
   }
 
+  for (const slug of otherWorkSlugs()) {
+    if (!slugs.includes(slug)) {
+      slugs.push(slug)
+    }
+  }
+
   return slugs
 }
 
@@ -329,7 +345,9 @@ export async function getCaseStudyBySlug(
 
   return applyYandeStudioLocalMedia(
     applySesahubLocalMedia(
-      applyRecruitewareLocalMedia(applyYandeLocalMedia(applyPalmLocalMedia(study)))
+      applyRecruitewareLocalMedia(
+        applyYandeLocalMedia(applyPalmLocalMedia(applyCoocLocalMedia(study)))
+      )
     )
   )
 }
@@ -340,7 +358,7 @@ export async function getArchiveProjects(): Promise<ArchiveProject[]> {
     getCaseStudySlugs(),
   ])
 
-  return projects.filter((project) => {
+  const fromCms = projects.filter((project) => {
     if (project.linkType !== 'internal') {
       return true
     }
@@ -352,5 +370,43 @@ export async function getArchiveProjects(): Promise<ArchiveProject[]> {
       )
     }
     return valid
+  })
+
+  return mergeLocalArchive(fromCms)
+}
+
+function mergeLocalArchive(projects: ArchiveProject[]) {
+  const merged = [...projects]
+
+  for (const local of LOCAL_ARCHIVE) {
+    const index = merged.findIndex(
+      (project) => project._id === local._id || project.title === local.title
+    )
+    if (index === -1) {
+      merged.push(local)
+      continue
+    }
+
+    merged[index] = { ...merged[index], ...local }
+  }
+
+  const localOrder = LOCAL_ARCHIVE.map((project) => project._id)
+
+  return merged.sort((a, b) => {
+    if (b.year !== a.year) {
+      return b.year - a.year
+    }
+    const aIndex = localOrder.indexOf(a._id)
+    const bIndex = localOrder.indexOf(b._id)
+    if (aIndex === -1 && bIndex === -1) {
+      return 0
+    }
+    if (aIndex === -1) {
+      return 1
+    }
+    if (bIndex === -1) {
+      return -1
+    }
+    return aIndex - bIndex
   })
 }
