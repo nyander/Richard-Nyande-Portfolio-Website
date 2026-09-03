@@ -1,8 +1,10 @@
+import type { ReactNode } from 'react'
+
 import { hasImageAsset } from '@/components/media/MediaSlot'
 import { SanityImage } from '@/components/media/SanityImage'
 import type { OtherWorkEntry } from '@/lib/other-work'
 
-function Fact({ label, children }: { label: string; children: string }) {
+function Fact({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="other-work-fact">
       <span className="other-work-fact-label">{label}</span>

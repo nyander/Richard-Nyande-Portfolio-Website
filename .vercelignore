@@ -1,0 +1,9 @@
+# iCloud nosync copies — the CLI follows these if they are uploaded
+node_modules
+node_modules.nosync
+.next
+.next.nosync
+.env*
+!.env.example
+.screenshots
+.git
