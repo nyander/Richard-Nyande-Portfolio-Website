@@ -11,9 +11,14 @@ import { CaseStudyReframing } from '@/components/work/CaseStudyReframing'
 import { CaseStudyWalkthrough } from '@/components/work/CaseStudyWalkthrough'
 import { OtherWorkPage } from '@/components/work/OtherWorkPage'
 import { YandeStudioComingSoon } from '@/components/work/YandeStudioComingSoon'
+import { JsonLd } from '@/components/site/JsonLd'
 import { otherWorkBySlug } from '@/lib/other-work'
-import { urlFor } from '@/lib/sanity/image'
 import { getCaseStudyBySlug, getCaseStudySlugs } from '@/lib/sanity/queries'
+import { ogImageUrl, routeMetadata } from '@/lib/seo'
+import {
+  breadcrumbJsonLd,
+  creativeWorkJsonLd,
+} from '@/lib/structured-data'
 import { YANDE_STUDIO_SLUG } from '@/lib/yande-studio'
 
 type CaseStudyRouteProps = {
@@ -33,19 +38,24 @@ export async function generateMetadata({
   const { slug } = await params
 
   if (slug === YANDE_STUDIO_SLUG) {
-    return {
-      title: 'Yande Studio — Richard Nyande',
-      description: 'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk.',
-    }
+    return routeMetadata({
+      title: 'Yande Studio',
+      description:
+        'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk.',
+      path: `/work/${slug}`,
+    })
   }
 
   const other = otherWorkBySlug(slug)
 
   if (other) {
-    return {
-      title: `${other.title} — Richard Nyande`,
+    return routeMetadata({
+      title: other.title,
       description: other.summary,
-    }
+      path: `/work/${slug}`,
+      image: ogImageUrl(other.thumbnail),
+      type: 'article',
+    })
   }
 
   const study = await getCaseStudyBySlug(slug)
@@ -54,36 +64,81 @@ export async function generateMetadata({
     return {}
   }
 
-  const title = study.seoTitle || study.title
-  const description = study.seoDescription || study.summary
-  const ogImage = study.ogImage?.src
-    ? study.ogImage.src
-    : study.ogImage?.asset
-      ? urlFor(study.ogImage).width(1200).height(630).url()
-      : undefined
+  return routeMetadata({
+    title: study.title,
+    seoTitle: study.seoTitle,
+    description: study.seoDescription || study.summary,
+    path: `/work/${slug}`,
+    image: ogImageUrl(study.ogImage) || ogImageUrl(study.heroImages?.[0]),
+    type: 'article',
+  })
+}
 
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: ogImage ? [{ url: ogImage }] : undefined,
-    },
-  }
+function WorkJsonLd({
+  name,
+  description,
+  path,
+  image,
+  datePublished,
+  dateModified,
+}: {
+  name: string
+  description: string
+  path: string
+  image?: string
+  datePublished?: string
+  dateModified?: string
+}) {
+  return (
+    <>
+      <JsonLd
+        data={creativeWorkJsonLd({
+          name,
+          description,
+          path,
+          image,
+          datePublished,
+          dateModified,
+        })}
+      />
+      <JsonLd data={breadcrumbJsonLd(name, path)} />
+    </>
+  )
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
   const { slug } = await params
+  const path = `/work/${slug}`
 
   if (slug === YANDE_STUDIO_SLUG) {
-    return <YandeStudioComingSoon />
+    return (
+      <>
+        <WorkJsonLd
+          name="Yande Studio"
+          description="Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk."
+          path={path}
+          datePublished="2026"
+        />
+        <YandeStudioComingSoon />
+      </>
+    )
   }
 
   const other = otherWorkBySlug(slug)
 
   if (other) {
-    return <OtherWorkPage project={other} />
+    return (
+      <>
+        <WorkJsonLd
+          name={other.title}
+          description={other.summary}
+          path={path}
+          image={ogImageUrl(other.thumbnail)}
+          datePublished={String(other.year)}
+        />
+        <OtherWorkPage project={other} />
+      </>
+    )
   }
 
   const study = await getCaseStudyBySlug(slug)
@@ -94,6 +149,14 @@ export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
 
   return (
     <article className="case-study">
+      <WorkJsonLd
+        name={study.title}
+        description={study.seoDescription || study.summary}
+        path={path}
+        image={ogImageUrl(study.ogImage) || ogImageUrl(study.heroImages?.[0])}
+        datePublished={String(study.year)}
+        dateModified={study._updatedAt}
+      />
       <SectionProgress />
       <header className="case-study-masthead">
         <div className="case-study-masthead-main">

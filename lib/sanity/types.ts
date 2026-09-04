@@ -128,6 +128,7 @@ export type OutcomeStatus = SectionChrome & {
 
 export type CaseStudyPage = {
   _id: string
+  _updatedAt?: string
   title: string
   slug: string
   role: string

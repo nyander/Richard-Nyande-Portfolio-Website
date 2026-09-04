@@ -250,7 +250,7 @@ export function ExperienceSheet() {
               <Image
                 className="about-sheet-mark-logo"
                 src="/images/Yande Logo - 1024px.png"
-                alt=""
+                alt="Yande Studio mark"
                 width={3167}
                 height={1265}
                 sizes="(min-width: 1200px) 95rem, 92vw"

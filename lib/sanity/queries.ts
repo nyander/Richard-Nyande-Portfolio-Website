@@ -36,6 +36,7 @@ import {
   YANDE_STUDIO_STUDY,
 } from '@/lib/yande-studio'
 import { LOCAL_ARCHIVE, otherWorkSlugs } from '@/lib/other-work'
+import { CASE_STUDY_PATH_PREFIX } from '@/lib/routes'
 
 import { client } from './client'
 import { isValidInternalHref } from './href'
@@ -136,6 +137,7 @@ const caseStudySlugsQuery = groq`
 const caseStudyBySlugQuery = groq`
   *[_type == "caseStudy" && slug.current == $slug][0]{
     _id,
+    _updatedAt,
     title,
     "slug": slug.current,
     role,
@@ -240,6 +242,20 @@ const archiveProjectsQuery = groq`
   }
 `
 
+const sitemapCaseStudiesQuery = groq`
+  *[_type == "caseStudy" && defined(slug.current)]{
+    "slug": slug.current,
+    _updatedAt
+  }
+`
+
+const sitemapArchiveQuery = groq`
+  *[_type == "archiveProject" && linkType == "internal" && defined(href)]{
+    href,
+    _updatedAt
+  }
+`
+
 const LOCAL_FEATURED: CaseStudyCard[] = [
   applyYandeStudioCardMedia(YANDE_STUDIO_CARD),
   applyPalmCardMedia(PALM_CARD),
@@ -327,6 +343,74 @@ export async function getCaseStudySlugs(): Promise<string[]> {
   }
 
   return slugs
+}
+
+export type SitemapWorkEntry = {
+  path: string
+  lastModified?: string
+}
+
+function workSlugFromHref(href: string) {
+  const prefix = `${CASE_STUDY_PATH_PREFIX}/`
+  if (!href.startsWith(prefix)) {
+    return null
+  }
+
+  const slug = href.slice(prefix.length)
+  if (!slug || slug.includes('/')) {
+    return null
+  }
+
+  return slug
+}
+
+export async function getSitemapWorkEntries(): Promise<SitemapWorkEntry[]> {
+  const [studies, archives] = await Promise.all([
+    sanityFetch<{ slug: string; _updatedAt?: string }[]>(
+      sitemapCaseStudiesQuery,
+      {},
+      []
+    ),
+    sanityFetch<{ href: string; _updatedAt?: string }[]>(
+      sitemapArchiveQuery,
+      {},
+      []
+    ),
+  ])
+
+  const entries = new Map<string, string | undefined>()
+
+  for (const study of studies) {
+    entries.set(`/work/${study.slug}`, study._updatedAt)
+  }
+
+  for (const local of LOCAL_FEATURED) {
+    if (!entries.has(`/work/${local.slug}`)) {
+      entries.set(`/work/${local.slug}`, undefined)
+    }
+  }
+
+  for (const project of archives) {
+    const slug = workSlugFromHref(project.href)
+    if (!slug) {
+      continue
+    }
+
+    const path = `/work/${slug}`
+    entries.set(path, project._updatedAt ?? entries.get(path))
+  }
+
+  for (const slug of otherWorkSlugs()) {
+    const path = `/work/${slug}`
+    if (!entries.has(path)) {
+      entries.set(path, undefined)
+    }
+  }
+
+  return [...entries.entries()].map(([path, lastModified]) => ({
+    path,
+    lastModified,
+  }))
 }
 
 export async function getCaseStudyBySlug(

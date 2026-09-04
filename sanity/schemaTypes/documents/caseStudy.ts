@@ -157,6 +157,9 @@ export const caseStudy = defineType({
       type: 'text',
       rows: 3,
       group: 'seo',
+      description:
+        'Search result snippet. Keep under 160 characters. Falls back to Summary if empty.',
+      validation: (Rule) => Rule.max(160),
     }),
     defineField({
       name: 'ogImage',
