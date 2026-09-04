@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { FooterWordmark } from '@/components/site/FooterWordmark'
-import { MENU_SOCIALS, NAV_ITEMS, isCurrentNav } from '@/lib/nav'
+import { MENU_SOCIALS, NAV_ITEMS, isCurrentNav, isOffsiteNav } from '@/lib/nav'
 
 const BIO =
   "I'm a multidisciplinary designer and developer working across product design, creative technology and digital experiences. My practice combines design and engineering, taking ideas from early concepts and user experience through to fully realised digital products, while drawing inspiration from fashion, music, art and culture to explore new ways of building, interacting and communicating through technology."
@@ -88,7 +88,7 @@ export function SiteFooter() {
           <nav className="site-footer-nav" aria-label="Footer">
             <ul>
               {NAV_ITEMS.map((item) => {
-                const current = isCurrentNav(pathname, item.href, 'external' in item)
+                const current = isCurrentNav(pathname, item.href, isOffsiteNav(item))
 
                 if (item.id === 'yande') {
                   return [
@@ -120,6 +120,16 @@ export function SiteFooter() {
                       </a>
                     </li>,
                   ]
+                }
+
+                if ('download' in item) {
+                  return (
+                    <li key={item.id}>
+                      <a href={item.href} className="site-footer-link" download={item.download}>
+                        {item.label}
+                      </a>
+                    </li>
+                  )
                 }
 
                 return (

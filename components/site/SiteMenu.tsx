@@ -9,6 +9,7 @@ import {
   MENU_SOCIALS,
   NAV_ITEMS,
   isCurrentNav,
+  isOffsiteNav,
 } from '@/lib/nav'
 
 type SiteMenuProps = {
@@ -20,7 +21,7 @@ export function SiteMenu({ open, onClose }: SiteMenuProps) {
   const pathname = usePathname()
   const titleId = useId()
   const current =
-    NAV_ITEMS.find((item) => isCurrentNav(pathname, item.href, 'external' in item)) ??
+    NAV_ITEMS.find((item) => isCurrentNav(pathname, item.href, isOffsiteNav(item))) ??
     NAV_ITEMS[0]
   const [previewId, setPreviewId] = useState(current.id)
   const preview = NAV_ITEMS.find((item) => item.id === previewId) ?? current
@@ -79,7 +80,7 @@ export function SiteMenu({ open, onClose }: SiteMenuProps) {
       <div className="site-menu-body">
         <nav className="site-menu-nav" aria-label="Menu">
           {NAV_ITEMS.map((item) => {
-            const currentItem = isCurrentNav(pathname, item.href, 'external' in item)
+            const currentItem = isCurrentNav(pathname, item.href, isOffsiteNav(item))
             const className =
               previewId === item.id || currentItem
                 ? 'site-menu-link is-active'
@@ -90,6 +91,14 @@ export function SiteMenu({ open, onClose }: SiteMenuProps) {
               onMouseEnter: () => setPreviewId(item.id),
               onFocus: () => setPreviewId(item.id),
               onClick: onClose,
+            }
+
+            if ('download' in item) {
+              return (
+                <a key={item.id} href={item.href} download={item.download} {...shared}>
+                  {item.label} <span aria-hidden="true">/</span>
+                </a>
+              )
             }
 
             if ('external' in item) {

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { SiteMenu } from '@/components/site/SiteMenu'
-import { NAV_ITEMS, isCurrentNav } from '@/lib/nav'
+import { NAV_ITEMS, isCurrentNav, isOffsiteNav } from '@/lib/nav'
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -46,7 +46,7 @@ export function SiteHeader() {
             </Link>
             <nav className="site-bar-nav" aria-label="Primary">
               {NAV_ITEMS.map((item) => {
-                const current = isCurrentNav(pathname, item.href, 'external' in item)
+                const current = isCurrentNav(pathname, item.href, isOffsiteNav(item))
 
                 if (item.id === 'yande') {
                   return (
@@ -69,6 +69,14 @@ export function SiteHeader() {
                 }
 
                 const className = current ? 'site-bar-link is-current' : 'site-bar-link'
+
+                if ('download' in item) {
+                  return (
+                    <a key={item.id} href={item.href} className={className} download={item.download}>
+                      {item.label}
+                    </a>
+                  )
+                }
 
                 return (
                   <Link

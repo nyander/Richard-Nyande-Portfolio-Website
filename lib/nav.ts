@@ -14,6 +14,14 @@ export const NAV_ITEMS = [
       'A product designer and creative technologist working between notes, sketches, and shipped software.',
   },
   {
+    id: 'cv',
+    label: 'CV',
+    href: '/cv/richard-nyande.pdf',
+    download: 'richard-nyande.pdf',
+    preview:
+      'The current CV — employment, capability, and the work behind the case studies.',
+  },
+  {
     id: 'yande',
     label: 'Yande',
     href: 'https://yande.uk',
@@ -34,8 +42,12 @@ export const MENU_SOCIALS = [
   { label: 'GitHub', href: 'https://github.com/nyander' },
 ] as const
 
-export function isCurrentNav(pathname: string, href: string, external?: boolean) {
-  if (external) {
+export function isOffsiteNav(item: (typeof NAV_ITEMS)[number]) {
+  return 'external' in item || 'download' in item
+}
+
+export function isCurrentNav(pathname: string, href: string, offsite?: boolean) {
+  if (offsite) {
     return false
   }
   if (href === '/') {
