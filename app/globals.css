@@ -45,6 +45,7 @@ html {
   /* `clip` (not `hidden`) so this doesn't become a scroll container -
      `overflow: hidden` on html/body breaks position: sticky everywhere. */
   overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -277,6 +278,10 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .hero-stamp-spline,
   .about-collage-spline,
   .load-screen-mark,
@@ -286,6 +291,8 @@ img {
   .site-bar-link::after,
   .site-bar-contact,
   .site-bar-contact::before,
+  .hero-work-link,
+  .hero-work-link::before,
   .featured-work-media img,
   .featured-work-reveal,
   .featured-work-copy::before {
@@ -1186,15 +1193,65 @@ html.is-booting body {
   text-transform: uppercase;
 }
 
+.hero-lede-block {
+  min-width: 0;
+  max-width: var(--lede-width);
+  transform: translate(var(--lede-x), var(--lede-y));
+}
+
 .hero-lede {
   margin: 0;
-  max-width: var(--lede-width);
+  max-width: none;
   color: var(--color-muted);
   font-size: var(--lede-size);
   font-weight: var(--lede-weight);
   letter-spacing: var(--lede-tracking);
   line-height: var(--lede-leading);
-  transform: translate(var(--lede-x), var(--lede-y));
+}
+
+.hero-work-link {
+  position: relative;
+  z-index: 0;
+  display: inline-block;
+  overflow: hidden;
+  margin-top: 1.15rem;
+  padding: 0.52rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--color-fg) 72%, transparent);
+  color: inherit;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    color 220ms ease,
+    border-color 220ms ease;
+}
+
+.hero-work-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-fg);
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition: transform 260ms ease;
+}
+
+.hero-work-link:hover {
+  border-color: var(--color-fg);
+  color: #fff;
+}
+
+.hero-work-link:hover::before {
+  transform: scaleY(1);
+}
+
+.hero-work-link:focus-visible {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 3px;
 }
 
 .hero-rail {
@@ -1223,10 +1280,6 @@ html.is-booting body {
   min-width: 1.25rem;
   border-bottom: 1px dotted currentColor;
   transform: translateY(-0.28em);
-}
-
-.hero-lede-block {
-  min-width: 0;
 }
 
 .hero-archive {
@@ -1283,8 +1336,13 @@ html.is-booting body {
   padding: 7.25rem var(--page-pad-right) 3.75rem var(--page-pad-left);
 }
 
-.home-hero.is-archive .hero-lede {
+.home-hero.is-archive .hero-lede-block {
   max-width: 36ch;
+  transform: none;
+}
+
+.home-hero.is-archive .hero-lede {
+  max-width: none;
   transform: none;
   color: var(--color-fg);
   font-family: var(--font-mono);
@@ -6029,7 +6087,8 @@ html.is-booting body {
     max-width: 100%;
   }
 
-  .hero-lede {
+  .hero-lede,
+  .hero-lede-block {
     max-width: 100%;
   }
 

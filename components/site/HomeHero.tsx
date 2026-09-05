@@ -290,7 +290,12 @@ export function HomeHero() {
             </div>
             <div className="hero-archive-col is-copy">
               <HeroRail left="R.N.Portfolio" mid="08 / 26" right="V. 001" />
-              <p className="hero-lede">{LEDE}</p>
+              <div className="hero-lede-block">
+                <p className="hero-lede">{LEDE}</p>
+                <a className="hero-work-link" href="#work">
+                  Discover work
+                </a>
+              </div>
             </div>
           </div>
         ) : (
@@ -298,7 +303,12 @@ export function HomeHero() {
             <div className="hero-title">
               <h1 id="home-hero-heading">Product Designer and Creative Technologist</h1>
             </div>
-            <p className="hero-lede">{LEDE}</p>
+            <div className="hero-lede-block">
+              <p className="hero-lede">{LEDE}</p>
+              <a className="hero-work-link" href="#work">
+                Discover work
+              </a>
+            </div>
           </div>
         )}
       </div>

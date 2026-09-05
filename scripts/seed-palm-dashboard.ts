@@ -73,7 +73,7 @@ const doc = {
   featured: true,
   order: 0,
   liveUrl: 'https://palm-dashboard-lg3wc.ondigitalocean.app/',
-  liveNote: 'Login required. Accessible upon request.',
+  liveNote: '',
   contextFacts: [
     { _type: 'contextFact', _key: key('f'), label: 'Client', value: 'Palm PR' },
     {

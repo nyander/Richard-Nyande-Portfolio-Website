@@ -27,7 +27,6 @@ const PALM_COVER = localImage(
 )
 
 const PALM_LIVE_URL = 'https://palm-dashboard-lg3wc.ondigitalocean.app/'
-const PALM_LIVE_NOTE = 'Login required. Accessible upon request.'
 
 const PALM_STATUS_SUMMARY =
   'Four modules shipped while I was there: onboarding, objectives and strategy, customer profiling, and coverage tracking. Performance analysis and coverage reporting had their structure. I left Palm PR. I am not working on this, and there is no developer continuing it.'
@@ -71,7 +70,7 @@ export const PALM_STUDY: CaseStudyPage = {
   designToCode: null,
   outcomeStatus: null,
   liveUrl: PALM_LIVE_URL,
-  liveNote: PALM_LIVE_NOTE,
+  liveNote: null,
   seoTitle: 'Palm Dashboard — Product Design & Build Case Study | Richard Nyande',
   seoDescription:
     'A multi-tenant PR workspace bringing campaign planning, coverage tracking and performance reporting into one place. Product design and full-stack build for Palm PR.',
@@ -335,7 +334,7 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
       : study.designToCode,
     ogImage: preferExisting(study.ogImage, PALM_HERO[0]),
     liveUrl: study.liveUrl || PALM_LIVE_URL,
-    liveNote: study.liveNote || PALM_LIVE_NOTE,
+    liveNote: null,
   }
 }
 
