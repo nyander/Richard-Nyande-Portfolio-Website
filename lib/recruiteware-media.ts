@@ -1,8 +1,10 @@
 import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
 import {
+  RECRUITEWARE_CARD,
   RECRUITEWARE_LIVE_NOTE,
   RECRUITEWARE_LIVE_URL,
   RECRUITEWARE_SLUG,
+  RECRUITEWARE_STUDY,
 } from '@/lib/recruiteware'
 
 const ROOT = '/images/recruiteware'
@@ -99,29 +101,29 @@ const MODULE_AFTER: Record<string, AltImage> = {
 }
 
 const DEEP_DIVE_AFTER: Record<string, { image: AltImage; caption: string }> = {
-  'from a wordpress shell to a front that can share apis': {
+  'keep the backend, replace the office': {
     image: localImage(
       'dashboard.png',
-      'Laravel office dashboard on the existing RecruitWare data'
+      'Office dashboard on the existing RecruitWare booking data'
     ),
     caption:
-      'Office dashboard. Chart.js on Laravel and React — not a WordPress template over the old PHP table.',
+      'Office dashboard. Last-week versus this-week bookings by client, on the existing backend.',
   },
-  'from an email of form fields to a row in the crm': {
+  'registration has to create a candidate': {
     image: localImage(
       'live-candidates.png',
       'Live Candidates table after a registration has become a CRM row'
     ),
     caption:
-      'Live Candidates. A registration that only emails the office never appears here.',
+      'Live Candidates. This is where a completed application has to land for the office to use it.',
   },
-  'from use-it-now to roles before screens': {
+  'use the existing mental model': {
     image: localImage(
       'employee-details.png',
       'Candidate record behind office login, with edit and leaver actions'
     ),
     caption:
-      'Candidate details after login. Correct credentials used to return a 404 until the Notes redirect and session cookie were kept.',
+      'Candidate details after login. Consultants enter through the existing RecruitWare session.',
   },
 }
 
@@ -142,11 +144,12 @@ export function applyRecruitewareLocalMedia(study: CaseStudyPage): CaseStudyPage
     return study
   }
 
+  const source = RECRUITEWARE_STUDY
   const heroImages = (study.heroImages ?? []).filter(hasVisual)
-  const productModules = study.productModules
+  const productModules = source.productModules
     ? {
-        ...study.productModules,
-        items: study.productModules.items?.map((item) => {
+        ...source.productModules,
+        items: source.productModules.items?.map((item) => {
           const key = moduleKey(item.title)
           const screenshot = MODULE_SCREENSHOTS[key]
           const after = MODULE_AFTER[key]
@@ -165,12 +168,12 @@ export function applyRecruitewareLocalMedia(study: CaseStudyPage): CaseStudyPage
           }
         }),
       }
-    : study.productModules
+    : source.productModules
 
-  const deepDives = study.deepDives
+  const deepDives = source.deepDives
     ? {
-        ...study.deepDives,
-        items: study.deepDives.items?.map((item) => {
+        ...source.deepDives,
+        items: source.deepDives.items?.map((item) => {
           const match = DEEP_DIVE_AFTER[item.title.trim().toLowerCase()]
           if (!match) {
             return item
@@ -186,19 +189,22 @@ export function applyRecruitewareLocalMedia(study: CaseStudyPage): CaseStudyPage
           }
         }),
       }
-    : study.deepDives
+    : source.deepDives
 
   return {
-    ...study,
+    ...source,
     heroImages: heroImages.length > 0 ? heroImages : RECRUITEWARE_HERO,
     productModules,
     deepDives,
-    designToCode: study.designToCode
+    designToCode: source.designToCode
       ? {
-          ...study.designToCode,
-          shippedImage: preferExisting(study.designToCode.shippedImage, RECRUITEWARE_HERO[0]),
+          ...source.designToCode,
+          shippedImage: preferExisting(
+            study.designToCode?.shippedImage,
+            RECRUITEWARE_HERO[0]
+          ),
         }
-      : study.designToCode,
+      : source.designToCode,
     ogImage: preferExisting(study.ogImage, RECRUITEWARE_HERO[0]),
     liveUrl: study.liveUrl || RECRUITEWARE_LIVE_URL,
     liveNote: study.liveNote || RECRUITEWARE_LIVE_NOTE,
@@ -212,6 +218,7 @@ export function applyRecruitewareCardMedia(study: CaseStudyCard): CaseStudyCard 
 
   return {
     ...study,
+    summary: RECRUITEWARE_CARD.summary,
     heroImage: hasVisual(study.heroImage) ? study.heroImage : RECRUITEWARE_HERO[0],
   }
 }

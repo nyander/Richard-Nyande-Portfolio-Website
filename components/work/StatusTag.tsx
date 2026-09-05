@@ -6,10 +6,10 @@ const STATUS_LABEL: Record<Status, string> = {
   concept: 'Concept',
 }
 
-export function StatusTag({ status }: { status: Status }) {
+export function StatusTag({ status, label }: { status: Status; label?: string }) {
   return (
     <span className={`status-tag status-tag--${status}`}>
-      {STATUS_LABEL[status]}
+      {label ?? STATUS_LABEL[status]}
     </span>
   )
 }

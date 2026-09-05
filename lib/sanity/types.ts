@@ -60,6 +60,7 @@ export type ProductModule = {
   _key?: string
   title: string
   shortLabel?: string
+  outcomeLabel?: string
   teaser?: string
   status: Status
   problem?: RestrictedPortableText
@@ -120,9 +121,12 @@ export type DesignToCode = SectionChrome & {
 
 export type OutcomeStatus = SectionChrome & {
   statusSummary?: string
+  statusLabels?: Partial<Record<Status, string>>
   whatsNext?: string
+  whatsNextHeading?: string
   quotes?: AttributedQuote[] | null
   evidence?: string[] | null
+  evidenceBoundary?: string
   reflection?: RestrictedPortableText
 }
 

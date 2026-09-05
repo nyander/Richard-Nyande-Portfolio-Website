@@ -22,6 +22,7 @@ const MODULE_SHORT_LABEL: Record<string, string> = {
 
 function moduleLabel(module: ProductModule) {
   return (
+    module.outcomeLabel ||
     module.shortLabel ||
     MODULE_SHORT_LABEL[module.title.toLowerCase()] ||
     module.title
@@ -64,7 +65,10 @@ export function CaseStudyOutcome({ section, modules }: CaseStudyOutcomeProps) {
             <ul className="outcome-status-tags">
               {grouped.map((group) => (
                 <li key={group.status}>
-                  <StatusTag status={group.status} />
+                  <StatusTag
+                    status={group.status}
+                    label={section.statusLabels?.[group.status]}
+                  />
                   <span>{group.titles.join(', ')}</span>
                 </li>
               ))}
@@ -99,9 +103,15 @@ export function CaseStudyOutcome({ section, modules }: CaseStudyOutcomeProps) {
           ) : (
             <TodoPlaceholder label="Add evidence points." />
           )}
+          {section.evidenceBoundary ? (
+            <div className="outcome-evidence-boundary">
+              <h3>Evidence boundary</h3>
+              <p>{section.evidenceBoundary}</p>
+            </div>
+          ) : null}
         </div>
         <div>
-          <h3>What&apos;s next</h3>
+          <h3>{section.whatsNextHeading ?? "What's next"}</h3>
           {section.whatsNext ? (
             <p>{section.whatsNext}</p>
           ) : (

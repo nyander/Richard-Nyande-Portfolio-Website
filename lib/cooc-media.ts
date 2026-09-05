@@ -1,5 +1,5 @@
 import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
-import { COOC_LIVE_URL, COOC_SLUG } from '@/lib/cooc'
+import { COOC_LIVE_URL, COOC_SLUG, COOC_STUDY } from '@/lib/cooc'
 
 const ROOT = '/images/cooc'
 
@@ -196,6 +196,12 @@ export function applyCoocLocalMedia(study: CaseStudyPage): CaseStudyPage {
       : study.designToCode,
     ogImage: preferExisting(study.ogImage, COOC_COVER),
     liveUrl: study.liveUrl || COOC_LIVE_URL,
+    outcomeStatus: COOC_STUDY.outcomeStatus
+      ? {
+          ...study.outcomeStatus,
+          ...COOC_STUDY.outcomeStatus,
+        }
+      : study.outcomeStatus,
   }
 }
 

@@ -176,6 +176,7 @@ export const COOC_STUDY: CaseStudyPage = {
       {
         title: 'Club operations WordPress cannot hold',
         shortLabel: 'Limits',
+        outcomeLabel: 'Full club operations',
         teaser:
           'Attendance, member messaging, behaviour history and SevenRooms were named as missing — not as screens I am showing.',
         status: 'concept',
@@ -322,19 +323,26 @@ export const COOC_STUDY: CaseStudyPage = {
   },
   outcomeStatus: {
     eyebrow: '06 / Outcome and status',
-    heading: 'Where the product stood',
+    heading: 'Where the product stands',
     statusSummary:
-      'The brand site went live in December 2024. The membership platform — apply, approve, bill, pass — went live in March 2025 at cooc.london. Built at Greyzip with Beth Lucas on front-end. WordPress was the launch stack. A custom club app was the comparison, not the delivery.',
+      'The brand site launched in December 2024. Three months later, COOC had moved from a promotional website into an operational membership service, covering application, approval, billing and digital member access. The launch used WordPress and existing services rather than the custom club app originally explored, allowing the team to meet the March 2025 opening window.',
+    statusLabels: {
+      concept: 'Out of scope',
+    },
+    whatsNextHeading: 'Product boundary',
     whatsNext:
-      'A custom app if the club needs attendance, in-platform messaging, member history and a direct SevenRooms join. Plugins will not grow into that product by themselves.',
+      'The shipped service covered acquisition and member access, not full club operations. Attendance, messaging, member history, analytics and a direct SevenRooms integration remained outside the launch scope. If those became operational priorities, I would reassess the service architecture rather than continuing to extend the plugin stack.',
     quotes: [],
     evidence: [
-      'Live site: cooc.london — brand pages plus membership.',
-      'Journey designed in Figma: options, application, approval, welcome mail, wallet pass.',
-      'Stack on the live membership loop: Divi form, MemberPress, New User Approve, Zapier, Passcreator. No event attendance, in-platform messaging, member analytics, or SevenRooms API.',
+      'Shipped: brand site and membership journey covering application, approval, billing and digital pass.',
+      'Observed in 2026: COOC continues to operate an online membership service, including active membership tiers, applications, payments and digital-pass support.',
+      'Design evidence: Figma journey covering membership options, application, approval, welcome communication and wallet pass.',
+      'Launch architecture: WordPress with Divi, MemberPress, New User Approve, Zapier and Passcreator, chosen to meet the launch window rather than delaying for a custom application.',
     ],
+    evidenceBoundary:
+      'Post-launch analytics and member behaviour were not available to me after handover, so I do not attribute conversion, retention or operational-efficiency figures to the work.',
     reflection: blocks(
-      'The honest version of this project is a brand site that had to become a membership operation without becoming a native app. I would still map the join path and design the pass before picking plugins. I would still have shipped WordPress for that February window. I would not describe this as a custom membership product, and I would not print a quote I cannot attribute.'
+      'The constraint was not something I would remove in hindsight. With the same February-to-March deadline, I would still ship WordPress. It gave COOC the membership capability it needed without waiting for a larger custom product. The important distinction is knowing where that solution should stop scaling.'
     ),
   },
 }

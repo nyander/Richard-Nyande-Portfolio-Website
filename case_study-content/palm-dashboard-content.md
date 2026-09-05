@@ -443,9 +443,8 @@ Eyebrow: **05 / Design to code**
 Heading: **Where building protected the design**
 
 **framing**
-Most product designers can't build. Most developers don't think in interaction and
-hierarchy. On Coverage Tracking I owned both sides, so a handful of decisions were
-shaped by how the system actually behaved, not lost somewhere in a handoff.
+Owning both design and implementation meant interaction decisions could be tested
+against the behaviour of the real system rather than being separated by a handoff.
 
 **decisions** (vertical stacked list, not a card grid — copy is explanatory and needs room)
 

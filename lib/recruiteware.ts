@@ -9,14 +9,16 @@ export const RECRUITEWARE_LIVE_URL =
 export const RECRUITEWARE_LIVE_NOTE =
   'Login required. Accessible upon request.'
 
+const RECRUITEWARE_SUMMARY =
+  'An office CRM for Thomas Grant and Apex that helped consultants search candidates, manage compliance and work with bookings on the existing recruitment system, while creating a shared product foundation for public applications and future candidate self-service.'
+
 export const RECRUITEWARE_CARD: CaseStudyCard = {
   _id: 'caseStudy-recruiteware',
   title: 'Recruiteware',
   slug: RECRUITEWARE_SLUG,
   role: 'Product Designer, Full Stack Developer',
   year: 2025,
-  summary:
-    'An office CRM for Thomas Grant and Apex Recruitment — a Laravel and React front on the existing RecruitWare backend, so consultants could search, book and check compliance without the old PHP shell.',
+  summary: RECRUITEWARE_SUMMARY,
   status: 'shipped',
   heroImage: null,
 }
@@ -27,100 +29,103 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
   slug: RECRUITEWARE_SLUG,
   role: 'Product Designer, Full Stack Developer',
   year: 2025,
-  summary:
-    'An office CRM for Thomas Grant and Apex Recruitment — a Laravel and React front on the existing RecruitWare backend, so consultants could search, book and check compliance without the old PHP shell.',
+  summary: RECRUITEWARE_SUMMARY,
   status: 'shipped',
   contextFacts: [
     fact('Client', 'Thomas Grant Recruitment, with Apex'),
-    fact('Type', 'Office CRM on a legacy recruitment backend'),
+    fact('Type', 'Office CRM on an existing recruitment backend'),
     fact('Stack', 'Laravel 11, React, Inertia.js, Tailwind, MySQL'),
     fact('Team', 'Greyzip, with Fungai Motezu on the existing APIs'),
   ],
   heroImages: [],
   seoTitle: 'Recruiteware — Product Design & Build Case Study | Richard Nyande',
   seoDescription:
-    'Greyzip, 2024–25. A Laravel and React office CRM for Thomas Grant and Apex Recruitment, sitting on the existing RecruitWare processing instead of replacing it.',
+    'Greyzip, 2024–25. An office CRM for Thomas Grant and Apex that kept RecruitWare’s processing and redesigned the consultant interface so public applications and a later candidate portal could share one product foundation.',
   ogImage: null,
   reframing: {
-    eyebrow: 'Beyond a WordPress skin',
-    heading: 'The work was three audiences sharing one backend, not a prettier template.',
+    eyebrow: 'On an established backend',
+    heading:
+      'The design challenge was deciding what to preserve, what to replace, and how three audiences could share one system.',
     intro:
-      'RecruitWare already held candidates, clients, bookings and payroll. Thomas Grant used it for warehouse and driving; Apex needed the same system for healthcare. The office screens were a PHP WordPress shell talking to a Notes database over session cookies.',
+      'Recruitment consultants were running healthcare workflows through an office system shaped around older logistics processes. I designed a new interface on top of the existing backend, creating a clearer consultant experience while establishing a foundation that public applications and future candidate self-service could share. Where the backend represented real operational states, I preserved that model rather than designing an interface the system could not truthfully support.',
     initialProposal: blocks(
       'Host a new front on WordPress, follow an existing layout, and spend the first 2.5 months mostly on look and feel, with some front-end behaviour added on top of the current system.'
     ),
     discovery: blocks(
-      'The product had three surfaces: a public website that had to write registrations into the CRM, an office system for consultants, and a candidate portal that did not exist yet. Apex wanted candidate records usable immediately. Public registration lived in WordPress form builders — some could only email — until Avada went back live with field names that matched the application pack. The office dashboard already had a spec: last-week versus this-week bookings by client.'
+      'There were three audiences on one recruitment operation: applicants on the public site, consultants in the office, and candidates who had no surface yet. Apex asked when they could have the CRM to organise candidates. Public registration lived in WordPress form builders — one live form could only email details, so tests never reached the database. The office already had a dashboard spec for last-week versus this-week bookings by client. The candidate portal was in the brief and did not exist yet.'
     ),
     productResponse: blocks(
-      'I proposed Laravel so the website, office CRM and portal could share APIs without re-implementing validation, scheduled jobs and reports. The office build then ran in a fixed order: Chart.js dashboards against the existing booking spec, Notes login and session cookies, candidate tables swapping fixture data for live views, then menus and the candidate form. Fungai stayed on the APIs and the existing processing. I designed and built the SPA in React and Inertia.'
+      'I treated those three experiences as parts of one product system, and proposed an interface layer on the existing RecruitWare processing so they could share APIs later. Validation, scheduled jobs, payroll and reports stayed where they already ran. The office product was designed around consultant work — pipeline, candidate status, compliance — and built in that order. Fungai stayed on the APIs. I designed and built the office interface.'
     ),
   },
   productModules: {
     eyebrow: 'Mapping the reality.',
-    heading: 'The office CRM, then the surfaces that still had to talk to it.',
+    heading: 'The office product, then the surfaces that still had to join it.',
     intro:
-      'Built at Greyzip with Fungai Motezu on the RecruitWare APIs, July to September 2024. Dashboard charts first, then login, then tables and menus, then the candidate form. The live deployment is the office system. The candidate portal was in the brief; it is not in these screenshots.',
+      'Built at Greyzip with Fungai Motezu on the RecruitWare APIs, July to September 2024. The live product is the office CRM and public registration into that system. Candidate self-service was in the brief and is out of scope here.',
     items: [
       {
         title: 'Access and roles',
         shortLabel: 'Roles',
-        teaser: 'Security had to ship first. Correct credentials still returned a 404 until the Notes redirect and session cookie were handled.',
+        teaser:
+          'Apex asked for candidate records before the rest of the product existed. Consultants had to enter through the login they already used.',
         status: 'shipped',
         problem: blocks(
-          'Apex needed people on candidate records before the rest of the product existed. The office app had to log into the existing RecruitWare session, not mint a second identity. Wrong credentials returned the HTML login page. Right credentials returned a 404 — the login was succeeding, the redirect was not.'
+          'Apex asked when they could have the CRM to organise candidates. The office product had to use the existing RecruitWare identity, so consultants were not given a second account. Wrong credentials returned the HTML login page. Right credentials returned a 404 — the login succeeded, the handoff into the new interface did not.'
         ),
         solution: blocks(
-          'An external CRM authentication guard that follows the Notes login redirect, keeps the session cookie and folder, then lands in the SPA. Logout sits on the same rails. Consultants, compliance and admins then see different slices of the same records.'
+          'The new office interface follows that existing login, keeps the session, then lands consultants in role-gated modules. Logout uses the same session. Consultants, compliance and admins see different slices of the same records. The wiring that made this possible — following the Notes redirect and keeping the session cookie — is in Design to code.'
         ),
         before: [
-          'WordPress PHP templates on a shared session cookie',
-          'Successful login looking like a 404',
+          'Successful login dropped consultants out of the new interface',
+          'Identity lived in the existing CRM session',
           'No candidate login',
         ],
         after: [
-          'Laravel auth following the existing redirect and cookie',
-          'Login and logout in the office app',
-          'Role-gated navigation once the session is real',
+          'Consultants enter through the login they already had',
+          'Role-gated navigation once they are in',
+          'Candidate access left for a later surface',
         ],
       },
       {
         title: 'Candidate lists',
         shortLabel: 'Candidates',
-        teaser: 'Live, pending, compliance, audit, leavers and archive — parsed from the backend menu string, not invented as a new IA.',
+        teaser:
+          'Consultants already understood candidates through Live, Pending, Compliance, Audit, Leavers and Archive. I kept those states and redesigned how they searched and scanned them.',
         status: 'shipped',
         problem: blocks(
-          'The previous candidates view was a PHP DataTable over a pipe-delimited Notes response. Columns came from per-user settings. The office nav was a delimited menu string: Live, Pending, Compliance Checks, Audit Checks, Leavers, Archive, then clients, contacts and jobs. A first live hook only showed Live Candidates no matter which view was requested.'
+          'Consultants already worked in those operational states. The previous office view made the lists hard to search and scan, and an early live connection only showed Live Candidates whichever view was requested. Those states came from the existing backend, including the Notes and menu configuration.'
         ),
         solution: blocks(
-          'Tables were designed against fixture data first, then swapped for the live payload once login worked. Views keep those statuses. Column toggles, search, advanced filters and a live-updates badge sit in the SPA. The nav parses the menu string — including catching missing prefixes and stray punctuation — instead of drawing a new information architecture.'
+          'I retained the status split and redesigned search, columns, filters and a visible live-updates state. Tables were designed against fixture data first, then connected to live views. The navigation reads the existing menu configuration — including malformed prefixes — so the interface stays truthful to the operational model.'
         ),
         before: [
-          'PHP table assembled from cookie-authenticated curl',
-          'One WordPress page per section, switching by reload',
-          'Menu items as a delimited string the front had to interpret',
+          'Status lists that were hard to search and scan',
+          'Each section as a separate office page',
+          'An early live view that only returned Live Candidates',
         ],
         after: [
-          'Live Candidates with search, columns and advanced filters',
-          'Polling with a visible Live Updates state',
-          'Same status split, driven by the existing menu ops',
+          'The same status split, with search, columns and filters',
+          'A visible Live Updates state',
+          'Navigation driven by the existing operational menu',
         ],
       },
       {
         title: 'Candidate profile',
         shortLabel: 'Profile',
-        teaser: 'Tabs and labels authored in the SPA. Fields and buttons come from the API, against the current system’s form.',
+        teaser:
+          'Healthcare compliance had to sit on the everyday candidate record, alongside the logistics fields the system already held.',
         status: 'shipped',
         problem: blocks(
-          'Profiles were still shaped for warehouse and driving. Healthcare needed compliance, attachments and auditing on the same candidate. The form could not be fully generated: labels and tabs had to be placed by hand, while data and action buttons would arrive on an API call, then submit back to the server.'
+          'Profiles were still shaped for warehouse and driving. Healthcare work needed compliance, attachments and auditing on the same candidate. Labels and tabs had to be authored in the interface; fields and actions still come from the current form API.'
         ),
         solution: blocks(
-          'A single candidate with inner navigation authored in the front: details, core documents, employment history, medical, convictions, payroll, jobs compliance, compliance check, expiry check, audit check, attachments and bookings. Edit and leaver stay on the record. Availability, preferred client and assigned jobs stay visible next to the compliance tabs.'
+          'A single candidate with inner navigation: details, core documents, employment history, medical, convictions, payroll, jobs compliance, compliance check, expiry check, audit check, attachments and bookings. Edit and leaver stay on the record. Availability, preferred client and assigned jobs stay visible next to the compliance tabs.'
         ),
         before: [
           'Warehouse and driving fields as the default profile',
-          'Compliance treated as a separate, easy-to-miss workflow',
-          'Audit timestamp not part of the everyday record',
+          'Compliance easy to miss beside the everyday record',
+          'Audit timestamp away from the details view',
         ],
         after: [
           'Healthcare and logistics fields on the same candidate',
@@ -131,37 +136,39 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
       {
         title: 'Booking dashboards',
         shortLabel: 'KPIs',
-        teaser: 'Day and week bookings by client, with last-week versus this-week difference — the first thing built, against the existing dashboard spec.',
+        teaser:
+          'The office needed last-week versus this-week bookings on screen, as the first destination, matching a spec that already existed.',
         status: 'shipped',
         problem: blocks(
-          'The office needed pipeline and booking volume on screen, not as an export. A dashboard spec already asked for last-week versus this-week day counts by client, bookings this week versus last, and a weekly difference. The backend could describe chart type, labels, data and order. The front did not yet render them.'
+          'Booking volume lived in background reports. A dashboard spec already asked for last-week versus this-week counts by client. The backend could describe chart type, labels, data and order. The office did not yet show them.'
         ),
         solution: blocks(
-          'Chart.js first, with dummy candidates, clients and bookings so the graphs could be proven before login worked. Then the same tables and charts — bar, line, gauge, pie — against live data. Finance and weekend costings stay siblings in the chrome, not mixed into this view.'
+          'The dashboard became the first office screen. Graphs were proven on fixture data, then pointed at live bookings. Finance and weekend costings stay as sibling areas in the chrome.'
         ),
         before: [
           'Report generation buried in background processing',
-          'A dashboard spec with no office front to render it',
+          'A dashboard spec with no office screen to render it',
         ],
         after: [
           'Dashboard as the first office destination',
-          'Tables and Chart.js views of the same booking split',
-          'API-described chart type, labels, data and order',
+          'Day and week bookings by client, including the weekly difference',
+          'Charts following the spec the backend already described',
         ],
       },
       {
         title: 'Locations and clients',
         shortLabel: 'Locations',
-        teaser: 'Clients, contacts and jobs sit on the same menu string as candidates — All Clients, then locations as a live table.',
+        teaser:
+          'Clients, contacts and jobs already sat next to candidates in the operational model. They needed the same kind of scannable table.',
         status: 'shipped',
         problem: blocks(
-          'Clients, jobs and locations already existed in the backend. The menu ops listed them next to candidates: All Clients, Contacts, Jobs. The office shell did not give a consistent table for browsing them, so booking and availability still depended on knowing the old screens.'
+          'Those records already existed in the backend. The menu listed All Clients, Contacts and Jobs beside candidates. Booking and availability still depended on knowing the previous office screens, because there was no consistent table for browsing them.'
         ),
         solution: blocks(
-          'Locations as a live table: branch, reference, manager, town, with the same search, columns and polling as candidates. Clients and jobs sit in the same sidebar because that is how the backend already grouped them.'
+          'Locations as a live table — branch, reference, manager, town — with the same search and columns as candidates. Clients and jobs stay in the same sidebar because that is how the backend already grouped them.'
         ),
         before: [
-          'Locations only reachable through the legacy shell',
+          'Locations only reachable through the previous office screens',
           'No shared table pattern across candidates and branches',
         ],
         after: [
@@ -173,84 +180,87 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
       {
         title: 'Website registration',
         shortLabel: 'Registration',
-        teaser: 'Avada went back live so field names could match the CRM. The form had to collect an application pack, not a contact email.',
+        teaser:
+          'An application has to become a candidate the office can see. Emailing the form fields is not enough.',
         status: 'shipped',
         problem: blocks(
-          'Apex and Thomas Grant already had registration and DBS forms on the public site. One plugin could only email details, so tests never hit the database. Apex’s bar was that candidates could complete it and the office could see the data. The CRM expected a long list of field names — identity, next of kin, employment history, medical, DBS, GDPR — that had to match exactly or someone would map them by hand.'
+          'Apex and Thomas Grant already had registration and DBS forms on the public site. One live plugin could only email details, so tests never reached the database. Apex’s requirement was that candidates could complete the pack and the office could see the data. The CRM expected field names — identity, next of kin, employment history, medical, DBS, GDPR — that had to match exactly or someone would map them by hand.'
         ),
         solution: blocks(
-          'Greyzip restored the Avada forms so entries stayed on the site and could be linked. Field names were set to the CRM placeholders. The pack was split into sections with a next step, because a single page could not hold it. Signature pages became documents the applicant ticks to confirm, not fields inside the form.'
+          'Greyzip restored the Avada forms so entries stayed on the site and could be linked. Field names were set to the CRM placeholders. The pack was split into sections with a next step, because a single page could not hold it. Signature pages became documents the applicant ticks to confirm.'
         ),
         before: [
           'Multiple form builders on the same site',
-          'Submissions that only arrived as email',
+          'A live path that only emailed the office',
           'Field names that would have needed manual matching',
         ],
         after: [
           'Avada live again, with CRM field names',
           'Stored entries as a fallback when the live write fails',
-          'A multi-section pack, with policy documents ticked not signed in-form',
+          'A multi-section pack, with policy documents ticked',
         ],
       },
       {
         title: 'Candidate portal',
         shortLabel: 'Portal',
-        teaser: 'The third surface in the brief: candidates seeing their own profile, documents and bookings. Not in the live office screenshots.',
+        outcomeLabel: 'Candidate self-service portal',
+        teaser:
+          'The third audience: candidates seeing their own profile, documents and bookings. Architecturally prepared, not shipped.',
         status: 'concept',
         problem: blocks(
-          'Candidates had no access to the system. The intended loop was: register on the website, get a profile in the CRM, then use an app for profile, documents and booking info. Whether uploads happened at registration or after vetting was still being decided.'
+          'Candidates had no access to the system. The intended loop was: register on the website, get a profile in the CRM, then use a later surface for profile, documents and booking info. Whether uploads happened at registration or after vetting was still being decided.'
         ),
         solution: blocks(
-          'Laravel was chosen so a later portal could use the same APIs as the office SPA. The screens here are the office product that shipped. A candidate-facing portal remains the third audience, not a screen I am presenting as finished.'
+          'The office product shipped first. The interface layer was shaped so a later portal could read the same profile and booking data. That surface is out of scope for this case study.'
         ),
         before: [
           'No candidate login',
           'Documents and availability handled inside the office only',
         ],
         after: [
-          'APIs shaped so a portal can read profile and bookings',
           'Office CRM shipped first',
-          'Portal left as the next surface, not a fake module screenshot',
+          'Shared APIs left ready for a later portal',
+          'No candidate-facing screens presented as finished',
         ],
       },
     ],
   },
   deepDives: {
     eyebrow: '04 / Deep dives',
-    heading: 'Three problems that were not a new CRM',
+    heading: 'Three decisions that shaped the office product',
     intro:
-      'The brief looked like a UI refresh on WordPress. The work that mattered was Chart.js against a booking spec, Notes login that looked like a 404, tables that only showed Live, and Avada field names that had to match the CRM.',
+      'The visible interface needed replacing. The backend still held years of working recruitment logic. The work that mattered was deciding what to keep, how an application becomes a candidate, and how consultants already organised their day.',
     items: [
       {
-        title: 'From a WordPress shell to a front that can share APIs',
-        shortLabel: 'Laravel front',
+        title: 'Keep the backend, replace the office',
+        shortLabel: 'Office layer',
         problem: blocks(
-          'Fungai’s first hosting thought was WordPress, because that is where the public site already lived. The office UI was already PHP templates on WordPress, curling recruitware.uk with a session cookie and parsing pipe-delimited Notes views. Re-skinning that would have left website, office and portal as three disconnected fronts.'
+          'The first hosting idea was WordPress, because that is where the public site already lived. The office UI was already PHP templates on that stack. The backend still ran validation, scheduled work, payroll and reports. A visual refresh on the same shell would have left website, office and a later portal as separate experiences on top of that processing.'
         ),
         contribution:
-          'I asked whether we were working on the candidate portal or the office system, then proposed Laravel so the three surfaces could talk through APIs without rebuilding validation, scheduled tasks and reports. In July I stood up Chart.js on dummy candidates, clients and bookings against the existing dashboard spec, and shared a Laravel and React app so we could plan how those graphs would take the API. Fungai agreed to focus on the APIs while Greyzip took the office front.',
+          'I asked whether we were working on the candidate portal or the office system, then proposed an interface layer that could share APIs later, without rebuilding the processing Fungai already ran. In July I designed the dashboard against the existing booking spec on fixture data, so we could agree the office destination before login was wired. Fungai stayed on the APIs while Greyzip took the office front.',
         constraints:
           'Do not re-do background processing, validation, scheduled tasks or report generation.\nThe existing database and session model had to keep working.\nThe dashboard API would indicate chart type, labels, data and order — the front had to render whatever that described.\nFirst phase ran July to September 2024.',
         decisions: [
           decision(
             'Keep the processing, replace the office shell',
-            'Laravel sits in front of the existing RecruitWare work. Payroll and reports stay where they already run.'
+            'The new interface sits in front of the existing RecruitWare work. Payroll and reports stay where they already run.'
           ),
           decision(
-            'Prove the graphs before the session works',
-            'Bar, gauge and line charts on fixture data meant we could argue about layout without waiting on login. The live dashboard is that spec: last-week versus this-week bookings by client.'
+            'Prove the dashboard before the session works',
+            'Graphs on fixture data meant we could agree layout without waiting on login. The live dashboard is that spec: last-week versus this-week bookings by client.'
           ),
           decision(
-            'Read the old calls before inventing new ones',
-            'Fungai sent the PHP candidates view, the curl helper, and the view process — type, URL, columns, query, return list, then per-user settings. The Live / Pending / Compliance split in the new UI is that view.'
+            'Read the existing views before drawing new ones',
+            'Fungai sent the PHP candidates view and the view process — type, URL, columns, query, return list, then per-user settings. The Live / Pending / Compliance split in the new UI is that view.'
           ),
         ],
         outcome: blocks(
-          'Shipped as the office CRM on DigitalOcean. The live product is Laravel 11, React, Inertia and Tailwind against the existing backend — not Divi, MemberPress, or a WordPress plugin stack.'
+          'The office CRM shipped on DigitalOcean as an interface layer on the existing backend. Website, office and a later portal can share that processing. The stack is in Design to code.'
         ),
       },
       {
-        title: 'From an email of form fields to a row in the CRM',
+        title: 'Registration has to create a candidate',
         shortLabel: 'Registration',
         problem: blocks(
           'Registration on the public site was supposed to create a candidate in the system. Tests did not. The live form used a plugin that could only email details. Avada already stored entries. Apex needed it easy for candidates to complete and possible for the office to see the data. The CRM then sent an application pack: identity, next of kin, three jobs of history, medical, DBS, GDPR and the rest — each placeholder had to be the Avada field name or it would be matched by hand.'
@@ -269,40 +279,40 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
             'A next-step form holds the questions. Each signed section in the pack is a document the applicant confirms they have read.'
           ),
           decision(
-            'Do not pretend WordPress is the CRM',
-            'Divi and membership plugins were never this product. Recruiteware’s registration story is intake into RecruitWare.'
+            'Treat the public form as intake into RecruitWare',
+            'The outcome of registration is a candidate the office can see. The public site stores the entry; the CRM decides pending versus live.'
           ),
         ],
         outcome: blocks(
-          'Avada live again, field names aligned to the pack, pending versus live still decided in the office. Not an inbox of unstructured emails.'
+          'Avada live again, field names aligned to the pack, pending versus live still decided in the office. An application can become a candidate record.'
         ),
       },
       {
-        title: 'From use-it-now to roles before screens',
-        shortLabel: 'Access first',
+        title: 'Use the existing mental model',
+        shortLabel: 'Operational IA',
         problem: blocks(
-          'Apex asked when they could just have the CRM to organise candidates. The office app had to use the existing login. Wrong credentials returned the HTML login page. Correct credentials returned a 404 until the redirect, cookie and folder were handled. After that, tables still only showed Live Candidates when other views were called. Menus arrived as a delimited string that was missing a Candidates prefix and had stray punctuation on Jobs.'
+          'Apex asked when they could have the CRM to organise candidates. Consultants already used Live, Pending, Compliance, Audit, Leavers and Archive. An early live connection only returned Live Candidates. The menu arrived as a configuration string that was missing a prefix and had stray punctuation on Jobs.'
         ),
         contribution:
-          'I designed the Candidates tables against fixture data so they were ready for fields, then spent August on login, logout and swapping that fixture for live rows. When the menu string was wrong, I sent it back rather than inventing a nav. Forms came next: wrap the menus, author tabs and labels, take data and buttons from the API.',
+          'I designed the candidate tables first, then connected them to live views once login worked. When the menu configuration was wrong, I sent it back so the interface would keep showing the real operational states. Profile tabs were authored next; fields and buttons still come from the API.',
         constraints:
-          'Apex wanted candidate use while other parts were still being built.\nLogin had to return cookie and folder from the existing server, not a new Laravel user table.\nPer-user settings can override URL, columns and query for a view.\nCandidate-facing access was a later surface.',
+          'Apex wanted candidate use while other parts were still being built.\nLogin had to return cookie and folder from the existing server.\nPer-user settings can override URL, columns and query for a view.\nCandidate-facing access was a later surface.',
         decisions: [
           decision(
-            'Treat a 404 after good credentials as a redirect bug',
-            'The login was working. The SPA had to follow it and keep the session, not show a missing page.'
+            'Keep the existing status split',
+            'Those categories represented genuine operational states. I improved search, scanning and movement through them, and left the underlying process in place.'
           ),
           decision(
             'Fixture tables, then live views, then the form',
             'Candidates UI first. Data on screen second. Profile tabs authored in the front, fields from the API, submit back to the server.'
           ),
           decision(
-            'Parse the menu, do not redesign it',
-            'Live, Pending, Compliance, Audit, Leavers, Archive, then Clients, Contacts and Jobs. The office nav is that string, corrected where it was malformed.'
+            'Correct the menu configuration',
+            'Live, Pending, Compliance, Audit, Leavers, Archive, then Clients, Contacts and Jobs. The office nav is that model, corrected where the string was malformed.'
           ),
         ],
         outcome: blocks(
-          'Shipped. The office CRM is behind a login that shares the RecruitWare session, with role-gated modules and live tables. Candidate self-service was scoped, not presented here as a finished screen.'
+          'The office CRM is behind a login that shares the RecruitWare session, with role-gated modules and live tables. Candidate self-service was scoped and is not presented here as a finished screen.'
         ),
       },
     ],
@@ -311,7 +321,7 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
     eyebrow: '05 / Design to code',
     heading: 'Where building protected the design',
     framing: blocks(
-      'The existing shell taught the data model: cookie session, Notes views, settings-driven columns, a menu string. Laravel, Inertia and React were how that model became an office SPA. Chart.js came first because the dashboard spec already knew the questions.'
+      'Owning both the interface and its implementation meant consultant workflows could be tested against the behaviour of the real RecruitWare system as they were designed, rather than assuming the backend could support an idealised interface. The existing shell taught the data model: cookie session, Notes views, settings-driven columns, a menu string.'
     ),
     decisions: [
       decision(
@@ -324,7 +334,7 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
       ),
       decision(
         'Author tabs, bind fields',
-        'Candidate form labels and tabs are placed in the SPA because they have to match the current system. Data and buttons arrive on an API call and submit back. Healthcare fields can grow without a new information architecture.'
+        'Candidate form labels and tabs are placed in the interface because they have to match the current system. Data and buttons arrive on an API call and submit back. Healthcare fields can grow on that record.'
       ),
     ],
     stackTags: [
@@ -340,19 +350,26 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
   },
   outcomeStatus: {
     eyebrow: '06 / Outcome and status',
-    heading: 'Where the product stood',
+    heading: 'Where the product stands',
     statusSummary:
-      'The office CRM shipped on DigitalOcean for Thomas Grant and Apex. Login is available on request. Public registration went back to Avada with CRM field names. A candidate portal was in the original three-part brief and is not claimed as a finished module here.',
+      'The office could move onto a purpose-built recruitment interface without replacing the backend responsible for existing reporting and operational processes. Public registration was aligned so an application could become a candidate record the office can see. Candidate self-service was in the original brief and remains unshipped.',
+    statusLabels: {
+      concept: 'Out of scope',
+    },
+    whatsNextHeading: 'Product boundary',
     whatsNext:
-      'Candidate self-service for profile, documents, availability and bookings, using the same APIs. Keep registration write-back on the Avada field names so intake never depends on an email plugin.',
+      'The shipped service is the consultant office product and public intake into that CRM. Candidate self-service for profile, documents, availability and bookings was prepared for in the architecture and is not part of the delivered product. If that surface became the next priority, it should use the shared APIs.',
     quotes: [],
     evidence: [
-      'The live office app is on DigitalOcean. Access is behind a login that shares the RecruitWare session, available on request.',
-      'Candidate lists keep Live / Pending / Compliance / Audit / Leavers / Archive from the existing menu ops, with search, column toggles and a visible live-updates state.',
-      'The dashboard matches the original spec: day and week bookings by client, including last-week versus this-week difference, rendered in Chart.js.',
+      'Shipped: consultant access, candidate statuses, profiles, compliance fields, booking dashboard, locations, and public registration into the CRM.',
+      'Observed: the office app is live on DigitalOcean, behind the existing RecruitWare login, available on request.',
+      'Design evidence: Live / Pending / Compliance / Audit / Leavers / Archive retained as the consultant model, with search, columns and live updates.',
+      'Launch architecture: an interface layer on the existing processing. Laravel, React and Inertia are in Design to code.',
     ],
+    evidenceBoundary:
+      'Post-handover analytics were not available to me, so I do not attribute speed, conversion or time-saved figures to the work.',
     reflection: blocks(
-      'The honest version of this project is a front on a working backend, built in order: graphs, then login, then tables, then the form. Mapping the Notes calls, the menu string and the Avada field names mattered more than the first hosting suggestion. I would still start there. I would not publish percentage load-time claims I cannot evidence, and I would not describe Divi or MemberPress as this stack.'
+      'The visible interface needed replacing. The backend still held years of working recruitment logic. Given the same brief I would still keep that processing and redesign the office on top of it. The distinction is knowing that an office product for consultants is not the same as a finished three-audience system.'
     ),
   },
   liveUrl: RECRUITEWARE_LIVE_URL,

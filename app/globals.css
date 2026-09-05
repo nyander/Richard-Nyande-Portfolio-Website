@@ -4104,6 +4104,12 @@ html.is-booting body {
   gap: 1.5rem var(--gap-columns);
 }
 
+.outcome-evidence-boundary {
+  margin-top: 1.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--color-line);
+}
+
 .outcome-reflection {
   max-width: var(--measure-prose);
   padding-top: 2rem;

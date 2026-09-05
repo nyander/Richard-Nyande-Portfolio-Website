@@ -35,6 +35,9 @@ const PALM_STATUS_SUMMARY =
 const PALM_WHATS_NEXT =
   "The next step identified was an LLM to compare incoming articles against a client's keywords and KPI criteria. I left before that work started, and there is no developer on the product now."
 
+const PALM_DESIGN_TO_CODE_FRAMING =
+  'Owning both design and implementation meant interaction decisions could be tested against the behaviour of the real system rather than being separated by a handoff.'
+
 export const PALM_CARD: CaseStudyCard = {
   _id: 'caseStudy-palm-dashboard',
   title: 'Palm Dashboard',
@@ -315,6 +318,7 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
     designToCode: study.designToCode
       ? {
           ...study.designToCode,
+          framing: blocks(PALM_DESIGN_TO_CODE_FRAMING),
           shippedImage: preferExisting(
             study.designToCode.shippedImage,
             DESIGN_TO_CODE_SHIPPED
