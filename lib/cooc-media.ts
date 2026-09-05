@@ -1,5 +1,5 @@
 import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
-import { COOC_LIVE_URL, COOC_SLUG, COOC_STUDY } from '@/lib/cooc'
+import { COOC_CARD, COOC_LIVE_URL, COOC_SLUG, COOC_STUDY } from '@/lib/cooc'
 
 const ROOT = '/images/cooc'
 
@@ -208,6 +208,7 @@ export function applyCoocCardMedia(study: CaseStudyCard): CaseStudyCard {
 
   return {
     ...study,
+    summary: COOC_CARD.summary,
     heroImage: hasVisual(study.heroImage) ? study.heroImage : COOC_THUMB,
   }
 }

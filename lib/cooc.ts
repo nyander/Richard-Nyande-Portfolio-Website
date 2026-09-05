@@ -12,7 +12,7 @@ export const COOC_CARD: CaseStudyCard = {
   role: 'Product Designer, UX/UI Designer, Web Developer',
   year: 2025,
   summary:
-    'A Central London members club that had to become a membership system after launch — registration, approval, billing and a wallet pass — designed and wired on WordPress at Greyzip.',
+    'A Central London members club that had to become a membership system after launch — registration, approval, billing and a wallet pass — designed and wired on WordPress at Palm PR.',
   status: 'shipped',
   heroImage: null,
 }
@@ -24,7 +24,7 @@ export const COOC_STUDY: CaseStudyPage = {
   role: 'Product Designer, UX/UI Designer, Web Developer',
   year: 2025,
   summary:
-    'A Central London members club that had to become a membership system after launch — registration, approval, billing and a wallet pass — designed and wired on WordPress at Greyzip.',
+    'A Central London members club that had to become a membership system after launch — registration, approval, billing and a wallet pass — designed and wired on WordPress at Palm PR.',
   status: 'shipped',
   contextFacts: [
     fact('Client', 'Cooc, with The Mandrake'),
@@ -33,12 +33,12 @@ export const COOC_STUDY: CaseStudyPage = {
       'Stack',
       'Figma, WordPress, Divi, MemberPress, New User Approve, Zapier, Passcreator'
     ),
-    fact('Team', 'Greyzip; Beth Lucas on front-end development'),
+    fact('Team', 'Palm PR; Beth Lucas on front-end development'),
   ],
   heroImages: [],
   seoTitle: 'Cooc — Product Design & Membership Case Study | Richard Nyande',
   seoDescription:
-    'Greyzip, 2024–25. Product and UX design for Cooc: a brand site that pivoted into a WordPress membership platform with approval, billing and a designed wallet pass.',
+    'Palm PR, 2024–25. Product and UX design for Cooc: a brand site that pivoted into a WordPress membership platform with approval, billing and a designed wallet pass.',
   ogImage: null,
   liveUrl: COOC_LIVE_URL,
   reframing: {
@@ -61,7 +61,7 @@ export const COOC_STUDY: CaseStudyPage = {
     eyebrow: 'The membership loop.',
     heading: 'A club site, then the membership loop that had to hang off it.',
     intro:
-      'Built at Greyzip. Brand site through December 2024. Membership platform requested February 2025 and live March 2025. Screens here are the Figma work, the journey wireframe, the comparison that decided the stack, and the pass I designed. Mario Brown on the card is test data.',
+      'Built at Palm PR. Brand site through December 2024. Membership platform requested February 2025 and live March 2025. Screens here are the Figma work, the journey wireframe, the comparison that decided the stack, and the pass I designed. Mario Brown on the card is test data.',
     items: [
       {
         title: 'Brand and visual system',
