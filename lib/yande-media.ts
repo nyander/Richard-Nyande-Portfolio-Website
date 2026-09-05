@@ -1,6 +1,7 @@
 import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
 import {
   YANDE_GADGETS_SLUG,
+  YANDE_GADGETS_STUDY,
   YANDE_WALKTHROUGH_URL,
 } from '@/lib/yande-gadgets'
 
@@ -173,11 +174,12 @@ export function applyYandeLocalMedia(study: CaseStudyPage): CaseStudyPage {
     return study
   }
 
+  const source = YANDE_GADGETS_STUDY
   const heroImages = (study.heroImages ?? []).filter(hasVisual)
-  const productModules = study.productModules
+  const productModules = source.productModules
     ? {
-        ...study.productModules,
-        items: study.productModules.items?.map((item) => {
+        ...source.productModules,
+        items: source.productModules.items?.map((item) => {
           const key = moduleKey(item.title)
           const screenshot = MODULE_SCREENSHOTS[key]
           const after = MODULE_AFTER[key]
@@ -198,10 +200,10 @@ export function applyYandeLocalMedia(study: CaseStudyPage): CaseStudyPage {
       }
     : study.productModules
 
-  const deepDives = study.deepDives
+  const deepDives = source.deepDives
     ? {
-        ...study.deepDives,
-        items: study.deepDives.items?.map((item) => {
+        ...source.deepDives,
+        items: source.deepDives.items?.map((item) => {
           const match = DEEP_DIVE_AFTER[item.title.trim().toLowerCase()]
           if (!match) {
             return item
@@ -220,19 +222,19 @@ export function applyYandeLocalMedia(study: CaseStudyPage): CaseStudyPage {
     : study.deepDives
 
   return {
-    ...study,
+    ...source,
     heroImages: heroImages.length > 0 ? heroImages : YANDE_HERO,
     productModules,
     deepDives,
-    designToCode: study.designToCode
+    designToCode: source.designToCode
       ? {
-          ...study.designToCode,
+          ...source.designToCode,
           shippedImage: preferExisting(
-            study.designToCode.shippedImage,
+            study.designToCode?.shippedImage,
             YANDE_HERO[0]
           ),
         }
-      : study.designToCode,
+      : source.designToCode,
     ogImage: preferExisting(study.ogImage, YANDE_HERO[0]),
     liveUrl: study.liveUrl || YANDE_WALKTHROUGH_URL,
     liveNote: study.liveNote || 'Archived student build. Walkthrough on YouTube.',

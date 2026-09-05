@@ -136,11 +136,12 @@ export function applyCoocLocalMedia(study: CaseStudyPage): CaseStudyPage {
     return study
   }
 
+  const source = COOC_STUDY
   const heroImages = (study.heroImages ?? []).filter(hasVisual)
-  const productModules = study.productModules
+  const productModules = source.productModules
     ? {
-        ...study.productModules,
-        items: study.productModules.items?.map((item) => {
+        ...source.productModules,
+        items: source.productModules.items?.map((item) => {
           const key = moduleKey(item.title)
           const screenshot = MODULE_SCREENSHOTS[key]
           const after = MODULE_AFTER[key]
@@ -161,10 +162,10 @@ export function applyCoocLocalMedia(study: CaseStudyPage): CaseStudyPage {
       }
     : study.productModules
 
-  const deepDives = study.deepDives
+  const deepDives = source.deepDives
     ? {
-        ...study.deepDives,
-        items: study.deepDives.items?.map((item) => {
+        ...source.deepDives,
+        items: source.deepDives.items?.map((item) => {
           const match = DEEP_DIVE_AFTER[item.title.trim().toLowerCase()]
           if (!match) {
             return item
@@ -183,25 +184,20 @@ export function applyCoocLocalMedia(study: CaseStudyPage): CaseStudyPage {
     : study.deepDives
 
   return {
-    ...study,
+    ...source,
     heroImages: heroImages.length > 0 ? heroImages : COOC_HERO,
     productModules,
     deepDives,
-    designToCode: study.designToCode
+    designToCode: source.designToCode
       ? {
-          ...study.designToCode,
-          figmaImage: preferExisting(study.designToCode.figmaImage, COOC_DRAFTS),
-          shippedImage: preferExisting(study.designToCode.shippedImage, COOC_COVER),
+          ...source.designToCode,
+          figmaImage: preferExisting(study.designToCode?.figmaImage, COOC_DRAFTS),
+          shippedImage: preferExisting(study.designToCode?.shippedImage, COOC_COVER),
         }
-      : study.designToCode,
+      : source.designToCode,
     ogImage: preferExisting(study.ogImage, COOC_COVER),
     liveUrl: study.liveUrl || COOC_LIVE_URL,
-    outcomeStatus: COOC_STUDY.outcomeStatus
-      ? {
-          ...study.outcomeStatus,
-          ...COOC_STUDY.outcomeStatus,
-        }
-      : study.outcomeStatus,
+    outcomeStatus: source.outcomeStatus,
   }
 }
 

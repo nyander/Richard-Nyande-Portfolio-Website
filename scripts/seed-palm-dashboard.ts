@@ -100,7 +100,7 @@ const doc = {
     'A multi-tenant PR workspace bringing campaign planning, coverage tracking and performance reporting into one place. Product design and full-stack build for Palm PR.',
   reframing: {
     _type: 'reframing',
-    eyebrow: 'Going beyond reporting',
+    eyebrow: 'Under the reporting request',
     heading: 'Connecting the work behind PR performance.',
     intro:
       'Palm started as a request to improve reporting. What we found underneath it was a bigger operational problem.',
@@ -116,7 +116,7 @@ const doc = {
   },
   productModules: {
     _type: 'productModulesSection',
-    eyebrow: 'Mapping the reality.',
+    eyebrow: 'The PR workflow.',
     heading: 'The work happened everywhere.',
     items: [
       {
@@ -389,9 +389,9 @@ const doc = {
   designToCode: {
     _type: 'designToCode',
     eyebrow: '05 / Design to code',
-    heading: 'Where building protected the design',
+    heading: 'Testing decisions against the live workflow',
     framing: blocks(
-      'Owning both design and implementation meant interaction decisions could be tested against the behaviour of the real system rather than being separated by a handoff.'
+      'Owning both design and implementation meant interaction decisions could be tested against the behaviour of the real system as they were made.'
     ),
     decisions: [
       decision(

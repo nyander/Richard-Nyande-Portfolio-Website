@@ -47,7 +47,7 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
     heading:
       'The design challenge was deciding what to preserve, what to replace, and how three audiences could share one system.',
     intro:
-      'Recruitment consultants were running healthcare workflows through an office system shaped around older logistics processes. I designed a new interface on top of the existing backend, creating a clearer consultant experience while establishing a foundation that public applications and future candidate self-service could share. Where the backend represented real operational states, I preserved that model rather than designing an interface the system could not truthfully support.',
+      'Recruitment consultants were running healthcare workflows through an office system shaped around older logistics processes. I designed a new interface on top of the existing backend, creating a clearer consultant experience while establishing a foundation that public applications and future candidate self-service could share. Where the backend already represented real operational states, I kept that model in the new interface.',
     initialProposal: blocks(
       'Host a new front on WordPress, follow an existing layout, and spend the first 2.5 months mostly on look and feel, with some front-end behaviour added on top of the current system.'
     ),
@@ -59,7 +59,7 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
     ),
   },
   productModules: {
-    eyebrow: 'Mapping the reality.',
+    eyebrow: 'The office product.',
     heading: 'The office product, then the surfaces that still had to join it.',
     intro:
       'Built at Greyzip with Fungai Motezu on the RecruitWare APIs, July to September 2024. The live product is the office CRM and public registration into that system. Candidate self-service was in the brief and is out of scope here.',
@@ -319,9 +319,9 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
   },
   designToCode: {
     eyebrow: '05 / Design to code',
-    heading: 'Where building protected the design',
+    heading: 'Working against the system that already existed',
     framing: blocks(
-      'Owning both the interface and its implementation meant consultant workflows could be tested against the behaviour of the real RecruitWare system as they were designed, rather than assuming the backend could support an idealised interface. The existing shell taught the data model: cookie session, Notes views, settings-driven columns, a menu string.'
+      'Owning both the interface and its implementation meant consultant workflows could be tested against the behaviour of the real RecruitWare system as they were designed. The existing shell taught the data model: cookie session, Notes views, settings-driven columns, a menu string.'
     ),
     decisions: [
       decision(

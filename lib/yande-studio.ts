@@ -47,10 +47,10 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
     'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk.',
   ogImage: null,
   reframing: {
-    eyebrow: 'Beyond a studio brochure',
-    heading: 'The work was building the studio’s own platform, not another portfolio page.',
+    eyebrow: 'The studio as a place',
+    heading: 'yande.uk had to hold the studio itself.',
     intro:
-      'Yande is the studio. yande.uk is what has to hold it: a 3D studio you can walk, pages you can read, and a CMS Richard publishes into. This is not Yande Gadgets, and it is not this personal site.',
+      'Yande is the studio. yande.uk is what has to hold it: a 3D studio you can walk, pages you can read, and a CMS Richard publishes into. Yande Gadgets is the 2020 Accra shop app. This site is the personal work list.',
     initialProposal: blocks(
       'Treat yande.uk as a marketing site or a copy of the personal work list — Webflow-like pages, Instagram as the archive, the 3D studio as decoration.'
     ),
@@ -62,7 +62,7 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
     ),
   },
   productModules: {
-    eyebrow: 'Mapping the reality.',
+    eyebrow: 'Surfaces.',
     heading: 'Seven surfaces of one platform, one of them facing the street.',
     intro:
       'The enter screen is what an unauthenticated visitor gets today. Behind it: the 3D studio, About, Practice, Library, Rotation, and Contact plus the CMS Richard uses. Shop, drops and membership are not modules here because they are not built.',
@@ -139,7 +139,7 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
         title: 'Practice',
         shortLabel: 'Practice',
         teaser:
-          'Show the studio’s work as Practice, not a freelance role list. Filters are work types, not job titles.',
+          'Show the studio’s work as Practice. Filters are the kinds of work the studio makes.',
         status: 'shipped',
         problem: blocks(
           'The personal portfolio was the only public work record. Job-title filters read as freelance, not as a studio.'
@@ -224,9 +224,9 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
   },
   deepDives: {
     eyebrow: '04 / Deep dives',
-    heading: 'Three problems that were not a prettier homepage',
+    heading: 'Identity, the phone, and an honest door',
     intro:
-      'The easy misread is a personal Three.js site. The work was identity (studio vs Gadgets vs this portfolio), making the 3D home survive a phone, and locking the door honestly while furniture and project pages were still being written.',
+      'Three questions sat under the public URL: how the studio stays distinct from Gadgets and this portfolio, how the 3D home survives a phone, and how to keep the door honest while furniture and project pages were still being written.',
     items: [
       {
         title: 'One studio, three names, no second site to duplicate',
@@ -240,8 +240,8 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
           'No member or paywall theatre in this phase.\nClient work remains the studio’s business.\nDo not merge Gadgets screens or copy.\nDo not point this case study’s live URL at the portfolio.',
         decisions: [
           decision(
-            'Practice IA is studio work types, not job titles',
-            'Filters describe what the studio makes. They are not a freelance role list.'
+            'Practice filters describe what the studio makes',
+            'The IA is studio work types, so the page reads as a studio rather than a personal CV.'
           ),
           decision(
             'Scene and editorial content live in Sanity',
@@ -353,7 +353,7 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
   },
   outcomeStatus: {
     eyebrow: '06 / Outcome and status',
-    heading: 'Where the product stood',
+    heading: 'What is live',
     statusSummary:
       'yande.uk is live and gated. Richard is the sole designer and developer. The 3D studio and publishing routes exist behind the enter screen. Interior furniture and some Practice copy are still in progress. Membership and commerce are not started.',
     whatsNext:

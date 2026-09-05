@@ -36,7 +36,7 @@ const PALM_WHATS_NEXT =
   "The next step identified was an LLM to compare incoming articles against a client's keywords and KPI criteria. I left before that work started, and there is no developer on the product now."
 
 const PALM_DESIGN_TO_CODE_FRAMING =
-  'Owning both design and implementation meant interaction decisions could be tested against the behaviour of the real system rather than being separated by a handoff.'
+  'Owning both design and implementation meant interaction decisions could be tested against the behaviour of the real system as they were made.'
 
 export const PALM_CARD: CaseStudyCard = {
   _id: 'caseStudy-palm-dashboard',
@@ -240,6 +240,7 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
   const productModules = study.productModules
     ? {
         ...study.productModules,
+        eyebrow: 'The PR workflow.',
         items: study.productModules.items?.map((item) => {
           const key = moduleKey(item.title)
           const screenshot = MODULE_SCREENSHOTS[key]
@@ -315,9 +316,16 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
     outcomeStatus,
     productModules,
     deepDives,
+    reframing: study.reframing
+      ? {
+          ...study.reframing,
+          eyebrow: 'Under the reporting request',
+        }
+      : study.reframing,
     designToCode: study.designToCode
       ? {
           ...study.designToCode,
+          heading: 'Testing decisions against the live workflow',
           framing: blocks(PALM_DESIGN_TO_CODE_FRAMING),
           shippedImage: preferExisting(
             study.designToCode.shippedImage,

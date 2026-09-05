@@ -120,6 +120,13 @@ export function CaseStudyOutcome({ section, modules }: CaseStudyOutcomeProps) {
         </div>
       </Reveal>
 
+      {section.lookingBack ? (
+        <Reveal className="outcome-looking-back">
+          <h3>{section.lookingBackHeading ?? 'Looking back'}</h3>
+          <p>{section.lookingBack}</p>
+        </Reveal>
+      ) : null}
+
       <Reveal className="outcome-reflection">
         <h3>Reflection</h3>
         {section.reflection?.length ? (

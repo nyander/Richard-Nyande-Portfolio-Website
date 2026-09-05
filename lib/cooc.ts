@@ -42,9 +42,9 @@ export const COOC_STUDY: CaseStudyPage = {
   ogImage: null,
   liveUrl: COOC_LIVE_URL,
   reframing: {
-    eyebrow: 'Beyond a brand landing page',
+    eyebrow: 'When the brief changed',
     heading:
-      'The work was a membership operation that had to ship on WordPress — not a custom club app.',
+      'The brand site had to become a membership operation in weeks.',
     intro:
       'Cooc is a private members club in Central London, under The Mandrake. The first brief was a brand site. Weeks after that site went live, the club needed people to apply, be approved, pay, and carry a pass on their phone.',
     initialProposal: blocks(
@@ -54,11 +54,11 @@ export const COOC_STUDY: CaseStudyPage = {
       'In February 2025 the request changed. They needed registration, payment collection and digital Apple and Android Wallet passes for door access, without waiting on a native app. A custom membership product — the kind of thing a house like Soho House runs as its own app — would have been the longer fit. The timeline did not allow it. WordPress, with plugins that already knew members, billing and passes, was the path that could ship in weeks.'
     ),
     productResponse: blocks(
-      'I designed the membership journey in Figma — options, application, approval, email, wallet pass — and the pass itself. Beth Lucas was the front-end developer. I built the WordPress membership wiring: a Divi registration form into MemberPress, New User Approve holding applications, MemberPress plans and recurring billing, Passcreator for the wallet pass, Zapier for the welcome mail and admin notice. WordPress was a constraint I designed inside, not a template I decorated.'
+      'I designed the membership journey in Figma — options, application, approval, email, wallet pass — and the pass itself. Beth Lucas was the front-end developer. I built the WordPress membership wiring: a Divi registration form into MemberPress, New User Approve holding applications, MemberPress plans and recurring billing, Passcreator for the wallet pass, Zapier for the welcome mail and admin notice. I designed that journey inside the WordPress constraint the timeline required.'
     ),
   },
   productModules: {
-    eyebrow: 'Mapping the reality.',
+    eyebrow: 'The membership loop.',
     heading: 'A club site, then the membership loop that had to hang off it.',
     intro:
       'Built at Greyzip. Brand site through December 2024. Membership platform requested February 2025 and live March 2025. Screens here are the Figma work, the journey wireframe, the comparison that decided the stack, and the pass I designed. Mario Brown on the card is test data.',
@@ -199,7 +199,7 @@ export const COOC_STUDY: CaseStudyPage = {
   },
   deepDives: {
     eyebrow: '04 / Deep dives',
-    heading: 'Three problems that were not a prettier theme',
+    heading: 'What the March deadline forced us to decide',
     intro:
       'The brief looked like WordPress. The work that mattered was the pivot, the stack choice, and a join path that ended in a pass people could hold.',
     items: [
@@ -210,7 +210,7 @@ export const COOC_STUDY: CaseStudyPage = {
           'The original site went live in December 2024 as a brand presence. In February 2025 the club asked for registration, payment and Apple Wallet passes. A native app or an ERP-style dashboard would have been the scale answer. They needed something that could be live in March.'
         ),
         contribution:
-          'I already had the UX, branding and graphic design from July, and the site in WordPress from August. The February work was a front-end redesign plus MemberPress, Zapier and Passcreator — joining tools the CMS could already run, on a journey I had drawn, rather than starting a new app.',
+          'I already had the UX, branding and graphic design from July, and the site in WordPress from August. The February work was a front-end redesign plus MemberPress, Zapier and Passcreator — joining tools the CMS could already run, on a journey I had drawn.',
         constraints:
           'Original website live December 2024.\nMembership platform requested February 2025 and live March 2025.\nBeth Lucas on front-end development.\nDo not wait on a custom app.\nDoor access had to be a wallet pass, not a new download from an app store.',
         decisions: [
@@ -219,11 +219,11 @@ export const COOC_STUDY: CaseStudyPage = {
             'The brand site was already the public face. Rebuilding it as Laravel would have missed March. MemberPress, New User Approve, Zapier and Passcreator sat on the stack that was already live.'
           ),
           decision(
-            'Design the pass, do not accept the default',
+            'Design the pass',
             'Passcreator issues the file. The layout — mark, member type, identity, QR, ID — is the Figma card. Test member on the still is Mario Brown.'
           ),
           decision(
-            'Treat approval as operations, not a thank-you page',
+            'Treat approval as operations',
             'New User Approve holds the application. Zapier tells admins. Billing starts after the yes.'
           ),
         ],
@@ -238,7 +238,7 @@ export const COOC_STUDY: CaseStudyPage = {
           'A custom app would have given control over UX, workflows, scale and APIs. WordPress is limited to what plugins allow, can bloat, and makes SevenRooms and CRM joins harder. The February brief still had to launch.'
         ),
         contribution:
-          'I wrote the comparison as a design artefact, not a blog aside: flexibility, UX, scalability, performance, speed of development, cost now and later, admin, security. WordPress won on speed, CMS and upfront cost. The custom app won on almost everything the club would want next. We shipped WordPress anyway, with those losses listed.',
+          'I wrote the comparison as a design artefact: flexibility, UX, scalability, performance, speed of development, cost now and later, admin, security. WordPress won on speed, CMS and upfront cost. The custom app won on almost everything the club would want next. We shipped WordPress, with those losses listed.',
         constraints:
           'Launch window was weeks, not a product cycle.\nWordPress and Divi were already the live site.\nA custom app was the longer ambition, not this sprint.\nDo not pretend plugins are an API layer.',
         decisions: [
@@ -251,8 +251,8 @@ export const COOC_STUDY: CaseStudyPage = {
             'Pages, media and forms were already in WordPress. MemberPress sits in that admin. A custom CMS would have been another product to train.'
           ),
           decision(
-            'Do not call this the lifestyle app',
-            'No event attendance, no in-platform messaging, no member behaviour history, no direct SevenRooms API. Those belong to a later custom app, not this case study’s shipped list.'
+            'Keep this release to the join path',
+            'Event attendance, in-platform messaging, member behaviour history and a direct SevenRooms API stay for a later custom app.'
           ),
         ],
         outcome: blocks(
@@ -293,7 +293,7 @@ export const COOC_STUDY: CaseStudyPage = {
     eyebrow: '05 / Design to code',
     heading: 'Where the design had to survive the plugins',
     framing: blocks(
-      'Figma held the brand, the pages and the pass. WordPress, Divi and MemberPress were how those frames became a live club site. Zapier and Passcreator were how approval became a mail and a wallet file. I designed the system and wired it; Beth Lucas built front-end. The stack is the one that could ship in March, not the one I would choose for a club app.'
+      'Figma held the brand, the pages and the pass. WordPress, Divi and MemberPress were how those frames became a live club site. Zapier and Passcreator were how approval became a mail and a wallet file. I designed the system and wired it; Beth Lucas built front-end. The stack is the one that could ship in March.'
     ),
     decisions: [
       decision(

@@ -127,6 +127,8 @@ export type OutcomeStatus = SectionChrome & {
   quotes?: AttributedQuote[] | null
   evidence?: string[] | null
   evidenceBoundary?: string
+  lookingBackHeading?: string
+  lookingBack?: string
   reflection?: RestrictedPortableText
 }
 

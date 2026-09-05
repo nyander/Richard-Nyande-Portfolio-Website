@@ -3,14 +3,16 @@ import type { CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
 
 export const SESAHUB_SLUG = 'sesahub'
 
+const SESAHUB_SUMMARY =
+  'For growing Ghanaian businesses becoming too complex to run from separate tools: one workspace to manage staff, review finance, control stock, handle orders and decide who can see what.'
+
 export const SESAHUB_CARD: CaseStudyCard = {
   _id: 'caseStudy-sesahub',
   title: 'SesaHub',
   slug: SESAHUB_SLUG,
   role: 'Product Designer, Full Stack Developer',
   year: 2025,
-  summary:
-    'An internal multi-tenant ERP — companies, sites, people, stock and a general ledger in one Laravel and React app, scoped so one company cannot see another.',
+  summary: SESAHUB_SUMMARY,
   status: 'shipped',
   heroImage: null,
 }
@@ -21,75 +23,74 @@ export const SESAHUB_STUDY: CaseStudyPage = {
   slug: SESAHUB_SLUG,
   role: 'Product Designer, Full Stack Developer',
   year: 2025,
-  summary:
-    'An internal multi-tenant ERP — companies, sites, people, stock and a general ledger in one Laravel and React app, scoped so one company cannot see another.',
+  summary: SESAHUB_SUMMARY,
   status: 'shipped',
   contextFacts: [
     fact('Client', 'Nyande ERP Solutions (internal)'),
-    fact('Type', 'Multi-tenant ERP'),
+    fact('Type', 'Internal operations workspace'),
     fact('Stack', 'Laravel 11, React, TypeScript, Inertia.js, Tailwind, PostgreSQL'),
     fact('Team', 'Dominic Nyande, business analyst; Amy Nyande, data analyst'),
   ],
   heroImages: [],
   seoTitle: 'SesaHub — Product Design & Build Case Study | Richard Nyande',
   seoDescription:
-    'Internal product, 2024–25. A Laravel and React ERP for multi-company operations: sites, employees, inventory, currency and core financials, deployed on Render.',
+    'Internal product, 2024–25. For growing companies in Ghana: one workspace to manage staff, review finance, control stock, handle orders and decide who can see what.',
   ogImage: null,
   reframing: {
-    eyebrow: 'Beyond another imported ERP',
+    eyebrow: 'A product proposition',
     heading:
-      'The work was one login across companies, sites and books — not a Western suite with the extra modules left on.',
+      'A growing company still has to manage staff, review finance, control stock, handle orders and set policies — and those jobs do not always live in one place.',
     intro:
-      'SesaHub is Nyande ERP Solutions, an internal family product. There is no external client. TechCorp Solutions Ltd in the general ledger shot is seeded test data, not a customer.',
+      'The target was growing businesses in Ghana moving from owner-led operations into something that needed more structure. SesaHub asked whether those jobs could live in one workspace, with access shaped by the person’s role and organisation. I defined that product model, designed the screens, and built the system. There was a wider ambition that the product could later be relevant in other African markets. We did not research that region, and this page does not treat that ambition as a finding. There is no external client. TechCorp Solutions Ltd in the screenshots is seeded test data, not a customer.',
     initialProposal: blocks(
-      'Buy or rent an existing ERP and live with modules written for a different market, or keep companies, stock, people and books in separate tools.'
+      'The product started from a hypothesis: growing businesses could benefit from managing more of their operation in one place. Reviewing finance, managing staff, setting policies, controlling stock, handling orders and reporting were treated as related jobs. The question was whether they could sit in one workspace, with access changing by the person’s role and organisation, rather than requiring a separate tool for each job.'
     ),
     discovery: blocks(
-      'Multi-company isolation had to be the permission model, not a filter on a shared table. Sites needed codes. Employees belonged to sites. Stock was per site. Currency had to convert inside the same app. The older public write-up listed a purchase-order pipeline — request, approval, shipment, receipt — that is not a finished workflow. Core financials were missing from that write-up and are in the running build: chart of accounts, journals, trial balance, fiscal calendar.'
+      'Ghana was the starting context. The work was an internal family product for Nyande ERP Solutions. Dominic Nyande was the business analyst: he helped define business requirements, discuss what each module needed to support, and challenge how the product should work from an operational perspective. There are no formal research reports or user-interview outputs from that work. Amy Nyande worked from the data side: she helped think through the information the system needed to hold and what a business would need to understand from it. That was not external user research. I do not have a formal competitor study from the original project.'
     ),
     productResponse: blocks(
-      'Laravel 11 with React, TypeScript and Inertia. Company-scoped RBAC and policies. Services for company, site, employee, customer, supplier, product and currency. Docker on Render with PostgreSQL. I designed and built the screens. Dominic Nyande was the business analyst; Amy Nyande was the data analyst.'
+      'I designed the product around those jobs: control who can see what, manage staff, keep customer and supplier records, control stock, review finance, and handle orders — with the purchase-order path left unfinished. Owners and managers needed the overall picture; finance needed transactions and records; HR and operations needed people and organisational information; employees needed only the parts relevant to their work. Company isolation, roles and the ledger are how that product idea becomes a system. Implementation is in Design to code.'
     ),
   },
   productModules: {
-    eyebrow: 'Mapping the reality.',
-    heading: 'Enterprise records first, then the books that have to match them.',
+    eyebrow: 'The jobs.',
+    heading: 'The jobs a growing company has to do, designed so they can live together.',
     intro:
-      'Built December 2024 to October 2025. Companies, sites, people, customers, suppliers, parts and currency, then core financials. The purchase-order request-to-receipt path was described on an older page; it is not shipped here. Screens are from the running app on seeded test data. There is no companies-list still yet — that module will not borrow another screen.',
+      'Built December 2024 to October 2025. The target was businesses moving from owner-led operations into something that needs structure: manage staff, review finance, control stock, handle orders, and decide who can see what. Screens are from the running app on seeded test data. Purchase-order request-to-receipt is not shipped. Company policies and recruitment were part of the original idea; they are not presented here as finished modules.',
     items: [
       {
-        title: 'Multi-company',
-        shortLabel: 'Companies',
+        title: 'Companies',
+        shortLabel: 'Access',
         teaser:
-          'Each company is its own environment. Consultants can hold roles across companies; data does not leak between them.',
+          'Control access by organisation: each company is its own workspace, so staff do not see another business’s records.',
         status: 'shipped',
         problem: blocks(
-          'A family product for more than one company cannot share a single admin table and hope a dropdown is enough. Permissions, currency and the books have to start from the company, or isolation is theatre.'
+          'SesaHub was intended to serve many independent businesses from one product. If companies share a single set of records, isolation is only a dropdown. Permissions, currency and the books have to start from the organisation.'
         ),
         solution: blocks(
-          'A company record with company-scoped RBAC and policies. Creating a company initialises its financial system rather than leaving the ledger as a later bolt-on.'
+          'A company record is the workspace. Creating a company also starts its financial setup, so the books belong to that organisation from the beginning rather than arriving as a later add-on.'
         ),
         before: [
           'Separate tools per company, or one database everyone can see',
-          'Permissions as a UI filter',
+          'Access treated as a filter on a shared list',
         ],
         after: [
-          'Company-scoped policies',
-          'Cross-company roles for consultants without shared rows',
-          'Financials initialised with the company',
+          'Each organisation as its own workspace',
+          'Roles that can cross companies without mixing records',
+          'Financial setup started with the company',
         ],
       },
       {
         title: 'Sites',
         shortLabel: 'Sites',
         teaser:
-          'Locations under a company, with codes generated by the service instead of typed by hand.',
+          'Locations under a company, so people and stock have a place to belong rather than floating on the organisation as a whole.',
         status: 'shipped',
         problem: blocks(
-          'Stock, people and fulfilment are per site. If a site is only a name on a company, inventory and employees have nothing reliable to join to.'
+          'A growing company may run more than one location. Stock, people and fulfilment are per site. If a site is only a name on the company, inventory and employees have nothing reliable to join to.'
         ),
         solution: blocks(
-          'A sites resource on the company. SiteService issues the code. Employees and part inventory hang off that record.'
+          'Sites sit under the company. Each site gets a generated code. Employees and inventory attach to that record.'
         ),
         before: [
           'Location as a note on the company',
@@ -97,43 +98,43 @@ export const SESAHUB_STUDY: CaseStudyPage = {
         ],
         after: [
           'Site list under the company',
-          'Auto-generated codes',
+          'Generated codes',
           'Employees and inventory join to the site',
         ],
       },
       {
         title: 'Employees',
-        shortLabel: 'HR',
+        shortLabel: 'Staff',
         teaser:
-          'People belong to a site. IDs are generated. Status and department sit on the same record as the login.',
+          'Manage staff against a site and a company, with a role that decides what they can see and do.',
         status: 'shipped',
         problem: blocks(
-          'HR sitting in a spreadsheet next to the ERP means site assignment, access and the employee record drift apart.'
+          'A business owner, a finance person, an HR or admin employee and general staff should not have the same access. If people live in a spreadsheet beside the product, assignment, login and responsibility drift apart.'
         ),
         solution: blocks(
-          'An employees resource with site assignment, generated IDs, department and status, tied into the same user and RBAC model as the rest of the app.'
+          'An employee record with site assignment, generated IDs, department and status, tied into the same login and permission model as the rest of the product.'
         ),
         before: [
           'Staff lists off-system',
-          'No join from a person to a site',
+          'No join from a person to a site or a role',
         ],
         after: [
-          'Employee IDs issued by the service',
-          'Site assignment on the record',
+          'People on the same product as the work',
+          'Site and company on the record',
           'Login and role on the same person',
         ],
       },
       {
         title: 'Customers and suppliers',
-        shortLabel: 'Parties',
+        shortLabel: 'Customers',
         teaser:
-          'Customer records with addresses and orders, and supplier records, so procurement is not only a name in a cell.',
+          'Keep customer and supplier records so orders and purchasing have someone to attach to.',
         status: 'shipped',
         problem: blocks(
-          'Inventory and books need counterparties. Without customer and supplier records, orders and purchases have nowhere to attach.'
+          'Stock and money need counterparties. Without customer and supplier records, orders and purchases have nowhere to live.'
         ),
         solution: blocks(
-          'Customers with addresses and customer orders. Suppliers as their own resource. That is the party layer. It is not a finished purchase-order workflow.'
+          'Customers with addresses and customer orders, and suppliers as their own records. That is the party layer. It is not a finished purchase-order workflow.'
         ),
         before: [
           'Counterparties in a sheet or in someone’s head',
@@ -148,13 +149,13 @@ export const SESAHUB_STUDY: CaseStudyPage = {
         title: 'Products and inventory',
         shortLabel: 'Stock',
         teaser:
-          'Parts and categories, with inventory per site — SKU and barcode on the item, levels on the site.',
+          'Control stock per site — identity on the item, levels on the location.',
         status: 'shipped',
         problem: blocks(
-          'A quantity on the company hides which site can fulfil. Categories and identifiers have to survive more than one location.'
+          'A single quantity on the company hides which site can fulfil an order. Categories and identifiers have to survive more than one location.'
         ),
         solution: blocks(
-          'Parts, product categories and part inventory. Stock levels live on the site. SKU and barcode sit on the part.'
+          'Parts, product categories and inventory. Stock levels live on the site. SKU and barcode sit on the part.'
         ),
         before: [
           'One stock number for the whole company',
@@ -168,37 +169,37 @@ export const SESAHUB_STUDY: CaseStudyPage = {
       },
       {
         title: 'Currency',
-        shortLabel: 'FX',
+        shortLabel: 'Currency',
         teaser:
-          'Rates in the app, with convert and update-rates endpoints, so a company is not stuck in one currency.',
+          'Rates inside the product, so a company is not stuck pricing and booking in a single assumed currency.',
         status: 'shipped',
         problem: blocks(
-          'Multi-company work across Ghana and other markets cannot price and book in a single hard-coded currency.'
+          'A growing business may need to work in more than one currency. Looking rates up beside the system makes the books and the stock disagree.'
         ),
         solution: blocks(
-          'A currencies resource plus convert and update-rates. Overrides stay available per company and transaction rather than only as a global default.'
+          'Currency records in the same workspace, with conversion available on the company and on a transaction rather than only as a global default.'
         ),
         before: [
           'One currency assumed for every company',
           'Rates looked up off-system',
         ],
         after: [
-          'Currency records in the app',
-          'Conversion and rate-update endpoints',
+          'Currency records in the product',
+          'Conversion available in the same workspace',
           'Company and transaction overrides',
         ],
       },
       {
         title: 'Core financials',
-        shortLabel: 'Ledger',
+        shortLabel: 'Finance',
         teaser:
-          'Chart of accounts, general ledger, journal entries, trial balance and fiscal calendar — in the same app as stock and people.',
+          'Review finance from proper records — accounts, journals and a ledger — in the same product as staff and stock.',
         status: 'shipped',
         problem: blocks(
-          'If the books live in another product, the ERP is a set of lists. Journal entries and a fiscal calendar have to belong to the company that owns the stock.'
+          'The finance module was trying to support proper financial records for the kind of growing business SesaHub was aimed at. Totals on a dashboard are not enough if there is no underlying record of transactions, and the books have to belong to the same organisation as the people and the stock.'
         ),
         solution: blocks(
-          'Core financials as a first-class route group: accounts, ledger, journals, trial balance, account analysis, fiscal calendar. Double-entry in the same tenant as the enterprise records. The screenshot is the TechCorp test company with zeroed balances.'
+          'Accounts, ledger, journal entries, trial balance, account analysis and a fiscal calendar as a first-class part of the product. The screenshot is the TechCorp test company with zeroed balances.'
         ),
         before: [
           'Books in a separate tool, or not at all',
@@ -212,70 +213,71 @@ export const SESAHUB_STUDY: CaseStudyPage = {
       },
       {
         title: 'Purchase orders',
-        shortLabel: 'POs',
+        shortLabel: 'Orders',
+        outcomeLabel: 'Handle orders',
         teaser:
-          'Described on an older page as request through receipt. Suppliers and customer orders exist; that pipeline does not.',
+          'Handling orders was part of the original picture. Suppliers and customer orders exist; request-through-receipt does not.',
         status: 'in-progress',
         problem: blocks(
-          'The public write-up listed an end-to-end purchase workflow. Shipping that copy as a finished module would have been a gallery of empty laptop frames.'
+          'Orders were part of the original operational picture. The public write-up listed an end-to-end purchase workflow. Shipping that copy as a finished module would have presented work the product does not do yet.'
         ),
         solution: blocks(
           'Supplier records and customer orders are in the build. The request → approval → purchase → shipment → receipt path is not. It stays marked in progress.'
         ),
         before: [
-          'A written PO pipeline with no screen to show',
+          'A written purchase pipeline with no screen to show',
         ],
         after: [
           'Supplier and order foundations in place',
-          'PO workflow not presented as shipped',
+          'Purchase-order workflow not presented as shipped',
         ],
       },
     ],
   },
   deepDives: {
     eyebrow: '04 / Deep dives',
-    heading: 'Three problems that were not a dashboard skin',
+    heading: 'Product questions the system had to answer',
     intro:
-      'The older page talked about African enterprises and empty MacBooks. The work that mattered was company-scoped access, a ledger in the same app, and not publishing a purchase-order story the routes do not support.',
+      'Company isolation, roles and the ledger are how one workspace can control access, manage staff, review finance and keep stock without mixing organisations.',
     items: [
       {
-        title: 'From a shared table to company-scoped access',
-        shortLabel: 'Tenancy',
+        title: 'Access follows role and organisation',
+        shortLabel: 'Access',
         problem: blocks(
-          'An ERP for more than one company fails the moment a consultant can see another company’s employees or books. A company dropdown on a global query is not isolation.'
+          'SesaHub was meant to serve many independent businesses from one product. A business owner, a finance person, an HR or admin employee and general staff needed different visibility. A company dropdown on a shared table would mix organisations.'
         ),
         contribution:
-          'I built companies as the tenant. Policies and RBAC are company-scoped. Consultants can hold roles across companies without sharing rows. Creating a company starts its financial system rather than leaving a blank ledger for later.',
+          'I treated the company as the workspace and designed access around the person’s role inside that organisation. Consultants and family users can hold roles across companies without sharing rows. Creating a company starts its financial setup in the same step.',
         constraints:
-          'No external client brief to hide behind — this is an internal product.\nDominic Nyande was the business analyst; Amy Nyande was the data analyst.\nData isolation had to hold for employees, sites, stock and the ledger, not only the company list.',
+          'No external client brief — this is an internal product.\nDominic helped define what the modules needed to support from an operational perspective.\nAmy helped think through the information the system needed to hold.\nIsolation had to hold for employees, sites, stock and the ledger, not only the company list.',
         decisions: [
           decision(
-            'Scope by policy, not by a filter in the UI',
-            'CompanyRBACService and policies sit on the records. A missed where clause should not be the only thing keeping tenants apart.'
+            'Scope access by organisation',
+            'Permissions sit on the records, so a missed filter in the interface cannot mix companies.'
           ),
           decision(
-            'Initialise the books with the company',
-            'A company without a chart of accounts is a list. Financial setup runs when the company is created.'
+            'Start the books with the company',
+            'A company without financial setup is a list of names. The workspace and the records are created together.'
           ),
         ],
         outcome: blocks(
-          'Shipped. Companies, sites, people and the ledger share the same tenant rules.'
+          'Shipped. Companies, sites, people and the ledger share the same organisation rules.'
         ),
       },
       {
-        title: 'From lists to a ledger in the same app',
-        shortLabel: 'Financials',
+        title: 'Keep financial records in the same product',
+        shortLabel: 'Finance',
         problem: blocks(
-          'The first public write-up did not mention core financials. Stock and people without journals still send someone to a spreadsheet or another product for the books.'
+          'If money is only a set of totals, the finance module cannot support the records a growing business needs. If the books live in another product, people and stock still send someone somewhere else to understand the operation.'
         ),
         contribution:
-          'I added chart of accounts, general ledger, journal entries, trial balance and a fiscal calendar as a route group next to enterprise. The general ledger screenshot is that module, on seeded TechCorp data, balances at zero.',
+          'I designed finance as a first-class part of the same workspace: chart of accounts, general ledger, journal entries, trial balance and a fiscal calendar. The general ledger screenshot is that module, on seeded TechCorp data, balances at zero.',
         constraints:
-          'Double-entry has to belong to the same company as the parts and employees.\nThe screenshot is test data and is labelled as such.\nI will not publish named-client outcomes I do not have.',
+          'The books have to belong to the same company as the parts and employees.\nThe screenshot is test data and is labelled as such.\nI will not publish named-client outcomes I do not have.',
         decisions: [
           decision(
-            'Ship the books as a module, not an export',
-            'Trial balance and journals are screens in the app. They are not a CSV out to someone else’s accounting tool.'
+            'Ship journals and a trial balance as screens',
+            'Trial balance and journals live in the product, next to staff and stock.'
           ),
           decision(
             'Show the test company honestly',
@@ -283,22 +285,22 @@ export const SESAHUB_STUDY: CaseStudyPage = {
           ),
         ],
         outcome: blocks(
-          'Shipped in the running build. The hero image is this ledger, not a marketing render.'
+          'Shipped in the running build. The hero image is this ledger, on seeded TechCorp data.'
         ),
       },
       {
-        title: 'From a written PO pipeline to what the routes actually do',
+        title: 'Show the system that exists',
         shortLabel: 'Honesty',
         problem: blocks(
-          'The older case study listed purchase orders and shipments as if they were done, then showed empty MacBook frames and a registration clip from another stack.'
+          'The older case study listed purchase orders and shipments as if they were done, then showed empty laptop frames and a registration clip from another stack. It also described the work as an ERP for enterprises across Africa.'
         ),
         contribution:
-          'I kept suppliers and customer orders in the story because they exist. I marked request-to-receipt as in progress. I did not reuse another project’s UI, and I dropped the MemberPress registration block that had landed on that page by mistake.',
+          'I kept suppliers and customer orders in the story because they exist. I marked request-to-receipt as in progress. I did not reuse another project’s interface, and I dropped the MemberPress registration block that had landed on that page by mistake. The African-market line stays an ambition, not a researched finding.',
         constraints:
-          'Empty laptop mockups are not product screenshots.\nMemberPress, Divi and New User Approve were never this stack.\nA live URL is omitted until there is one to print.',
+          'Empty laptop mockups stay off this page.\nMemberPress, Divi and New User Approve were never this stack.\nA live URL is omitted until there is one to print.',
         decisions: [
           decision(
-            'Do not ship a gallery of blank laptops',
+            'Only show screens that exist',
             'Modules without a still show as image coming soon. Companies and purchase orders have no screenshot yet. Sites, employees, customers, products, currency and the ledger are from the running app, on seed data.'
           ),
           decision(
@@ -314,22 +316,22 @@ export const SESAHUB_STUDY: CaseStudyPage = {
   },
   designToCode: {
     eyebrow: '05 / Design to code',
-    heading: 'Where building protected the design',
+    heading: 'Making the product model run as one system',
     framing: blocks(
-      'The information architecture is the tenant: company, then sites, people, parties, parts and books. Laravel, Inertia and React are how those records stay on one login. TypeScript pages under Enterprise and Core Financials are the screens. Docker on Render is how it shipped.'
+      'Owning both the interface and its implementation meant the module and permission model could be tested against a running multi-company system. Laravel, React, TypeScript and Inertia are how those records stay on one login. Docker on Render is how it shipped.'
     ),
     decisions: [
       decision(
-        'Policies on the company, not a global admin flag',
-        'RBAC and company policies are the isolation. A consultant’s cross-company role is still a role on a company, not a pass to every table.'
+        'Permissions on the company',
+        'A person’s cross-company role is still a role on a company.'
       ),
       decision(
-        'Let services issue the codes',
+        'Let the system issue the codes',
         'Site codes and employee IDs come from the service layer so lists stay joinable when someone forgets a naming convention.'
       ),
       decision(
-        'Keep conversion in the app',
-        'Currency convert and update-rates are endpoints, not a spreadsheet beside the ERP.'
+        'Keep conversion in the product',
+        'Currency conversion and rate updates run in the same workspace as the books.'
       ),
     ],
     stackTags: [
@@ -346,19 +348,29 @@ export const SESAHUB_STUDY: CaseStudyPage = {
   },
   outcomeStatus: {
     eyebrow: '06 / Outcome and status',
-    heading: 'Where the product stood',
+    heading: 'Where the product stands',
     statusSummary:
-      'SesaHub shipped on Render as Nyande ERP Solutions, October 2025, after work that started in December 2024. The running app is seeded with test data. There is no external client and no named quote. The live URL is not on this page until there is one to give. Purchase-order request-to-receipt is not claimed as shipped.',
+      'SesaHub shipped on Render as Nyande ERP Solutions in October 2025, after work that started in December 2024. It is an internal product proposition: a working system for the jobs we believed a growing business would need to coordinate. The running app is seeded with test data. There is no external client and no named quote. The live URL is not on this page until there is one to give.',
+    statusLabels: {
+      concept: 'Out of scope',
+    },
+    whatsNextHeading: 'What I would validate next',
     whatsNext:
-      'Finish the purchase-order workflow. Capture module screenshots from the running app. Add a live link if a shareable URL exists. The mobile app, voice and AI items on the older page are later work, not this release.',
+      'If I were developing this now, I would interview the growing Ghanaian businesses the product was aimed at and test which modules are essential versus unnecessary complexity. I would finish the purchase-order workflow only if that job is confirmed. The mobile, voice and AI items on the older page stay later work. The wider African ambition would remain an intent until it is researched.',
     quotes: [],
     evidence: [
-      'Deployed on Render with Docker, nginx, PHP-FPM and PostgreSQL.',
-      'Company-scoped RBAC across companies, sites, employees, customers, suppliers, products, currencies and core financials.',
-      'General ledger, chart of accounts, journal entries and fiscal calendar are in the running app. The screenshot is TechCorp test data. Purchase-order request-to-receipt is not.',
+      'Shipped: company workspaces, sites, employees, customers and suppliers, products and inventory, currency, and core financial records.',
+      'Observed: a running internal app on Render, on seeded data. There is no public customer deployment on this page.',
+      'Design evidence: modules and access designed around different responsibilities inside an organisation, with finance as records rather than totals only.',
+      'Launch architecture: one product for multiple organisations. Implementation is in Design to code.',
     ],
+    evidenceBoundary:
+      'There was no external client and no Ghanaian SME interview programme. Screens use seeded demo data. I do not claim adoption, revenue or operational impact.',
+    lookingBackHeading: 'Looking back',
+    lookingBack:
+      "Ghana Statistical Service's 2024 Integrated Business Establishment Survey reported that 92.3% of businesses operate informally, with informal status including businesses that do not maintain formal accounts. The same survey found that the overwhelming majority of establishments are micro businesses. That does not validate SesaHub by itself. It gives later context to the opportunity we were exploring: what happens when a growing business begins to need more structured records, responsibilities and operational systems.",
     reflection: blocks(
-      'The honest version of this project is an internal ERP, built in order: tenant, then sites and people, then stock and currency, then the books. I would still start with isolation. I would not publish a purchase-order gallery I cannot show, and I would not describe MemberPress as this stack.'
+      'The honest version of this project is a 0→1 product proposition, not a client transformation. I would still start from the jobs a growing company has to coordinate, and I would still design access around role and organisation. I would validate those jobs with the businesses themselves before expanding the system, and I would not describe an African-market ambition as a finding.'
     ),
   },
 }

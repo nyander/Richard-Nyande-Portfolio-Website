@@ -41,8 +41,8 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
     'Final-year project, 2019–20. A Laravel operations app for a Ghana electronics retailer: stock, shipments, deposits and financial reports in one place.',
   ogImage: null,
   reframing: {
-    eyebrow: 'Beyond a shop website',
-    heading: 'The work was the business process, not the storefront.',
+    eyebrow: 'On the shop floor',
+    heading: 'Buying, shipping and selling still lived in a notebook.',
     intro:
       'Yande Gadgets had been trading since 2011. Growth stalled because buying, shipping, selling and reporting still lived in a notebook.',
     initialProposal: blocks(
@@ -56,7 +56,7 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
     ),
   },
   productModules: {
-    eyebrow: 'Mapping the reality.',
+    eyebrow: 'Around one shop floor.',
     heading: 'Ten iterations around one shop floor.',
     intro:
       'Built through Agile sprints with the owner testing each pass. Adobe XD first, then Bootstrap 4 on Laravel.',
@@ -197,9 +197,9 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
   },
   deepDives: {
     eyebrow: '04 / Design deep-dives',
-    heading: 'Three problems that were not a website',
+    heading: 'What observation changed',
     intro:
-      'The brief looked like ecommerce. The work that mattered was inventory identity, demand without waste, and numbers the owner could trust.',
+      'The brief looked like ecommerce. Watching the shop showed three tighter problems: how a second-hand unit was identified, how a request became a real buy, and which numbers the owner trusted before he ordered more stock.',
     items: [
       {
         title: 'From a notebook line to one physical unit',
@@ -226,7 +226,7 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
           ),
         ],
         outcome: blocks(
-          'Shipped. The catalogue the shop actually used was a list of unique units with shipped, received and sold states — not a warehouse quantity screen.'
+          'Shipped. The catalogue the shop used was a list of unique units with shipped, received and sold states.'
         ),
       },
       {
@@ -250,7 +250,7 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
             'A deposit filters serious demand without turning the shop into a mail-order business the owner did not want.'
           ),
           decision(
-            'Notify people, do not hope they refresh',
+            'Notify people when the unit is found',
             'Admins get a NewRequestedProduct notification. When the unit is acquired, the customer is told. The old process had neither.'
           ),
           decision(
@@ -294,7 +294,7 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
   },
   designToCode: {
     eyebrow: '05 / Design to code',
-    heading: 'Where building protected the design',
+    heading: 'How the shop-floor rules stayed true in code',
     framing: blocks(
       'Adobe XD set the Ghana-flag chrome — yellow bar, green footer, role-coloured dashboards. Laravel MVC, Blade and Bootstrap 4 were how those screens stayed honest once staff, suppliers and a Stripe charge were on the same host.'
     ),
@@ -326,7 +326,7 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
   },
   outcomeStatus: {
     eyebrow: '06 / Outcome and status',
-    heading: 'Where the product stood',
+    heading: 'What the shop was using',
     statusSummary:
       'The 2019–20 final-year build shipped through ten iterations and was tested with the owner, a staff member, a supplier and a customer. Quantity search, receipt photos and colour-coded statement alerts were left as follow-ons.',
     whatsNext:
@@ -343,7 +343,7 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
       'The owner described the generated report as the icing on the cake: buying decisions from statements he no longer had to fill in.',
     ],
     reflection: blocks(
-      'The lesson was to treat the family shop as a real operations problem, not a portfolio storefront. Agile with the owner in the loop meant requests-and-deposits could still land as a priority once interviews proved the old version lost money. If I did it again I would add search and receipt photos before calling the shop-floor loop finished.'
+      'The lesson was to treat the family shop as a real operations problem. Agile with the owner in the loop meant requests-and-deposits could still land as a priority once interviews proved the old version lost money. If I did it again I would add search and receipt photos before calling the shop-floor loop finished.'
     ),
   },
   liveUrl: YANDE_WALKTHROUGH_URL,

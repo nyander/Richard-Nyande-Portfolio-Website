@@ -1,5 +1,5 @@
 import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
-import { SESAHUB_SLUG } from '@/lib/sesahub'
+import { SESAHUB_CARD, SESAHUB_SLUG, SESAHUB_STUDY } from '@/lib/sesahub'
 
 const ROOT = '/images/sesahub'
 
@@ -54,12 +54,12 @@ const MODULE_SCREENSHOTS: Record<string, AltImage> = {
 }
 
 const DEEP_DIVE_AFTER: Record<string, { image: AltImage; caption: string }> = {
-  'from a shared table to company-scoped access': {
+  'access follows role and organisation': {
     image: SESAHUB_HERO[2],
     caption:
       'Employees list. Company is a column on the record — TechCorp and East Africa Trading are seed data, not a shared staff table.',
   },
-  'from lists to a ledger in the same app': {
+  'keep financial records in the same product': {
     image: SESAHUB_HERO[0],
     caption:
       'General ledger. TechCorp Solutions Ltd is seed data, balances at zero — not a named client.',
@@ -83,11 +83,12 @@ export function applySesahubLocalMedia(study: CaseStudyPage): CaseStudyPage {
     return study
   }
 
+  const source = SESAHUB_STUDY
   const heroImages = (study.heroImages ?? []).filter(hasVisual)
-  const productModules = study.productModules
+  const productModules = source.productModules
     ? {
-        ...study.productModules,
-        items: study.productModules.items?.map((item) => {
+        ...source.productModules,
+        items: source.productModules.items?.map((item) => {
           const screenshot = MODULE_SCREENSHOTS[moduleKey(item.title)]
 
           return {
@@ -98,12 +99,12 @@ export function applySesahubLocalMedia(study: CaseStudyPage): CaseStudyPage {
           }
         }),
       }
-    : study.productModules
+    : source.productModules
 
-  const deepDives = study.deepDives
+  const deepDives = source.deepDives
     ? {
-        ...study.deepDives,
-        items: study.deepDives.items?.map((item) => {
+        ...source.deepDives,
+        items: source.deepDives.items?.map((item) => {
           const match = DEEP_DIVE_AFTER[item.title.trim().toLowerCase()]
           if (!match) {
             return item
@@ -119,20 +120,22 @@ export function applySesahubLocalMedia(study: CaseStudyPage): CaseStudyPage {
           }
         }),
       }
-    : study.deepDives
+    : source.deepDives
 
   return {
-    ...study,
+    ...source,
     heroImages: heroImages.length > 0 ? heroImages : SESAHUB_HERO,
     productModules,
     deepDives,
-    designToCode: study.designToCode
+    designToCode: source.designToCode
       ? {
-          ...study.designToCode,
-          shippedImage: preferExisting(study.designToCode.shippedImage, SESAHUB_HERO[0]),
+          ...source.designToCode,
+          shippedImage: preferExisting(study.designToCode?.shippedImage, SESAHUB_HERO[0]),
         }
-      : study.designToCode,
+      : source.designToCode,
     ogImage: preferExisting(study.ogImage, SESAHUB_HERO[0]),
+    liveUrl: study.liveUrl || source.liveUrl,
+    liveNote: study.liveNote || source.liveNote,
   }
 }
 
@@ -143,6 +146,7 @@ export function applySesahubCardMedia(study: CaseStudyCard): CaseStudyCard {
 
   return {
     ...study,
+    summary: SESAHUB_CARD.summary,
     heroImage: hasVisual(study.heroImage) ? study.heroImage : SESAHUB_HERO[0],
   }
 }

@@ -3,6 +3,7 @@ import {
   YANDE_STUDIO_LIVE_NOTE,
   YANDE_STUDIO_LIVE_URL,
   YANDE_STUDIO_SLUG,
+  YANDE_STUDIO_STUDY,
 } from '@/lib/yande-studio'
 
 const ROOT = '/images/yande-studio'
@@ -106,11 +107,12 @@ export function applyYandeStudioLocalMedia(study: CaseStudyPage): CaseStudyPage 
     return study
   }
 
+  const source = YANDE_STUDIO_STUDY
   const heroImages = (study.heroImages ?? []).filter(hasVisual)
-  const productModules = study.productModules
+  const productModules = source.productModules
     ? {
-        ...study.productModules,
-        items: study.productModules.items?.map((item) => {
+        ...source.productModules,
+        items: source.productModules.items?.map((item) => {
           const screenshot = MODULE_SCREENSHOTS[moduleKey(item.title)]
 
           return {
@@ -123,10 +125,10 @@ export function applyYandeStudioLocalMedia(study: CaseStudyPage): CaseStudyPage 
       }
     : study.productModules
 
-  const deepDives = study.deepDives
+  const deepDives = source.deepDives
     ? {
-        ...study.deepDives,
-        items: study.deepDives.items?.map((item) => {
+        ...source.deepDives,
+        items: source.deepDives.items?.map((item) => {
           const match = DEEP_DIVE_AFTER[item.title.trim().toLowerCase()]
           if (!match) {
             return item
@@ -145,16 +147,16 @@ export function applyYandeStudioLocalMedia(study: CaseStudyPage): CaseStudyPage 
     : study.deepDives
 
   return {
-    ...study,
+    ...source,
     heroImages: heroImages.length > 0 ? heroImages : YANDE_STUDIO_HERO,
     productModules,
     deepDives,
-    designToCode: study.designToCode
+    designToCode: source.designToCode
       ? {
-          ...study.designToCode,
-          shippedImage: preferExisting(study.designToCode.shippedImage, GATE),
+          ...source.designToCode,
+          shippedImage: preferExisting(study.designToCode?.shippedImage, GATE),
         }
-      : study.designToCode,
+      : source.designToCode,
     ogImage: preferExisting(study.ogImage, GATE),
     liveUrl: study.liveUrl || YANDE_STUDIO_LIVE_URL,
     liveNote: study.liveNote || YANDE_STUDIO_LIVE_NOTE,
