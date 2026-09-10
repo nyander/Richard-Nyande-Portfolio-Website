@@ -4,14 +4,14 @@ export const NAV_ITEMS = [
     label: 'Work',
     href: '/',
     preview:
-      'Case studies with real depth — the ideas that grew past the sketchbook and into products.',
+      'Selected product design and front-end work, from workflow through to production interfaces.',
   },
   {
     id: 'about',
     label: 'About',
     href: '/about',
     preview:
-      'A product designer and creative technologist working between notes, sketches, and shipped software.',
+      'A product designer and front-end developer working between notes, sketches and shipped software.',
   },
   {
     id: 'cv',
@@ -35,7 +35,6 @@ export const MENU_CONTACT = {
   mailto: 'mailto:rich.nyande@gmail.com',
   place: 'Essex, United Kingdom',
 } as const
-
 export const MENU_SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/richard-nyande-1aa32a133' },
   { label: 'Instagram', href: 'https://www.instagram.com/richxrt_/' },

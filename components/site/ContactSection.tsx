@@ -75,7 +75,7 @@ export function ContactSection({ standalone = false }: ContactSectionProps) {
           <h2 id="contact-heading">Get in touch</h2>
           <p className="section-intro">
             If you have a product to design and build, or a brief that needs someone who can do
-            both — write to me. I read everything that comes through.
+            both, write to me. I read everything that comes through.
           </p>
 
           <form className="home-contact-form" onSubmit={handleSubmit}>
@@ -107,7 +107,7 @@ export function ContactSection({ standalone = false }: ContactSectionProps) {
               {status === 'sending' ? 'Sending' : 'Submit'}
             </button>
             <p className="home-contact-note" role="status" aria-live="polite">
-              {status === 'sent' ? "Sent — I'll write back to the address you left." : null}
+              {status === 'sent' ? "Sent. I'll write back to the address you left." : null}
               {status === 'error' ? (
                 <>
                   {error}{' '}

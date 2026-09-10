@@ -13,7 +13,7 @@ export const YANDE_GADGETS_CARD: CaseStudyCard = {
   role: 'Product Designer, Full Stack Developer',
   year: 2020,
   summary:
-    'A bespoke operations app for a second-hand electronics shop in Accra — replacing notebook stock, shipments and reports with one Laravel workspace.',
+    'A bespoke operations app for a second-hand electronics shop in Accra, replacing notebook stock, shipments and reports with one Laravel workspace.',
   status: 'shipped',
   heroImage: null,
 }
@@ -25,15 +25,27 @@ export const YANDE_GADGETS_STUDY: CaseStudyPage = {
   role: 'Product Designer, Full Stack Developer',
   year: 2020,
   summary:
-    'A bespoke operations app for a second-hand electronics shop in Accra — replacing notebook stock, shipments and reports with one Laravel workspace.',
+    'A bespoke operations app for a second-hand electronics shop in Accra, replacing notebook stock, shipments and reports with one Laravel workspace.',
   status: 'shipped',
   walkthroughUrl: YANDE_WALKTHROUGH_URL,
   walkthroughTitle: 'Yande Gadgets walkthrough',
   contextFacts: [
-    fact('Client', 'Yande Gadgets, Accra'),
-    fact('Type', 'Bespoke operations web app'),
-    fact('Stack', 'Laravel, PHP, MySQL, Bootstrap 4'),
+    fact('For', 'Yande Gadgets, Accra'),
+    fact(
+      'Problem',
+      'Buying, shipping, selling and reporting still lived in a notebook.'
+    ),
+    fact(
+      'Owned',
+      'Product design and Laravel implementation as sole designer and developer.'
+    ),
     fact('Team', 'Sole designer and developer'),
+    fact('Status', 'Shipped student build. Final-year project, 2019 to 2020.'),
+    fact(
+      'Result',
+      'Unique-item stock model, operational rules and reports in one Laravel workspace. Walkthrough on YouTube.'
+    ),
+    fact('Stack', 'Laravel, PHP, MySQL, Bootstrap 4'),
   ],
   heroImages: [],
   seoTitle: 'Yande Gadgets — Product Design & Build Case Study | Richard Nyande',

@@ -5,7 +5,7 @@ import { useControls } from 'leva'
 import { HeroStamp } from '@/components/site/HeroStamp'
 
 const LEDE =
-  'I design and build digital products, systems and interactive experiences, working across product thinking, UX/UI, design systems and creative technology. From discovery and prototyping through to React, TypeScript, Next.js, APIs and production, I work across the full journey from an early idea to something people can actually use.'
+  'I design and build digital products, turning complex workflows into clear, usable experiences. My work spans product thinking, UX/UI and prototyping through to React, TypeScript and production delivery, with a focus on how an experience works as well as how it looks.'
 
 function HeroRail({
   left,
@@ -285,7 +285,7 @@ export function HomeHero() {
                   <span>Product</span>
                   <span>Designer</span>
                 </span>
-                <span className="hero-archive-title">and Creative Technologist</span>
+                <span className="hero-archive-title">and Front-End Developer</span>
               </h1>
             </div>
             <div className="hero-archive-col is-copy">
@@ -301,7 +301,7 @@ export function HomeHero() {
         ) : (
           <div className="hero-copy">
             <div className="hero-title">
-              <h1 id="home-hero-heading">Product Designer and Creative Technologist</h1>
+              <h1 id="home-hero-heading">Product Designer & Front-End Developer</h1>
             </div>
             <div className="hero-lede-block">
               <p className="hero-lede">{LEDE}</p>

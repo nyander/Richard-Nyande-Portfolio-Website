@@ -1,5 +1,6 @@
 import { hasImageAsset } from '@/components/media/MediaSlot'
 import { SanityImage } from '@/components/media/SanityImage'
+import { CaseStudyFactsSlider } from '@/components/work/CaseStudyFactsSlider'
 import { TodoPlaceholder } from '@/components/work/TodoPlaceholder'
 import type { CaseStudyPage } from '@/lib/sanity/types'
 
@@ -18,14 +19,7 @@ export function CaseStudyHero({ study }: CaseStudyHeroProps) {
   return (
     <section id="hero" className="case-study-hero" aria-labelledby="case-study-title">
       {(study.contextFacts?.length ?? 0) > 0 ? (
-        <dl className="case-study-facts">
-          {study.contextFacts?.map((fact) => (
-            <div key={`${fact.label}-${fact.value}`}>
-              <dt>{fact.label}</dt>
-              <dd>{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
+        <CaseStudyFactsSlider facts={study.contextFacts ?? []} />
       ) : null}
 
       <div

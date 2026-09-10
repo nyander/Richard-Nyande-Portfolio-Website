@@ -13,7 +13,7 @@ export function personJsonLd() {
     '@type': 'Person',
     '@id': PERSON_ID,
     name: SITE_NAME,
-    jobTitle: 'Product Designer and Creative Technologist',
+    jobTitle: 'Product Designer and Front-End Developer',
     url: SITE_URL,
     sameAs: MENU_SOCIALS.map((social) => social.href),
     worksFor: {

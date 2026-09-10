@@ -12,7 +12,7 @@ export const COOC_CARD: CaseStudyCard = {
   role: 'Product Designer, UX/UI Designer, Web Developer',
   year: 2025,
   summary:
-    'A Central London members club that had to become a membership system after launch — registration, approval, billing and a wallet pass — designed and wired on WordPress at Palm PR.',
+    'A Central London members club that had to become a membership system after launch: registration, approval, billing and a wallet pass, designed and wired on WordPress at Palm PR.',
   status: 'shipped',
   heroImage: null,
 }
@@ -24,16 +24,31 @@ export const COOC_STUDY: CaseStudyPage = {
   role: 'Product Designer, UX/UI Designer, Web Developer',
   year: 2025,
   summary:
-    'A Central London members club that had to become a membership system after launch — registration, approval, billing and a wallet pass — designed and wired on WordPress at Palm PR.',
+    'A Central London members club that had to become a membership system after launch: registration, approval, billing and a wallet pass, designed and wired on WordPress at Palm PR.',
   status: 'shipped',
   contextFacts: [
-    fact('Client', 'Cooc, with The Mandrake'),
-    fact('Type', 'Members-club site and membership system'),
+    fact('For', 'Cooc, with The Mandrake'),
+    fact(
+      'Problem',
+      'A live brand site had to become apply, approve, pay and a wallet pass for the door, in weeks.'
+    ),
+    fact(
+      'Owned',
+      'Product and UX design, membership journey, wallet pass design, and WordPress membership wiring.'
+    ),
+    fact('Team', 'Palm PR; Beth Lucas on front-end development'),
+    fact(
+      'Status',
+      'Brand site live December 2024. Membership platform live March 2025. Full club operations out of scope.'
+    ),
+    fact(
+      'Result',
+      'Membership loop live at cooc.london. No conversion or retention figures are claimed.'
+    ),
     fact(
       'Stack',
       'Figma, WordPress, Divi, MemberPress, New User Approve, Zapier, Passcreator'
     ),
-    fact('Team', 'Palm PR; Beth Lucas on front-end development'),
   ],
   heroImages: [],
   seoTitle: 'Cooc — Product Design & Membership Case Study | Richard Nyande',
@@ -184,7 +199,7 @@ export const COOC_STUDY: CaseStudyPage = {
           'Once the club is a membership product, the next questions are who came, who they can message, what they did, and whether bookings in SevenRooms show up in the same place. WordPress with these plugins does not give those surfaces.'
         ),
         solution: blocks(
-          'I compared a custom app with WordPress on flexibility, UX, scale, performance, speed, cost, CMS and security, and shipped WordPress because speed and the existing CMS won the February window. The gaps stay listed. They are not filled with empty laptop frames.'
+          'I compared a custom app with WordPress on flexibility, UX, scale, performance, speed, cost, CMS and security, and shipped WordPress because speed and the existing CMS won the February window. The gaps stay listed. They are not filled with placeholder screens.'
         ),
         before: [
           'A membership loop that can launch',

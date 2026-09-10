@@ -28,9 +28,9 @@ export const ABOUT = {
   opening: {
     label: 'Opening',
     heading: 'About',
-    lede: 'Product designer and creative technologist. I design digital products, then build them.',
+    lede: 'Product designer and front-end developer. I design digital products, then build them.',
     roleLabel: 'Role',
-    role: 'Product Designer\nCreative Technologist',
+    role: 'Product Designer\nFront-End Developer',
   },
   now: {
     label: 'Now',
@@ -97,12 +97,12 @@ export const ABOUT = {
     meta: {
       brand: 'RN™',
       name: 'Richard Nyande',
-      role: 'Product designer · Creative technologist',
+      role: 'Product designer · Front-end developer',
       subject: 'Employment & capability record',
       date: '08 / 2026',
       docNo: 'RN-2026-08-007',
       location: 'Essex, UK',
-      status: 'Open to contract',
+      status: 'Current',
       rev: '004',
     },
     records: [
@@ -253,6 +253,6 @@ export const ABOUT = {
     ],
   },
   close: {
-    pitch: 'Open to product design and creative technology contracts.',
+    pitch: 'If you have a product to design and build, write to me.',
   },
 } as const

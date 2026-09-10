@@ -26,10 +26,25 @@ export const SESAHUB_STUDY: CaseStudyPage = {
   summary: SESAHUB_SUMMARY,
   status: 'shipped',
   contextFacts: [
-    fact('Client', 'Nyande ERP Solutions (internal)'),
-    fact('Type', 'Internal operations workspace'),
-    fact('Stack', 'Laravel 11, React, TypeScript, Inertia.js, Tailwind, PostgreSQL'),
+    fact('For', 'Nyande ERP Solutions (internal product)'),
+    fact(
+      'Problem',
+      'Growing Ghanaian businesses managing staff, finance, stock and orders across disconnected tools.'
+    ),
+    fact(
+      'Owned',
+      'Product model, interface design and full-stack implementation.'
+    ),
     fact('Team', 'Dominic Nyande, business analyst; Amy Nyande, data analyst'),
+    fact(
+      'Status',
+      'Working internal system on seeded data. Purchase-order request through receipt was not delivered.'
+    ),
+    fact(
+      'Result',
+      'Running multi-company workspace on Render. Adoption and commercial impact have not been established.'
+    ),
+    fact('Stack', 'Laravel 11, React, TypeScript, Inertia.js, Tailwind, PostgreSQL'),
   ],
   heroImages: [],
   seoTitle: 'SesaHub — Product Design & Build Case Study | Richard Nyande',
@@ -41,7 +56,7 @@ export const SESAHUB_STUDY: CaseStudyPage = {
     heading:
       'A growing company still has to manage staff, review finance, control stock, handle orders and set policies — and those jobs do not always live in one place.',
     intro:
-      'The target was growing businesses in Ghana moving from owner-led operations into something that needed more structure. SesaHub asked whether those jobs could live in one workspace, with access shaped by the person’s role and organisation. I defined that product model, designed the screens, and built the system. There was a wider ambition that the product could later be relevant in other African markets. We did not research that region, and this page does not treat that ambition as a finding. There is no external client. TechCorp Solutions Ltd in the screenshots is seeded test data, not a customer.',
+      'The target was growing businesses in Ghana moving from owner-led operations into something that needed more structure. SesaHub asked whether staff, finance, stock, orders and access could live in one workspace, shaped by role and organisation. I defined that product model, designed the screens, and built the system. There is no external client.',
     initialProposal: blocks(
       'The product started from a hypothesis: growing businesses could benefit from managing more of their operation in one place. Reviewing finance, managing staff, setting policies, controlling stock, handling orders and reporting were treated as related jobs. The question was whether they could sit in one workspace, with access changing by the person’s role and organisation, rather than requiring a separate tool for each job.'
     ),
@@ -56,7 +71,7 @@ export const SESAHUB_STUDY: CaseStudyPage = {
     eyebrow: 'The jobs.',
     heading: 'The jobs a growing company has to do, designed so they can live together.',
     intro:
-      'Built December 2024 to October 2025. The target was businesses moving from owner-led operations into something that needs structure: manage staff, review finance, control stock, handle orders, and decide who can see what. Screens are from the running app on seeded test data. Purchase-order request-to-receipt is not shipped. Company policies and recruitment were part of the original idea; they are not presented here as finished modules.',
+      'Built December 2024 to October 2025. The target was businesses moving from owner-led operations into something that needs structure. Company policies and recruitment were part of the original idea; they are not presented here as finished modules.',
     items: [
       {
         title: 'Companies',
@@ -219,10 +234,10 @@ export const SESAHUB_STUDY: CaseStudyPage = {
           'Handling orders was part of the original picture. Suppliers and customer orders exist; request-through-receipt does not.',
         status: 'in-progress',
         problem: blocks(
-          'Orders were part of the original operational picture. The public write-up listed an end-to-end purchase workflow. Shipping that copy as a finished module would have presented work the product does not do yet.'
+          'Orders were part of the original operational picture. The request-through-receipt path was not built.'
         ),
         solution: blocks(
-          'Supplier records and customer orders are in the build. The request → approval → purchase → shipment → receipt path is not. It stays marked in progress.'
+          'Supplier records and customer orders are in the build. The request, approval, purchase, shipment and receipt path is not. It stays marked in progress.'
         ),
         before: [
           'A written purchase pipeline with no screen to show',
@@ -289,27 +304,27 @@ export const SESAHUB_STUDY: CaseStudyPage = {
         ),
       },
       {
-        title: 'Show the system that exists',
-        shortLabel: 'Honesty',
+        title: 'Leave the purchase-order path unfinished',
+        shortLabel: 'Scope',
         problem: blocks(
-          'The older case study listed purchase orders and shipments as if they were done, then showed empty laptop frames and a registration clip from another stack. It also described the work as an ERP for enterprises across Africa.'
+          'Handling orders was part of the original picture, but request through receipt was not built. Presenting that path as a finished module would have overclaimed the product.'
         ),
         contribution:
-          'I kept suppliers and customer orders in the story because they exist. I marked request-to-receipt as in progress. I did not reuse another project’s interface, and I dropped the MemberPress registration block that had landed on that page by mistake. The African-market line stays an ambition, not a researched finding.',
+          'I kept supplier and customer-order records because they exist, and marked the remaining purchase-order path as in progress. Screens on this page are from the running app.',
         constraints:
-          'Empty laptop mockups stay off this page.\nMemberPress, Divi and New User Approve were never this stack.\nA live URL is omitted until there is one to print.',
+          'Internal product, no external client brief.\nIsolation still had to hold for employees, sites, stock and the ledger.\nA public live URL is omitted until there is one to print.',
         decisions: [
           decision(
-            'Only show screens that exist',
-            'Modules without a still show as image coming soon. Companies and purchase orders have no screenshot yet. Sites, employees, customers, products, currency and the ledger are from the running app, on seed data.'
+            'Ship the foundations, not the missing workflow',
+            'Suppliers and customer orders stay in the story. Request, approval, shipment and receipt stay out of the shipped picture.'
           ),
           decision(
-            'Leave Live blank rather than a hash link',
-            'The old page’s Live Project pointed at nothing. Recruiteware can say DigitalOcean because that URL exists. SesaHub will say it when there is a URL.'
+            'Show the running system',
+            'Modules without a still are marked as image coming soon. Sites, employees, customers, products, currency and the ledger are from the running app.'
           ),
         ],
         outcome: blocks(
-          'This page describes the modules that run, and the one that does not, without filling gaps from the old Webflow CMS.'
+          'The page describes the modules that run, and the purchase-order path that does not.'
         ),
       },
     ],
@@ -318,20 +333,20 @@ export const SESAHUB_STUDY: CaseStudyPage = {
     eyebrow: '05 / Design to code',
     heading: 'Making the product model run as one system',
     framing: blocks(
-      'Owning both the interface and its implementation meant the module and permission model could be tested against a running multi-company system. Laravel, React, TypeScript and Inertia are how those records stay on one login. Docker on Render is how it shipped.'
+      'Owning both the interface and its implementation meant the module and permission model could be tested against a running multi-company system. Organisation-scoped access, generated codes and in-product currency conversion are how those records stay truthful on one login.'
     ),
     decisions: [
       decision(
         'Permissions on the company',
-        'A person’s cross-company role is still a role on a company.'
+        'A person’s cross-company role is still a role on a company, so a missed filter in the interface cannot mix organisations.'
       ),
       decision(
         'Let the system issue the codes',
-        'Site codes and employee IDs come from the service layer so lists stay joinable when someone forgets a naming convention.'
+        'Site codes and employee IDs come from the service layer so people and stock stay joinable when someone forgets a naming convention.'
       ),
       decision(
         'Keep conversion in the product',
-        'Currency conversion and rate updates run in the same workspace as the books.'
+        'Currency conversion and rate updates run in the same workspace as the books, so finance and stock do not disagree on the rate.'
       ),
     ],
     stackTags: [
@@ -350,13 +365,13 @@ export const SESAHUB_STUDY: CaseStudyPage = {
     eyebrow: '06 / Outcome and status',
     heading: 'Where the product stands',
     statusSummary:
-      'SesaHub shipped on Render as Nyande ERP Solutions in October 2025, after work that started in December 2024. It is an internal product proposition: a working system for the jobs we believed a growing business would need to coordinate. The running app is seeded with test data. There is no external client and no named quote. The live URL is not on this page until there is one to give.',
+      'SesaHub is an internal product proposition with a working implementation, shipped on Render in October 2025 after work that started in December 2024.',
     statusLabels: {
       concept: 'Out of scope',
     },
-    whatsNextHeading: 'What I would validate next',
+    whatsNextHeading: 'Limitations',
     whatsNext:
-      'If I were developing this now, I would interview the growing Ghanaian businesses the product was aimed at and test which modules are essential versus unnecessary complexity. I would finish the purchase-order workflow only if that job is confirmed. The mobile, voice and AI items on the older page stay later work. The wider African ambition would remain an intent until it is researched.',
+      'Screens contain seeded TechCorp data, not a customer. There was no external customer research programme. Adoption and commercial impact have not been established. The complete purchase-order workflow was not delivered. A wider African-market ambition remains intent, not a researched finding.',
     quotes: [],
     evidence: [
       'Shipped: company workspaces, sites, employees, customers and suppliers, products and inventory, currency, and core financial records.',
@@ -365,7 +380,7 @@ export const SESAHUB_STUDY: CaseStudyPage = {
       'Launch architecture: one product for multiple organisations. Implementation is in Design to code.',
     ],
     evidenceBoundary:
-      'There was no external client and no Ghanaian SME interview programme. Screens use seeded demo data. I do not claim adoption, revenue or operational impact.',
+      'There was no external client and no Ghanaian SME interview programme. I do not claim adoption, revenue or operational impact.',
     lookingBackHeading: 'Looking back',
     lookingBack:
       "Ghana Statistical Service's 2024 Integrated Business Establishment Survey reported that 92.3% of businesses operate informally, with informal status including businesses that do not maintain formal accounts. The same survey found that the overwhelming majority of establishments are micro businesses. That does not validate SesaHub by itself. It gives later context to the opportunity we were exploring: what happens when a growing business begins to need more structured records, responsibilities and operational systems.",

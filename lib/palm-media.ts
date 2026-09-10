@@ -1,5 +1,5 @@
-import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
-import { blocks } from '@/lib/case-study-blocks'
+import type { AltImage, CaseStudyCard, CaseStudyPage, DesignToCode } from '@/lib/sanity/types'
+import { blocks, decision } from '@/lib/case-study-blocks'
 
 const ROOT = '/images/palm-dashboard'
 
@@ -35,7 +35,28 @@ const PALM_WHATS_NEXT =
   "The next step identified was an LLM to compare incoming articles against a client's keywords and KPI criteria. I left before that work started, and there is no developer on the product now."
 
 const PALM_DESIGN_TO_CODE_FRAMING =
-  'Owning both design and implementation meant interaction decisions could be tested against the behaviour of the real system as they were made.'
+  'Owning both design and implementation let me test interface decisions against the behaviour of the working system.'
+
+const PALM_DESIGN_TO_CODE: DesignToCode = {
+  eyebrow: '05 / Design to code',
+  heading: 'Testing decisions against the live workflow',
+  framing: blocks(PALM_DESIGN_TO_CODE_FRAMING),
+  decisions: [
+    decision(
+      'Finding coverage without slowing the team down',
+      "Coverage Tracking scans the web daily for articles that mention a client's agreed keywords, brand names, products or topics. Because that scan runs against an external search service, it can take time, so it runs in the background rather than making anyone wait. The team can keep working and check back once results are ready to review."
+    ),
+    decision(
+      'Handling scans that stall',
+      'External scans can fail or take longer than expected. A visible scan status and a cancel action let the team see what is happening and step in if a scan gets stuck, rather than waiting with no explanation.'
+    ),
+    decision(
+      'Scoring coverage against each client, not the article itself',
+      "An article's value depends on which client and which objective it is measured against. When staff approve coverage, they score what it is worth to that client, not a generic rating on the article."
+    ),
+  ],
+  stackTags: ['Laravel', 'Inertia + React', 'MySQL', 'ScrapingBee', 'Tailwind'],
+}
 
 export const PALM_CARD: CaseStudyCard = {
   _id: 'caseStudy-palm-dashboard',
@@ -58,10 +79,29 @@ export const PALM_STUDY: CaseStudyPage = {
   summary: PALM_CARD.summary,
   status: PALM_CARD.status,
   contextFacts: [
-    { label: 'Client', value: 'Palm PR' },
-    { label: 'Type', value: 'Multi-tenant SaaS workspace' },
-    { label: 'Stack', value: 'Laravel, Inertia + React, MySQL' },
+    { label: 'For', value: 'Palm PR account teams and their clients' },
+    {
+      label: 'Problem',
+      value:
+        'Campaign planning, coverage tracking and reporting lived across spreadsheets, documents and inboxes.',
+    },
+    {
+      label: 'Owned',
+      value: 'Product design and full-stack implementation as sole designer and developer.',
+    },
     { label: 'Team', value: 'Sole designer and developer' },
+    {
+      label: 'Status',
+      value:
+        'Four modules shipped at handover. Performance analysis and coverage reporting had structure only. Not in active development.',
+    },
+    {
+      label: 'Result',
+      value:
+        'Internal feedback credited timeline automation with removing about an hour of Excel work per client.',
+    },
+    { label: 'Stack', value: 'Laravel, Inertia + React, MySQL' },
+    { label: 'Inspect', value: 'Live application. Login required.' },
   ],
   heroImages: [],
   reframing: null,
@@ -70,7 +110,7 @@ export const PALM_STUDY: CaseStudyPage = {
   designToCode: null,
   outcomeStatus: null,
   liveUrl: PALM_LIVE_URL,
-  liveNote: null,
+  liveNote: 'Login required.',
   seoTitle: 'Palm Dashboard — Product Design & Build Case Study | Richard Nyande',
   seoDescription:
     'A multi-tenant PR workspace bringing campaign planning, coverage tracking and performance reporting into one place. Product design and full-stack build for Palm PR.',
@@ -305,6 +345,10 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
         quotes: (study.outcomeStatus.quotes ?? []).filter(
           (item) => item.name.trim().toLowerCase() !== 'charlotte'
         ),
+        evidence: [
+          'Internal feedback credited timeline automation with removing about an hour of Excel work per client.',
+          'Word document use was reduced across onboarding and reporting, cutting time previously spent re-entering the same information into separate templates.',
+        ],
       }
     : study.outcomeStatus
 
@@ -321,20 +365,20 @@ export function applyPalmLocalMedia(study: CaseStudyPage): CaseStudyPage {
           eyebrow: 'Under the reporting request',
         }
       : study.reframing,
-    designToCode: study.designToCode
-      ? {
-          ...study.designToCode,
-          heading: 'Testing decisions against the live workflow',
-          framing: blocks(PALM_DESIGN_TO_CODE_FRAMING),
-          shippedImage: preferExisting(
-            study.designToCode.shippedImage,
-            DESIGN_TO_CODE_SHIPPED
-          ),
-        }
-      : study.designToCode,
+    designToCode: (() => {
+      const sourceBuild = study.designToCode ?? PALM_DESIGN_TO_CODE
+      return {
+        ...sourceBuild,
+        heading: 'Testing decisions against the live workflow',
+        framing: blocks(PALM_DESIGN_TO_CODE_FRAMING),
+        shippedImage: preferExisting(sourceBuild.shippedImage, DESIGN_TO_CODE_SHIPPED),
+      }
+    })(),
     ogImage: preferExisting(study.ogImage, PALM_HERO[0]),
+    contextFacts: PALM_STUDY.contextFacts,
+    summary: PALM_CARD.summary,
     liveUrl: study.liveUrl || PALM_LIVE_URL,
-    liveNote: null,
+    liveNote: 'Login required.',
   }
 }
 
@@ -346,6 +390,7 @@ export function applyPalmCardMedia(study: CaseStudyCard): CaseStudyCard {
   return {
     ...study,
     status: PALM_CARD.status,
+    summary: PALM_CARD.summary,
     heroImage: PALM_COVER,
   }
 }

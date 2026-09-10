@@ -5,6 +5,8 @@ export type OtherWorkEntry = ArchiveProject & {
   liveUrl: string | null
   liveNote?: string
   liveLabel?: string
+  codeUrl?: string
+  codeLabel?: string
   subtitle?: string
   tools?: string
   employer?: string
@@ -185,6 +187,8 @@ export const LOCAL_ARCHIVE: OtherWorkEntry[] = [
     kind: 'Three.js',
     liveUrl: 'https://3-d-chevrolet-showcase.vercel.app/',
     liveLabel: 'Live project',
+    codeUrl: 'https://github.com/nyander/3D-Chevrolet-Showcase',
+    codeLabel: 'Source',
     thumbnail: still(
       'chevrolet-immersive-experience',
       'Chevrolet Three.js showroom — Corvette on a dark grid with orbit controls'
@@ -196,7 +200,7 @@ export const LOCAL_ARCHIVE: OtherWorkEntry[] = [
     paragraphs: [
       'A conceptual automotive brief: show a Chevrolet in the browser instead of a still. Orbit the model, inspect the body, hit hotspots on features. Built for desktop and phone, with touch on both.',
       'Blender for the model. Three.js for the render. Vite for the build. The work was shader setup, real-time lighting, camera transitions and the hotspot layer, kept light enough to run in a tab.',
-      'Not a Chevrolet commission. A prototype for how a vehicle could be shown on the web.',
+      'Not a Chevrolet commission. A prototype for how a vehicle could be shown on the web. The source is public at https://github.com/nyander/3D-Chevrolet-Showcase and shows the Three.js scene, camera controls and hotspot interaction.',
     ],
     origin: 'Built while learning Three.js and WebGL.',
   }),

@@ -130,7 +130,7 @@ export function WorkIndex({ caseStudies, otherWork }: WorkIndexProps) {
           <p className="section-eyebrow">Portfolio</p>
           <h2 id="featured-work-heading">Selected work</h2>
           <p className="section-intro">
-            Products I designed and built — from the first notes through to software in use.
+            Products I designed and built, from workflow through to production interfaces.
           </p>
         </header>
       </Reveal>

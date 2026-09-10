@@ -26,9 +26,9 @@ const mono = IBM_Plex_Mono({
   variable: "--font-code",
 });
 
-const DEFAULT_TITLE = "Richard Nyande — Product Designer & Creative Technologist"
+const DEFAULT_TITLE = "Richard Nyande — Product Designer & Front-End Developer"
 const DEFAULT_DESCRIPTION =
-  "Product designer and creative technologist. I design and build digital products, combining design and engineering from an early idea through to production."
+  "Product designer and front-end developer. I design and build digital products, from product thinking and UX/UI through to React, TypeScript and production delivery."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

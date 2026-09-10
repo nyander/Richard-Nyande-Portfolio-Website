@@ -67,7 +67,7 @@ export function CaseStudyWalkthrough({ url, title }: CaseStudyWalkthroughProps) 
         <p className="section-eyebrow">Walkthrough</p>
         <h2 id="walkthrough-heading">How the product works</h2>
         <p className="section-intro">
-          A recorded pass through the live student build — stock, shipments, requests and
+          A recorded pass through the live student build: stock, shipments, requests and
           reports.
         </p>
       </Reveal>

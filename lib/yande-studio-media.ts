@@ -1,5 +1,6 @@
 import type { AltImage, CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
 import {
+  YANDE_STUDIO_CARD,
   YANDE_STUDIO_LIVE_NOTE,
   YANDE_STUDIO_LIVE_URL,
   YANDE_STUDIO_SLUG,
@@ -170,6 +171,8 @@ export function applyYandeStudioCardMedia(study: CaseStudyCard): CaseStudyCard {
 
   return {
     ...study,
+    status: YANDE_STUDIO_CARD.status,
+    summary: YANDE_STUDIO_CARD.summary,
     heroImage: hasVisual(study.heroImage) ? study.heroImage : GATE,
   }
 }

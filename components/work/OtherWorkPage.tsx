@@ -46,6 +46,16 @@ export function OtherWorkPage({ project }: { project: OtherWorkEntry }) {
               >
                 {liveLabel} ↗
               </a>
+              {project.codeUrl ? (
+                <a
+                  className="other-work-hero-live"
+                  href={project.codeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {project.codeLabel ?? 'Source'} ↗
+                </a>
+              ) : null}
               {project.liveNote ? (
                 <p className="other-work-hero-note">{project.liveNote}</p>
               ) : null}

@@ -32,15 +32,30 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
   summary: RECRUITEWARE_SUMMARY,
   status: 'shipped',
   contextFacts: [
-    fact('Client', 'Thomas Grant Recruitment, with Apex'),
-    fact('Type', 'Office CRM on an existing recruitment backend'),
-    fact('Stack', 'Laravel 11, React, Inertia.js, Tailwind, MySQL'),
+    fact('For', 'Thomas Grant Recruitment, with Apex'),
+    fact(
+      'Problem',
+      'Consultants were running healthcare recruitment on an office system shaped around older logistics processes.'
+    ),
+    fact(
+      'Owned',
+      'Office interface design and front-end implementation on the existing RecruitWare processing.'
+    ),
     fact('Team', 'Greyzip, with Fungai Motezu on the existing APIs'),
+    fact(
+      'Status',
+      'Office CRM and public registration shipped. Candidate self-service was in the brief and is out of scope.'
+    ),
+    fact(
+      'Result',
+      'Consultants enter through the existing login into a role-gated office product. Login required to inspect.'
+    ),
+    fact('Stack', 'Laravel 11, React, Inertia.js, Tailwind, MySQL'),
   ],
   heroImages: [],
   seoTitle: 'Recruiteware — Product Design & Build Case Study | Richard Nyande',
   seoDescription:
-    'Greyzip, 2024–25. An office CRM for Thomas Grant and Apex that kept RecruitWare’s processing and redesigned the consultant interface so public applications and a later candidate portal could share one product foundation.',
+    'Greyzip, 2025. An office CRM for Thomas Grant and Apex that kept RecruitWare’s processing and redesigned the consultant interface so public applications and a later candidate portal could share one product foundation.',
   ogImage: null,
   reframing: {
     eyebrow: 'On an established backend',
@@ -62,7 +77,7 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
     eyebrow: 'The office product.',
     heading: 'The office product, then the surfaces that still had to join it.',
     intro:
-      'Built at Greyzip with Fungai Motezu on the RecruitWare APIs, July to September 2024. The live product is the office CRM and public registration into that system. Candidate self-service was in the brief and is out of scope here.',
+      'Built at Greyzip with Fungai Motezu on the RecruitWare APIs, July to September 2025. The live product is the office CRM and public registration into that system. Candidate self-service was in the brief and is out of scope here.',
     items: [
       {
         title: 'Access and roles',
@@ -240,7 +255,7 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
         contribution:
           'I asked whether we were working on the candidate portal or the office system, then proposed an interface layer that could share APIs later, without rebuilding the processing Fungai already ran. In July I designed the dashboard against the existing booking spec on fixture data, so we could agree the office destination before login was wired. Fungai stayed on the APIs while Greyzip took the office front.',
         constraints:
-          'Do not re-do background processing, validation, scheduled tasks or report generation.\nThe existing database and session model had to keep working.\nThe dashboard API would indicate chart type, labels, data and order — the front had to render whatever that described.\nFirst phase ran July to September 2024.',
+          'Do not re-do background processing, validation, scheduled tasks or report generation.\nThe existing database and session model had to keep working.\nThe dashboard API would indicate chart type, labels, data and order — the front had to render whatever that described.\nFirst phase ran July to September 2025.',
         decisions: [
           decision(
             'Keep the processing, replace the office shell',
@@ -326,15 +341,15 @@ export const RECRUITEWARE_STUDY: CaseStudyPage = {
     decisions: [
       decision(
         'Follow the Notes login, keep the cookie and folder',
-        'An external authentication guard with session sync keeps RecruitWare as the source of who someone is. A 404 after good credentials was the redirect, not a failed password.'
+        'Consultants kept the identity they already used. An external authentication guard with session sync keeps RecruitWare as the source of who someone is. A 404 after good credentials was the redirect, not a failed password.'
       ),
       decision(
         'Let the API describe the chart, then render it',
-        'Chart type, labels, data and order come from the backend. The dashboard spec already asked for last-week versus this-week bookings by client. Dummy data proved the graphs; live data replaced them.'
+        'The office already expected last-week versus this-week bookings by client. Chart type, labels, data and order come from the backend so the dashboard can change without a front-end rewrite. Dummy data proved the graphs; live data replaced them.'
       ),
       decision(
         'Author tabs, bind fields',
-        'Candidate form labels and tabs are placed in the interface because they have to match the current system. Data and buttons arrive on an API call and submit back. Healthcare fields can grow on that record.'
+        'Candidate form labels and tabs sit in the interface so consultants recognise the current pack. Data and buttons arrive on an API call and submit back. Healthcare fields can grow on that record.'
       ),
     ],
     stackTags: [

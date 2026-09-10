@@ -257,11 +257,11 @@ const sitemapArchiveQuery = groq`
 `
 
 const LOCAL_FEATURED: CaseStudyCard[] = [
-  applyYandeStudioCardMedia(YANDE_STUDIO_CARD),
   applyPalmCardMedia(PALM_CARD),
+  applyRecruitewareCardMedia(RECRUITEWARE_CARD),
   applyCoocCardMedia(COOC_CARD),
   applySesahubCardMedia(SESAHUB_CARD),
-  applyRecruitewareCardMedia(RECRUITEWARE_CARD),
+  applyYandeStudioCardMedia(YANDE_STUDIO_CARD),
   applyYandeCardMedia(YANDE_GADGETS_CARD),
 ]
 
@@ -295,14 +295,10 @@ function mergeLocalCaseStudies(studies: CaseStudyCard[]) {
   }
 
   return withLocal.sort((a, b) => {
-    if (b.year !== a.year) {
-      return b.year - a.year
-    }
-
     const aIndex = order.indexOf(a.slug)
     const bIndex = order.indexOf(b.slug)
     if (aIndex === -1 && bIndex === -1) {
-      return 0
+      return b.year - a.year
     }
     if (aIndex === -1) {
       return 1
