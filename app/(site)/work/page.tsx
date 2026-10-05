@@ -7,7 +7,7 @@ import { routeMetadata } from '@/lib/seo'
 export const metadata: Metadata = routeMetadata({
   title: 'Work',
   description:
-    'Selected work: products I designed and built, from workflow through to production interfaces.',
+    'Selected work across product design and UX, creative development, and web design.',
   path: '/work',
 })
 

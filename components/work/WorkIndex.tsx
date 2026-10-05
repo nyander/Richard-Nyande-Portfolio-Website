@@ -7,6 +7,7 @@ import { hasImageAsset } from '@/components/media/MediaSlot'
 import { SanityImage } from '@/components/media/SanityImage'
 import { Reveal } from '@/components/motion/Reveal'
 import { ClientLogoMarquee } from '@/components/site/ClientLogoMarquee'
+import { groupWorkIndex, type WorkListItem } from '@/lib/work-groups'
 import type { AltImage, ArchiveProject, CaseStudyCard, Status } from '@/lib/sanity/types'
 
 type WorkIndexProps = {
@@ -32,18 +33,6 @@ function clipSummary(value: string) {
   return `${text.slice(0, SUMMARY_LIMIT).replace(/\s+\S*$/, '')}…`
 }
 
-function statusLabel(status: Status) {
-  if (status === 'shipped') {
-    return 'Case study'
-  }
-
-  if (status === 'in-progress') {
-    return 'In progress'
-  }
-
-  return 'Concept'
-}
-
 function statusClassName(status: Status | 'archive') {
   if (status === 'shipped') {
     return 'work-folio-status is-shipped'
@@ -60,67 +49,30 @@ function statusClassName(status: Status | 'archive') {
   return 'work-folio-status is-archive'
 }
 
+function toPreview(item: WorkListItem): PreviewItem {
+  return {
+    id: item.id,
+    title: item.title,
+    summary: item.summary,
+    image: item.image,
+  }
+}
+
 export function WorkIndex({ caseStudies, otherWork }: WorkIndexProps) {
-  const firstPreview: PreviewItem | null = caseStudies[0]
-    ? {
-        id: caseStudies[0]._id,
-        title: caseStudies[0].title,
-        summary: caseStudies[0].summary,
-        image: caseStudies[0].heroImage,
-      }
-    : otherWork[0]
-      ? {
-          id: otherWork[0]._id,
-          title: otherWork[0].title,
-          summary: otherWork[0].summary,
-          image: otherWork[0].thumbnail,
-        }
-      : null
+  const groups = groupWorkIndex(caseStudies, otherWork)
+  const firstItem = groups[0]?.items[0] ?? null
+  const [active, setActive] = useState<PreviewItem | null>(
+    firstItem ? toPreview(firstItem) : null
+  )
+  const [openId, setOpenId] = useState<string | null>(firstItem?.id ?? null)
 
-  const [active, setActive] = useState<PreviewItem | null>(firstPreview)
-  const [openId, setOpenId] = useState<string | null>(caseStudies[0]?._id ?? null)
-  const [otherOpen, setOtherOpen] = useState(false)
-
-  if (caseStudies.length === 0 && otherWork.length === 0) {
+  if (groups.length === 0) {
     return <ClientLogoMarquee />
   }
 
   function toggleRow(id: string) {
     setOpenId((current) => (current === id ? null : id))
   }
-
-  function toggleOther() {
-    setOtherOpen((open) => {
-      const next = !open
-      if (!next && caseStudies[0]) {
-        setActive({
-          id: caseStudies[0]._id,
-          title: caseStudies[0].title,
-          summary: caseStudies[0].summary,
-          image: caseStudies[0].heroImage,
-        })
-      }
-      return next
-    })
-  }
-
-  const otherFolder = (listId: string) => (
-    <OtherWorkFolder
-      listId={listId}
-      projects={otherWork}
-      open={otherOpen}
-      onToggle={toggleOther}
-      activeId={active?.id}
-      onActivate={(project) =>
-        setActive({
-          id: project._id,
-          title: project.title,
-          summary: project.summary,
-          image: project.thumbnail,
-        })
-      }
-    />
-  )
 
   return (
     <section id="work" className="work-section" aria-labelledby="featured-work-heading">
@@ -130,7 +82,7 @@ export function WorkIndex({ caseStudies, otherWork }: WorkIndexProps) {
           <p className="section-eyebrow">Portfolio</p>
           <h2 id="featured-work-heading">Selected work</h2>
           <p className="section-intro">
-            Products I designed and built, from workflow through to production interfaces.
+            Product systems, interactive experiences and websites, grouped by the kind of work.
           </p>
         </header>
       </Reveal>
@@ -138,124 +90,57 @@ export function WorkIndex({ caseStudies, otherWork }: WorkIndexProps) {
         <div className="work-folio-desktop">
           <div className="work-folio-layout">
             <div className="work-folio-list">
-              {caseStudies.length > 0 ? (
-                <div>
-                  <p className="work-folio-tier">Case studies</p>
-                  {caseStudies.map((study) => (
+              {groups.map((group) => (
+                <div key={group.id} className="work-folio-group">
+                  <p className="work-folio-tier">{group.label}</p>
+                  {group.items.map((item) => (
                     <WorkRow
-                      key={study._id}
-                      href={`/work/${study.slug}`}
-                      title={study.title}
-                      year={String(study.year)}
-                      role={study.role}
-                      status={statusLabel(study.status)}
-                      statusClassName={statusClassName(study.status)}
-                      active={active?.id === study._id}
-                      onActivate={() =>
-                        setActive({
-                          id: study._id,
-                          title: study.title,
-                          summary: study.summary,
-                          image: study.heroImage,
-                        })
-                      }
+                      key={item.id}
+                      href={item.href}
+                      title={item.title}
+                      year={String(item.year)}
+                      role={item.role}
+                      status={item.status}
+                      statusClassName={statusClassName(item.statusKind)}
+                      external={item.external}
+                      active={active?.id === item.id}
+                      onActivate={() => setActive(toPreview(item))}
                     />
                   ))}
                 </div>
-              ) : null}
-              {otherWork.length > 0 ? otherFolder('other-work-list-desktop') : null}
+              ))}
             </div>
             {active ? <PreviewPane item={active} /> : null}
           </div>
         </div>
 
         <div className="work-folio-mobile">
-          {caseStudies.length > 0 ? (
-            <div>
-              <p className="work-folio-tier">Case studies</p>
-              {caseStudies.map((study) => (
+          {groups.map((group) => (
+            <div key={group.id} className="work-folio-group">
+              <p className="work-folio-tier">{group.label}</p>
+              {group.items.map((item) => (
                 <WorkAccordionRow
-                  key={study._id}
-                  id={study._id}
-                  title={study.title}
-                  year={study.year}
-                  role={study.role}
-                  summary={study.summary}
-                  href={`/work/${study.slug}`}
-                  image={study.heroImage}
-                  status={statusLabel(study.status)}
-                  statusClassName={statusClassName(study.status)}
-                  cta="Read the case study →"
-                  open={openId === study._id}
-                  onToggle={() => toggleRow(study._id)}
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  year={item.year}
+                  role={item.role}
+                  summary={item.summary}
+                  href={item.href}
+                  image={item.image}
+                  status={item.status}
+                  statusClassName={statusClassName(item.statusKind)}
+                  cta={item.kind === 'case' ? 'Read the case study →' : 'View the project →'}
+                  external={item.external}
+                  open={openId === item.id}
+                  onToggle={() => toggleRow(item.id)}
                 />
               ))}
             </div>
-          ) : null}
-          {otherWork.length > 0 ? otherFolder('other-work-list-mobile') : null}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-const OTHER_WORK_LEDE =
-  'WordPress and Webflow sites, and Three.js projects built while learning WebGL.'
-
-function OtherWorkFolder({
-  listId,
-  projects,
-  open,
-  onToggle,
-  activeId,
-  onActivate,
-}: {
-  listId: string
-  projects: ArchiveProject[]
-  open: boolean
-  onToggle: () => void
-  activeId?: string
-  onActivate: (project: ArchiveProject) => void
-}) {
-  return (
-    <div className={open ? 'work-folio-other is-open' : 'work-folio-other'}>
-      <button
-        type="button"
-        className="work-folio-other-toggle"
-        aria-expanded={open}
-        aria-controls={listId}
-        onClick={onToggle}
-      >
-        <span className="work-folio-tier">Other work</span>
-        <span className="work-folio-other-lede">{OTHER_WORK_LEDE}</span>
-        <span className="work-folio-chevron" aria-hidden="true">
-          ⌄
-        </span>
-      </button>
-      <div
-        id={listId}
-        className={open ? 'work-folio-panel is-open' : 'work-folio-panel'}
-        aria-hidden={!open}
-        {...(!open ? { inert: true } : {})}
-      >
-        <div className="work-folio-panel-inner work-folio-other-list">
-          {projects.map((project) => (
-            <WorkRow
-              key={project._id}
-              href={project.href}
-              title={project.title}
-              year={String(project.year)}
-              role={project.listRole ?? project.role}
-              status="Other work"
-              statusClassName={statusClassName('archive')}
-              external={project.linkType === 'external'}
-              active={activeId === project._id}
-              onActivate={() => onActivate(project)}
-            />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -325,6 +210,7 @@ function WorkAccordionRow({
   status,
   statusClassName,
   cta,
+  external = false,
   open,
   onToggle,
 }: {
@@ -338,6 +224,7 @@ function WorkAccordionRow({
   status: string
   statusClassName: string
   cta: string
+  external?: boolean
   open: boolean
   onToggle: () => void
 }) {
@@ -382,7 +269,13 @@ function WorkAccordionRow({
             {year}
             {role ? ` · ${role}` : ''}
           </p>
-          <Link href={href} className="work-folio-m-link" tabIndex={open ? undefined : -1}>
+          <Link
+            href={href}
+            className="work-folio-m-link"
+            tabIndex={open ? undefined : -1}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+          >
             {cta}
           </Link>
         </div>

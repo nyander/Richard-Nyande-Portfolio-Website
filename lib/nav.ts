@@ -4,7 +4,7 @@ export const NAV_ITEMS = [
     label: 'Work',
     href: '/',
     preview:
-      'Selected product design and front-end work, from workflow through to production interfaces.',
+      'Selected work across product design, creative development and web.',
   },
   {
     id: 'about',
