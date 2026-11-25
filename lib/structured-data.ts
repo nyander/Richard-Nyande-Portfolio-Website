@@ -19,7 +19,7 @@ export function personJsonLd() {
     worksFor: {
       '@type': 'Organization',
       name: 'Yande Studio',
-      url: 'https://yande.uk',
+      url: 'https://yande.studio',
     },
   }
 }

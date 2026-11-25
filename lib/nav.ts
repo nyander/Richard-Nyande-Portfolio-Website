@@ -24,7 +24,7 @@ export const NAV_ITEMS = [
   {
     id: 'yande',
     label: 'Yande',
-    href: 'https://yande.uk',
+    href: 'https://yande.studio',
     external: true,
     preview: 'The studio for making and publishing work outside the portfolio.',
   },

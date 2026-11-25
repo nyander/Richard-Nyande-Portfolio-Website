@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         destination: 'https://www.richardnyande.co.uk/:path*',
         permanent: true,
       },
+      {
+        source: '/work/yande-studio',
+        destination: 'https://yande.studio/',
+        permanent: false,
+      },
     ]
   },
 };

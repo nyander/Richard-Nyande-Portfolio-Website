@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 import { SectionProgress } from '@/components/motion/SectionProgress'
 import { CaseStudyDeepDives } from '@/components/work/CaseStudyDeepDives'
@@ -10,7 +10,6 @@ import { CaseStudyProductModules } from '@/components/work/CaseStudyProductModul
 import { CaseStudyReframing } from '@/components/work/CaseStudyReframing'
 import { CaseStudyWalkthrough } from '@/components/work/CaseStudyWalkthrough'
 import { OtherWorkPage } from '@/components/work/OtherWorkPage'
-import { YandeStudioComingSoon } from '@/components/work/YandeStudioComingSoon'
 import { JsonLd } from '@/components/site/JsonLd'
 import { otherWorkBySlug } from '@/lib/other-work'
 import { getCaseStudyBySlug, getCaseStudySlugs } from '@/lib/sanity/queries'
@@ -19,7 +18,7 @@ import {
   breadcrumbJsonLd,
   creativeWorkJsonLd,
 } from '@/lib/structured-data'
-import { YANDE_STUDIO_SLUG } from '@/lib/yande-studio'
+import { YANDE_STUDIO_LIVE_URL, YANDE_STUDIO_SLUG } from '@/lib/yande-studio'
 
 type CaseStudyRouteProps = {
   params: Promise<{ slug: string }>
@@ -38,12 +37,7 @@ export async function generateMetadata({
   const { slug } = await params
 
   if (slug === YANDE_STUDIO_SLUG) {
-    return routeMetadata({
-      title: 'Yande Studio',
-      description:
-        'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk.',
-      path: `/work/${slug}`,
-    })
+    redirect(YANDE_STUDIO_LIVE_URL)
   }
 
   const other = otherWorkBySlug(slug)
@@ -111,17 +105,7 @@ export default async function CaseStudyPage({ params }: CaseStudyRouteProps) {
   const path = `/work/${slug}`
 
   if (slug === YANDE_STUDIO_SLUG) {
-    return (
-      <>
-        <WorkJsonLd
-          name="Yande Studio"
-          description="Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk."
-          path={path}
-          datePublished="2026"
-        />
-        <YandeStudioComingSoon />
-      </>
-    )
+    redirect(YANDE_STUDIO_LIVE_URL)
   }
 
   const other = otherWorkBySlug(slug)

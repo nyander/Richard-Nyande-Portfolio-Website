@@ -1,3 +1,4 @@
+import { YANDE_STUDIO_LIVE_URL, YANDE_STUDIO_SLUG } from '@/lib/yande-studio'
 import type { AltImage, ArchiveProject, CaseStudyCard, Status } from '@/lib/sanity/types'
 
 export type WorkGroupId = 'product' | 'creative' | 'web'
@@ -71,6 +72,8 @@ function caseStudyStatus(status: Status) {
 }
 
 function fromCaseStudy(study: CaseStudyCard): WorkListItem {
+  const isStudio = study.slug === YANDE_STUDIO_SLUG
+
   return {
     id: study._id,
     slug: study.slug,
@@ -79,9 +82,10 @@ function fromCaseStudy(study: CaseStudyCard): WorkListItem {
     role: study.role,
     summary: study.summary,
     image: study.heroImage,
-    href: `/work/${study.slug}`,
+    href: isStudio ? YANDE_STUDIO_LIVE_URL : `/work/${study.slug}`,
     status: caseStudyStatus(study.status),
     statusKind: study.status,
+    external: isStudio,
     kind: 'case',
   }
 }

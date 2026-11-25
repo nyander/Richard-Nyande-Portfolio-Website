@@ -76,7 +76,7 @@ export function YandeStudioComingSoon() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          yande.uk ↗
+          yande.studio ↗
         </a>
         <span className="yande-soon-stamp" aria-hidden="true">
           Soon

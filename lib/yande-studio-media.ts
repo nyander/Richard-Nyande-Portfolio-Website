@@ -87,7 +87,7 @@ const DEEP_DIVE_AFTER: Record<string, { image: AltImage; caption: string }> = {
   },
   'build the platform while the studio is still forming — lock the door honestly': {
     image: GATE,
-    caption: 'This is what yande.uk is today: a password collage, not an open studio visit.',
+    caption: 'This is what yande.studio is today: a password collage, not an open studio visit.',
   },
 }
 

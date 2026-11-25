@@ -2,7 +2,7 @@ export const ABOUT_LINKS = {
   email: 'rich.nyande@gmail.com',
   mailto: 'mailto:rich.nyande@gmail.com',
   linkedin: 'https://www.linkedin.com/in/richard-nyande-1aa32a133',
-  yande: 'https://yande.uk',
+  yande: 'https://yande.studio',
   palm: '/work/palm-dashboard',
   gadgets: '/work/yande-gadgets',
   recruiteware: '/work/recruiteware',
@@ -116,7 +116,7 @@ export const ABOUT = {
         scope: 'Founder · Creative studio',
         dates: '2024 —',
         href: ABOUT_LINKS.yande,
-        linkLabel: 'yande.uk',
+        linkLabel: 'yande.studio',
         external: true,
       },
       {

@@ -3,7 +3,7 @@ import type { CaseStudyCard, CaseStudyPage } from '@/lib/sanity/types'
 
 export const YANDE_STUDIO_SLUG = 'yande-studio'
 
-export const YANDE_STUDIO_LIVE_URL = 'https://yande.uk'
+export const YANDE_STUDIO_LIVE_URL = 'https://yande.studio'
 
 export const YANDE_STUDIO_LIVE_NOTE =
   'Password-gated promo window. The studio surfaces sit behind the enter screen.'
@@ -44,15 +44,15 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
   heroImages: [],
   seoTitle: 'Yande Studio — Richard Nyande',
   seoDescription:
-    'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.uk.',
+    'Yande is a creative digital studio. The case study is being rewritten — the studio is live at yande.studio.',
   ogImage: null,
   reframing: {
     eyebrow: 'The studio as a place',
-    heading: 'yande.uk had to hold the studio itself.',
+    heading: 'yande.studio had to hold the studio itself.',
     intro:
-      'Yande is the studio. yande.uk is what has to hold it: a 3D studio you can walk, pages you can read, and a CMS Richard publishes into. Yande Gadgets is the 2020 Accra shop app. This site is the personal work list.',
+      'Yande is the studio. yande.studio is what has to hold it: a 3D studio you can walk, pages you can read, and a CMS Richard publishes into. Yande Gadgets is the 2020 Accra shop app. This site is the personal work list.',
     initialProposal: blocks(
-      'Treat yande.uk as a marketing site or a copy of the personal work list — Webflow-like pages, Instagram as the archive, the 3D studio as decoration.'
+      'Treat yande.studio as a marketing site or a copy of the personal work list — Webflow-like pages, Instagram as the archive, the 3D studio as decoration.'
     ),
     discovery: blocks(
       'The studio needed a place that could carry unfinished interiors and a still-forming offer without lying about a public launch. Work had to be publishable without duplicating the personal portfolio. Home had to run on a phone, not only on a desktop GPU. A 2020 shop ops app in Accra is a different product with the same first name.'
@@ -232,10 +232,10 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
         title: 'One studio, three names, no second site to duplicate',
         shortLabel: 'Identity',
         problem: blocks(
-          'Yande Studio, Yande Gadgets (the 2020 Accra shop app) and this personal portfolio are easy to mash into one Yande website. Publishing work only here would make the studio a logo. Cloning this work list onto yande.uk would be two lists of the same case studies.'
+          'Yande Studio, Yande Gadgets (the 2020 Accra shop app) and this personal portfolio are easy to mash into one Yande website. Publishing work only here would make the studio a logo. Cloning this work list onto yande.studio would be two lists of the same case studies.'
         ),
         contribution:
-          'I built yande.uk as the studio’s product: spatial home plus Practice, Library, Rotation and Contact. Gadgets stays its own 2020 study. This site stays the personal work list. The two apps share a Sanity production dataset; every studio GROQ query stays _type-scoped.',
+          'I built yande.studio as the studio’s product: spatial home plus Practice, Library, Rotation and Contact. Gadgets stays its own 2020 study. This site stays the personal work list. The two apps share a Sanity production dataset; every studio GROQ query stays _type-scoped.',
         constraints:
           'No member or paywall theatre in this phase.\nClient work remains the studio’s business.\nDo not merge Gadgets screens or copy.\nDo not point this case study’s live URL at the portfolio.',
         decisions: [
@@ -309,7 +309,7 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
           ),
         ],
         outcome: blocks(
-          'The gate shipped and is what yande.uk shows an unauthenticated visitor today. Interior furniture and Practice content are still in progress. The member layer is not started.'
+          'The gate shipped and is what yande.studio shows an unauthenticated visitor today. Interior furniture and Practice content are still in progress. The member layer is not started.'
         ),
       },
     ],
@@ -355,12 +355,12 @@ export const YANDE_STUDIO_STUDY: CaseStudyPage = {
     eyebrow: '06 / Outcome and status',
     heading: 'What is live',
     statusSummary:
-      'yande.uk is live and gated. Richard is the sole designer and developer. The 3D studio and publishing routes exist behind the enter screen. Interior furniture and some Practice copy are still in progress. Membership and commerce are not started.',
+      'yande.studio is live and gated. Richard is the sole designer and developer. The 3D studio and publishing routes exist behind the enter screen. Interior furniture and some Practice copy are still in progress. Membership and commerce are not started.',
     whatsNext:
       'Interior furniture sequence, Practice and Library content pass, exterior HDR first-load. Not next: auth, payments, drops, or a member layer.',
     quotes: [],
     evidence: [
-      'https://yande.uk redirects unauthenticated visitors to /gate?exp=collage (verified 1 Sep 2026).',
+      'https://yande.studio redirects unauthenticated visitors to /gate?exp=collage (verified 1 Sep 2026).',
       'Public routes behind the gate: /, /about, /practice, /library, /rotation, /contact. CMS at /studio.',
       'No walkthrough video. No usage metrics on this page.',
     ],

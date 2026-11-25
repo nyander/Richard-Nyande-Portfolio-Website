@@ -130,7 +130,13 @@ export function WorkIndex({ caseStudies, otherWork }: WorkIndexProps) {
                   image={item.image}
                   status={item.status}
                   statusClassName={statusClassName(item.statusKind)}
-                  cta={item.kind === 'case' ? 'Read the case study →' : 'View the project →'}
+                  cta={
+                    item.external
+                      ? 'Visit the studio →'
+                      : item.kind === 'case'
+                        ? 'Read the case study →'
+                        : 'View the project →'
+                  }
                   external={item.external}
                   open={openId === item.id}
                   onToggle={() => toggleRow(item.id)}
