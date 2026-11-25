@@ -11,7 +11,7 @@ export const NAV_ITEMS = [
     label: 'About',
     href: '/about',
     preview:
-      'A product designer and front-end developer working between notes, sketches and shipped software.',
+      'A full-stack engineer and creative technologist working between notes, sketches and shipped software.',
   },
   {
     id: 'cv',

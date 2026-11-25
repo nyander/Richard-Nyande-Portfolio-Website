@@ -6,7 +6,7 @@ import { routeMetadata } from '@/lib/seo'
 export const metadata: Metadata = routeMetadata({
   title: 'About',
   description:
-    'I design digital products, then build them. Based in Essex; currently a contractor at Hutchison Ports UK and founder of Yande Studio.',
+    'Full-stack engineer and creative technologist. I design and build digital products, then ship them. Based in Essex; currently a contractor at Hutchison Ports UK and founder of Yande Studio.',
   path: '/about',
 })
 

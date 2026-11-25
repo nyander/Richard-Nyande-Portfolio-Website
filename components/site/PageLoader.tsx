@@ -4,7 +4,7 @@ type PageLoaderProps = {
   caption?: string
 }
 
-export function PageLoader({ caption = 'Designer & developer' }: PageLoaderProps) {
+export function PageLoader({ caption = 'Engineer & technologist' }: PageLoaderProps) {
   return (
     <div className="page-loader">
       <Image

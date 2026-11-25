@@ -8,7 +8,7 @@ import { FooterWordmark } from '@/components/site/FooterWordmark'
 import { MENU_SOCIALS, NAV_ITEMS, isCurrentNav, isOffsiteNav } from '@/lib/nav'
 
 const BIO =
-  "I'm a product designer and front-end developer working across enterprise applications, SaaS, operational tools, consumer websites and interactive experiences. My practice combines design and engineering, taking ideas from early concepts and user experience through to interfaces in production, while drawing inspiration from fashion, music, art and culture."
+  "I'm a full-stack engineer and creative technologist working across enterprise applications, SaaS, operational tools, consumer websites and interactive experiences. I take work from UX and prototyping through to production interfaces, backend services and 3D experiences, while drawing inspiration from fashion, music, art and culture."
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
   Instagram: (
